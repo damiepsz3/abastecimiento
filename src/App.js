@@ -1,43 +1,74 @@
-import React, {Component} from "react";
-import logo from "./logo.svg";
+import React, { Component } from "react";
+import {
+  Container,
+  Header,
+  Grid,
+  Input,
+  Divider,
+  Button,
+  Segment
+} from "semantic-ui-react";
 import "./App.css";
-import config from "./config"
 
 class App extends Component {
-  componentDidMount() {
-    console.log(process.env.API_KEY);
-    // 1. Load the JavaScript client library.
-    window.gapi.load("client", () => {
-      // 2. Initialize the JavaScript client library.
-      window.gapi.client.init({
-        apiKey: config.apiKey,
-        // Your API key will be automatically added to the Discovery Document URLs.
-        discoveryDocs: config.discoveryDocs
-      }).then(() => {
-        // 3. Initialize and make the API request.
-        this.load(this.onLoad);
-      });
-    });
+  constructor(props) {
+    super(props);
+    this.state = {
+      plantillas: []
+    };
   }
 
-  load = (callback) => {
-    window.gapi.client.load("sheets", "v4", () => {
-      window.gapi.client.sheets.spreadsheets.values.get({spreadsheetId: config.spreadsheetId, range: "Sheet1!A1:A25"}).then(console.log);
-    });
-  }
+  componentDidMount() {}
 
   render() {
-    return (<div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo"/>
-        <h1 className="App-title">Welcome to React</h1>
-      </header>
-      <p className="App-intro">
-        To get started, edit
-        <code>src/App.js</code>
-        and save to reload.
-      </p>
-    </div>);
+    const { plantillas } = this.state;
+
+    return (
+      <Container>
+        <Header as="h1" style={{ marginTop: 40 }}>
+          Formulario de abastecimiento
+        </Header>
+        <Grid style={{ marginTop: 40 }}>
+          <Grid.Row>
+            <Grid.Column width={8}>
+              <Header as="h4">Nombre y Apellido</Header>
+              <Input fluid control="input" placeholder="Nombre y Apellido" />
+            </Grid.Column>
+            <Grid.Column width={8}>
+              <Header as="h4">Email</Header>
+              <Input fluid control="input" placeholder="Email" />
+            </Grid.Column>
+          </Grid.Row>
+          <Divider />
+          <Grid.Row>
+            <Grid.Column width={8}>
+              <Header as="h4">Seleccione Categoría</Header>
+              <Segment.Group>
+                <Segment>Content</Segment>
+                <Segment>Content</Segment>
+                <Segment>Content</Segment>
+                <Segment>Content</Segment>
+              </Segment.Group>
+            </Grid.Column>
+            <Grid.Column width={8}>
+              {plantillas.length !== 0 && (
+                <Segment.Group>
+                  <Segment>Content</Segment>
+                  <Segment>Content</Segment>
+                  <Segment>Content</Segment>
+                  <Segment>Content</Segment>
+                </Segment.Group>
+              )}
+            </Grid.Column>
+          </Grid.Row>
+          <Grid.Row>
+            <Container textAlign="center" style={{ marginTop: 60 }}>
+              <Button type="submit">Solicitar</Button>
+            </Container>
+          </Grid.Row>
+        </Grid>
+      </Container>
+    );
   }
 }
 
