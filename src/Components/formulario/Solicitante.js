@@ -16,7 +16,6 @@ class Solicitante extends Component {
     this.state = {
       emailError: false ,
       emailValue: '',
-      emailFocus: false,
 
     };
   }
@@ -28,7 +27,7 @@ handleChange = ( e, {value} ) => {
 
 
   render() {
-    const { emailError, emailValue, emailFocus } = this.state;
+    const { emailError, emailValue,  } = this.state;
 
     return (
         <Grid>

@@ -19,3 +19,8 @@
 .searchCategoria {
   margin: 10px;
 }
+
+.ui.segment.segmentCategorias:hover{
+  cursor: pointer;
+  background-color: rgb(226, 230, 240);
+}

@@ -22,6 +22,7 @@ class Form extends Component {
 
         <Solicitante />
         <Divider />
+        
         <Plantilla data={data} />
         <Divider />
         <CamposDinamicos plantillaSeleccionada={plantillaSeleccionada}/>
