@@ -1,8 +1,9 @@
-import React, {Component} from "react";
-import {Container} from "semantic-ui-react";
+import React, { Component } from "react";
+import { Container } from "semantic-ui-react";
 
-import Form from "./Components/formulario/Form"
+import Form from "./Components/formulario/Form";
 import "./App.css";
+import GoogleApi from "./GoogleApi";
 
 class App extends Component {
   constructor(props) {
@@ -12,14 +13,18 @@ class App extends Component {
     };
   }
 
-  componentDidMount() {}
+  componentDidMount() {
+    GoogleApi.init().then(result => this.setState({ plantillas: result }));
+  }
 
   render() {
-    const {plantillas} = this.state;
-
-    return (<Container>
-      <Form/>
-    </Container>);
+    const { plantillas } = this.state;
+    console.log();
+    return (
+      <Container>
+        <Form data={plantillas} />
+      </Container>
+    );
   }
 }
 
