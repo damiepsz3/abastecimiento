@@ -1924,15 +1924,15 @@ class Camposcomunes extends Component {
       </Grid.Row>
 
       <Grid.Row>
-          <Grid.Column width={8}>
-            <Header as="h4">Valor Unitario (U$D)</Header>
-            <Input label='USD$' fluid={true} placeholder='Monto'/>
-          </Grid.Column>
+        <Grid.Column width={8}>
+          <Header as="h4">Valor Unitario (U$D)</Header>
+          <Input label='USD$' fluid={true} placeholder='Monto'/>
+        </Grid.Column>
 
-          <Grid.Column width={8}>
-            <Header as="h4">TAG de equipo que lo utiliza</Header>
-            <Input fluid={true} control="input" placeholder="Ej: 3 unidades"/>
-          </Grid.Column>
+        <Grid.Column width={8}>
+          <Header as="h4">TAG de equipo que lo utiliza</Header>
+          <Input fluid={true} control="input" placeholder="Ej: 3 unidades"/>
+        </Grid.Column>
       </Grid.Row>
 
       <Grid.Row>
@@ -1942,11 +1942,11 @@ class Camposcomunes extends Component {
         </Grid.Column>
 
 
-        {requiereStock === 'Si' && 
-        <Grid.Column width={8}>
-          <Header as="h4">Consumo Anual Esperable</Header>
-          <Input fluid={true} control="input" placeholder="Ej: 300 unidades"/>
-        </Grid.Column> }
+        {requiereStock === 'Si' && (
+          <Grid.Column width={8}>
+            <Header as="h4">Consumo Anual Esperable</Header>
+            <Input fluid={true} control="input" placeholder="Ej: 300 unidades"/>
+          </Grid.Column> )}
       </Grid.Row>
     </Grid>);
   }

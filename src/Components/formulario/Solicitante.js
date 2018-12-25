@@ -14,15 +14,23 @@ class Solicitante extends Component {
     super(props);
 
     this.state = {
-      plantillas: [],
+      emailError: false ,
+      emailValue: '',
+      emailFocus: false,
+
     };
   }
 
+handleChange = ( e, {value} ) => {
+  this.setState({emailValue: value,})
 
-  componentDidMount() {}
+}
+
+
+
 
   render() {
-    const {plantillas} = this.state;
+    const { emailError, emailValue, emailFocus } = this.state;
 
     return (
         <Grid>
@@ -33,7 +41,7 @@ class Solicitante extends Component {
           </Grid.Column>
           <Grid.Column width={8}>
             <Header as="h4">Email</Header>
-            <Input fluid control="input" placeholder="Email"/>
+            <Input fluid control="input" error={emailError} onChange={this.handleChange} value={emailValue} placeholder="Email"/>
           </Grid.Column>
         </Grid.Row>
 
