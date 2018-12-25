@@ -7,11 +7,12 @@ import "../../App.css";
 class Camposcomunes extends Component {
   constructor(props) {
     super(props);
-
     this.state = {
-      plantillas: []
+      requiereStock: ''
     };
   }
+  //obj = {value: 'des'}
+  handleChange = (e, { value }) => this.setState({requiereStock: value})
 
   opcionesGradoDeCriticidad = [
     {
@@ -1887,8 +1888,7 @@ class Camposcomunes extends Component {
   componentDidMount() {}
 
   render() {
-    const {plantillas} = this.state;
-
+    const { requiereStock } = this.state
     return (<Grid>
       <Grid.Row>
         <Grid.Column width={8}>
@@ -1900,7 +1900,7 @@ class Camposcomunes extends Component {
           <Input fluid={true} control="input" placeholder=""/>
         </Grid.Column>
       </Grid.Row>
-      <br/>
+
       <Grid.Row>
         <Grid.Column width={8}>
           <Header as="h4">Planta</Header>
@@ -1911,7 +1911,7 @@ class Camposcomunes extends Component {
           <Dropdown options={this.opcionesSector} placeholder='Seleccione Sector' fluid={true} search={true} selection={true}/>
         </Grid.Column>
       </Grid.Row>
-            <br/>
+
       <Grid.Row>
         <Grid.Column width={8}>
           <Header as="h4">Criticidad</Header>
@@ -1922,7 +1922,7 @@ class Camposcomunes extends Component {
           <Dropdown options={this.opcionesSiNo} placeholder='Seleccione' fluid={true} search={false} selection={true}/>
         </Grid.Column>
       </Grid.Row>
-            <br/>
+
       <Grid.Row>
           <Grid.Column width={8}>
             <Header as="h4">Valor Unitario (U$D)</Header>
@@ -1934,16 +1934,19 @@ class Camposcomunes extends Component {
             <Input fluid={true} control="input" placeholder="Ej: 3 unidades"/>
           </Grid.Column>
       </Grid.Row>
-            <br/>
+
       <Grid.Row>
         <Grid.Column width={8}>
           <Header as="h4">¿Requiere Stock?</Header>
-          <Dropdown placeholder='Seleccione Planta Requiriente' fluid={true} search={false} selection={true} options={this.opcionesSiNo}/>
+          <Dropdown placeholder='Seleccione Planta Requiriente' onChange={this.handleChange} value={requiereStock} fluid={true} search={false} selection={true} options={this.opcionesSiNo}/>
         </Grid.Column>
+
+
+        {requiereStock === 'Si' && 
         <Grid.Column width={8}>
           <Header as="h4">Consumo Anual Esperable</Header>
           <Input fluid={true} control="input" placeholder="Ej: 300 unidades"/>
-        </Grid.Column>
+        </Grid.Column> }
       </Grid.Row>
     </Grid>);
   }
