@@ -24,3 +24,9 @@
   cursor: pointer;
   background-color: rgb(226, 230, 240);
 }
+
+
+#root .ui.divider {
+  margin-bottom: 40px;
+  margin-top: 40px;
+}

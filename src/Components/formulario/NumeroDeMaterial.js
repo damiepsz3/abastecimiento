@@ -7,7 +7,7 @@ import {Form, Radio,
 } from "semantic-ui-react";
 import "../../App.css";
 
-class NumeeroDeMaterial extends Component {
+class NumeroDeMaterial extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -16,49 +16,38 @@ class NumeeroDeMaterial extends Component {
   handleChange = (e, { value }) => this.setState({ value })
 
 
-}
+
   render() {
-    const { emailError, emailValue, emailFocus } = this.state;
 
     return (
         <Grid>
-          <Form>
-            <Grid.Row>
-              <Grid.Column width={3}>
+          <Header as="h4">¿Conoce el numero del material que desea solicitar?</Header>
+          
 
-                <Form.Field>
-                  ¿Conoce el numero del material que desea solicitar? <b>{this.state.value}</b>
-                </Form.Field>
-                <Form.Field>
-                  <Radio
-                    label='Si'
-                    name='radioGroup'
-                    value='Si'
-                    checked={this.state.value === 'Si'}
-                    onChange={this.handleChange}
-                  />
-                </Form.Field>
+          <Grid.Row>
+            <Grid.Column width={1}>
 
-
-
-
-              </Grid.Column>
-              <Grid.Column width={3}>
-                <Form.Field>
-                  <Radio
-                    label='No'
-                    name='radioGroup'
-                    value='No'
-                    checked={this.state.value === 'No'}
-                    onChange={this.handleChange}
-                  />
-                </Form.Field>
-          </Grid.Column>
-        </Grid.Row>
-  </Form>
+              <Radio
+                label='Si'
+                name='radioGroup'
+                value='Si'
+                checked={this.state.value === 'Si'}
+                onChange={this.handleChange}
+              />
+            </Grid.Column>
+            <Grid.Column width={1}>
+              <Radio
+                label='No'
+                name='radioGroup'
+                value='No'
+                checked={this.state.value === 'No'}
+                onChange={this.handleChange}
+              />
+            </Grid.Column>
+          </Grid.Row>
         </Grid>
         );
   }
 }
 
-export default NumeeroDeMaterial;
+export default NumeroDeMaterial;

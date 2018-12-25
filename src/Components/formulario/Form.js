@@ -4,6 +4,7 @@ import Plantilla from "./Plantilla";
 import Camposcomunes from "./Camposcomunes";
 import Solicitante from "./Solicitante";
 import CamposDinamicos from "./CamposDinamicos";
+import NumeroDeMaterial from "./NumeroDeMaterial"
 import "../../App.css";
 
 class Form extends Component {
@@ -22,7 +23,8 @@ class Form extends Component {
 
         <Solicitante />
         <Divider />
-        
+        <NumeroDeMaterial />
+        <Divider />
         <Plantilla data={data} />
         <Divider />
         <CamposDinamicos plantillaSeleccionada={plantillaSeleccionada}/>
