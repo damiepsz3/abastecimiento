@@ -1,90 +1,64 @@
-import React, {Component} from "react";
-import config from "../../config"
-import {Header, Grid, Segment} from "semantic-ui-react";
-import "../../App.css";
+import React, { Component } from "react";
+import { Grid, Header, Segment, Input } from "semantic-ui-react";
 
 class Plantilla extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      categorias: [],
-      plantillas: []
+      query: ""
     };
   }
 
-  componentDidMount() {
-
-    console.log(process.env);
-    // 1. Load the JavaScript client library.
-    window.gapi.load("client", () => {
-      // 2. Initialize the JavaScript client library.
-      window.gapi.client.init({
-        apiKey: config.apiKey,
-        // Your API key will be automatically added to the Discovery Document URLs.
-        discoveryDocs: config.discoveryDocs
-      }).then(() => {
-        // 3. Initialize and make the API request.
-        this.load(this.onLoad);
-      });
-    });
-  }
-
-  load = (callback) => {
-    window.gapi.client.load("sheets", "v4 ", () => {
-      window.gapi.client.sheets.spreadsheets.values.get({spreadsheetId: config.spreadsheetId, range: "Sheet1!A1:R668"}).then(console.log);
-    });
-  }
+  handleSearch = (e, { value }) => {
+    this.setState({ query: value });
+  };
 
   render() {
-    const {plantillas} = this.state;
+    const { data } = this.props;
+    const { query } = this.state;
 
-    return (<Grid>
-      <Grid.Row>
+    return (
+      <Grid>
+        <Grid.Row columns="equal">
+          <Grid.Column>
+            <Header as="h4">Seleccione Categoría</Header>
+            <Segment.Group>
+              <Input
+                className="searchCategoria"
+                action={{ icon: "search" }}
+                placeholder="Buscar..."
+                fluid
+                onChange={this.handleSearch}
+              />
+              <div className="contenedorCategorias">
+                {data
+                  .filter(
+                    item =>
+                      item["Nombre Plantilla"].toLowerCase().search(query) !==
+                      -1
+                  )
+                  .map((plantilla, idx) => (
+                    <Segment className="segmentCategorias" key={idx}>
+                      {plantilla["Nombre Plantilla"]}
+                    </Segment>
+                  ))}
+              </div>
+            </Segment.Group>
+          </Grid.Column>
 
-        <Grid.Column width={8}>
-          <Header as="h4">Seleccione Categoría</Header>
-          <div className="contenedorCategorias">
+          <Header as="h4" />
+          <Grid.Column>
             <Segment.Group>
               <Segment>Content</Segment>
               <Segment>Content</Segment>
               <Segment>Content</Segment>
               <Segment>Content</Segment>
-              <Segment>Content</Segment>
-              <Segment>Content</Segment>
-              <Segment>Content</Segment>
-              <Segment>Content</Segment>
-              <Segment>Content</Segment>
-              <Segment>Content</Segment>
-              <Segment>Content</Segment>
-              <Segment>Content</Segment>
-              <Segment>Content</Segment>
-              <Segment>Content</Segment>
-              <Segment>Content</Segment>
-              <Segment>Content</Segment>
-              <Segment>Content</Segment>
-              <Segment>Content</Segment>
-              <Segment>Content</Segment>
-              <Segment>Content</Segment>
-              <Segment>Content</Segment>
-              <Segment>Content</Segment>
-              <Segment>Content</Segment>
             </Segment.Group>
-          </div>
-        </Grid.Column>
-
-        <Grid.Column width={8}>
-          {
-            plantillas.length !== 0 && (<Segment.Group>
-              <Segment>Content</Segment>
-              <Segment>Content</Segment>
-              <Segment>Content</Segment>
-              <Segment>Content</Segment>
-            </Segment.Group>)
-          }
-        </Grid.Column>
-      </Grid.Row>
-    </Grid>);
+          </Grid.Column>
+        </Grid.Row>
+      </Grid>
+    );
   }
 }
 
