@@ -1,12 +1,21 @@
+.contenedorCategorias {
+  height: 500px;
+  overflow-y: scroll;
+  border-top: 1px solid rgba(34, 36, 38, 0.15) !important;
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+}
 
+.segmentCategorias {
+  border-radius: 0 !important;
+  border-top: 0 !important;
+  border-left: 0 !important;
+  border-right: 0 !important;
+  border-bottom: 1px solid rgba(34, 36, 38, 0.15) !important;
+  margin-top: 0 !important;
+  margin-bottom: 0 !important;
+}
 
-.contenedorCategorias{
-    height: 500px;
-    overflow-y: scroll;
-    border: 1px solid rgba(34,36,38,.15);
-    border-left:0;
-    border-radius: 5px;
-    margin-bottom: 20px;
-    margin-left: 0 !important;
-    margin-right: 0 !important;
+.searchCategoria {
+  margin: 10px;
 }

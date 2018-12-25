@@ -7,24 +7,8 @@ import Solicitante from "./Solicitante";
 import "../../App.css";
 
 class Form extends Component {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      plantillas: []
-    };
-  }
-
-  opcionesGradoDeCriticidad = [
-    { key: "af", value: "Critico", text: "Critico" },
-    { key: "af", value: "Poco Critico", text: "Poco Critico" },
-    { key: "af", value: "Medianamente Critico", text: "Medianamente Critico" }
-  ];
-
-  componentDidMount() {}
-
   render() {
-    const { plantillas } = this.props;
+    const { data } = this.props;
 
     return (
       <React.Fragment>
@@ -39,7 +23,7 @@ class Form extends Component {
 
         <Solicitante />
         <Divider />
-        <Plantilla />
+        <Plantilla data={data} />
         <Divider />
         <Camposcomunes />
 
