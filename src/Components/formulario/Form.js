@@ -3,7 +3,7 @@ import { Container, Header, Grid, Divider, Button } from "semantic-ui-react";
 import Plantilla from "./Plantilla";
 import Camposcomunes from "./Camposcomunes";
 import Solicitante from "./Solicitante";
-
+import CamposDinamicos from "./CamposDinamicos";
 import "../../App.css";
 
 class Form extends Component {
