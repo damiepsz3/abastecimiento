@@ -6,7 +6,8 @@ class Plantilla extends Component {
     super(props);
 
     this.state = {
-      query: ""
+      query: "",
+      nombrePlantillaSeleccionada: ""
     };
   }
 
@@ -15,14 +16,14 @@ class Plantilla extends Component {
   };
 
   render() {
-    const { data } = this.props;
-    const { query } = this.state;
+    const { data, selectPlantilla, plantillaSeleccionada } = this.props;
+    const { query, nombrePlantillaSeleccionada } = this.state;
 
     return (
       <Grid>
         <Grid.Row columns="equal">
           <Grid.Column>
-            <Header as="h4">Seleccione Categoría</Header>
+            <Header as="h4">Seleccione Plantilla</Header>
             <Segment.Group>
               <Input
                 className="searchCategoria"
@@ -35,11 +36,26 @@ class Plantilla extends Component {
                 {data
                   .filter(
                     item =>
-                      item["Nombre Plantilla"].toLowerCase().search(query) !==
+                    item["Nombre Plantilla"].toLowerCase().search(query) !==
                       -1
                   )
+                  .sort(
+                    (a, b) =>
+                      a["Nombre Plantilla"].toUpperCase() <
+                      b["Nombre Plantilla"].toUpperCase()
+                        ? -1
+                        : 1
+                  )
                   .map((plantilla, idx) => (
-                    <Segment className="segmentCategorias" key={idx}>
+                    <Segment
+                      className="segmentCategorias"
+                      key={idx}
+                      onClick={e =>
+                        this.setState({
+                          nombrePlantillaSeleccionada: plantilla
+                        })
+                      }
+                    >
                       {plantilla["Nombre Plantilla"]}
                     </Segment>
                   ))}
@@ -47,14 +63,29 @@ class Plantilla extends Component {
             </Segment.Group>
           </Grid.Column>
 
-          <Header as="h4" />
           <Grid.Column>
-            <Segment.Group>
-              <Segment>Content</Segment>
-              <Segment>Content</Segment>
-              <Segment>Content</Segment>
-              <Segment>Content</Segment>
-            </Segment.Group>
+            {nombrePlantillaSeleccionada !== "" && (
+              <React.Fragment>
+                <Header as="h4">Seleccione Categoría</Header>
+                <Segment.Group>
+                  {data
+                    .filter(
+                      row =>
+                        row["Nombre Plantilla"] ===
+                        nombrePlantillaSeleccionada["Nombre Plantilla"]
+                    )
+                    .map((plantilla, idx) => (
+                      <Segment
+                        className="segmentCategorias"
+                        key={idx}
+                        onClick={e => selectPlantilla(plantilla)}
+                      >
+                        {plantilla["Taxonomia BOLD:Descripción"]}
+                      </Segment>
+                    ))}
+                </Segment.Group>
+              </React.Fragment>
+            )}
           </Grid.Column>
         </Grid.Row>
       </Grid>
