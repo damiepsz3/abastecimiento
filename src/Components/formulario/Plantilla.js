@@ -34,12 +34,24 @@ class Plantilla extends Component {
               />
               <div className="contenedorCategorias">
                 {data
+                  .reduce((acum, currentValue) => {
+                    //chequea que no se repita  ningun nombre de plantilla.
+                    if (
+                      !acum
+                        .map(a => a["Nombre Plantilla"])
+                        .includes(currentValue["Nombre Plantilla"])
+                    )
+                      acum.push(currentValue);
+                    return acum;
+                  }, [])
                   .filter(
+                    //filtra por caratecres ingresados
                     item =>
-                    item["Nombre Plantilla"].toLowerCase().search(query) !==
+                      item["Nombre Plantilla"].toLowerCase().search(query) !==
                       -1
                   )
                   .sort(
+                    //ordenamiento alfabetico
                     (a, b) =>
                       a["Nombre Plantilla"].toUpperCase() <
                       b["Nombre Plantilla"].toUpperCase()
