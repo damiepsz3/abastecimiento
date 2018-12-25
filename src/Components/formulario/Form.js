@@ -7,42 +7,25 @@ import CamposDinamicos from "./CamposDinamicos";
 import "../../App.css";
 
 class Form extends Component {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      plantillaSeleccionada: ""
-    };
-  }
-
-  seleccionarPlantilla = plantilla => {
-    this.setState({ plantillaSeleccionada: plantilla });
-  };
-
   render() {
-    const { data } = this.props;
-    const { plantillaSeleccionada } = this.state;
-    console.log(plantillaSeleccionada);
+    const { data, plantillaSeleccionada } = this.props;
+
     return (
       <React.Fragment>
         <Header
           as="h1"
           style={{
             marginTop: 40
-          }}
-        >
+          }}  >
           Formulario de abastecimiento
         </Header>
 
         <Solicitante />
         <Divider />
-        <Plantilla
-          data={data}
-          selectPlantilla={this.seleccionarPlantilla}
-          plantillaSeleccionada={plantillaSeleccionada}
-        />
+        
+        <Plantilla data={data} />
         <Divider />
-        <CamposDinamicos plantillaSeleccionada={plantillaSeleccionada} />
+        <CamposDinamicos plantillaSeleccionada={plantillaSeleccionada}/>
         <Divider />
         <Camposcomunes />
 
@@ -52,8 +35,9 @@ class Form extends Component {
               textAlign="center"
               style={{
                 marginTop: 60
-              }}
-            >
+              }}>
+
+
               <Button type="submit">Solicitar</Button>
             </Container>
           </Grid.Row>

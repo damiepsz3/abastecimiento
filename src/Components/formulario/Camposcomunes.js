@@ -1942,6 +1942,9 @@ class Camposcomunes extends Component {
         </Grid.Column>
 
 
+
+
+
         {requiereStock === 'Si' && (
           <Grid.Column width={8}>
             <Header as="h4">Consumo Anual Esperable</Header>
