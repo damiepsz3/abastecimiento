@@ -8,7 +8,7 @@ import "../../App.css";
 
 class Form extends Component {
   render() {
-    const { data } = this.props;
+    const { data, plantillaSeleccionada } = this.props;
 
     return (
       <React.Fragment>
@@ -16,14 +16,15 @@ class Form extends Component {
           as="h1"
           style={{
             marginTop: 40
-          }}
-        >
+          }}  >
           Formulario de abastecimiento
         </Header>
 
         <Solicitante />
         <Divider />
         <Plantilla data={data} />
+        <Divider />
+        <CamposDinamicos plantillaSeleccionada={plantillaSeleccionada}/>
         <Divider />
         <Camposcomunes />
 
@@ -33,8 +34,9 @@ class Form extends Component {
               textAlign="center"
               style={{
                 marginTop: 60
-              }}
-            >
+              }}>
+
+
               <Button type="submit">Solicitar</Button>
             </Container>
           </Grid.Row>

@@ -27,8 +27,6 @@ handleChange = ( e, {value} ) => {
 }
 
 
-
-
   render() {
     const { emailError, emailValue, emailFocus } = this.state;
 
