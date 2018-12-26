@@ -30,3 +30,11 @@
   margin-bottom: 45px;
   margin-top: 60px;
 }
+
+
+#root .NumeroMaterial i.check{
+  color: green
+}
+#root .question{
+  font-size: 16px;
+}
