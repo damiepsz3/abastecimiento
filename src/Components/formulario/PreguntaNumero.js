@@ -7,7 +7,7 @@ import {Form, Radio,
 } from "semantic-ui-react";
 import "../../App.css";
 
-class NumeroDeMaterial extends Component {
+class PreguntaNumero extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -22,11 +22,9 @@ class NumeroDeMaterial extends Component {
     return (
         <Grid>
           <Header as="h4">¿Conoce el numero del material que desea solicitar?</Header>
-          
 
           <Grid.Row>
             <Grid.Column width={1}>
-
               <Radio
                 label='Si'
                 name='radioGroup'
@@ -45,9 +43,11 @@ class NumeroDeMaterial extends Component {
               />
             </Grid.Column>
           </Grid.Row>
+
+
         </Grid>
         );
   }
 }
 
-export default NumeroDeMaterial;
+export default PreguntaNumero;
