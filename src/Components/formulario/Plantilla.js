@@ -46,11 +46,12 @@ class Plantilla extends Component {
         <Segment
           className="segmentCategorias"
           key={idx}
-          onClick={e =>
+          onClick={e => {
             this.setState({
               nombrePlantillaSeleccionada: plantilla
-            })
-          }
+            });
+            this.props.selectPlantilla("");
+          }}
         >
           {plantilla["Nombre Plantilla"]}
         </Segment>
