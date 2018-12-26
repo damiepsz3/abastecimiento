@@ -1,11 +1,12 @@
 import React, { Component } from "react";
 import { Container, Header, Grid, Divider, Button } from "semantic-ui-react";
+import GoogleApi from "../../GoogleApi";
 import Plantilla from "./Plantilla";
 import Camposcomunes from "./Camposcomunes";
 import Solicitante from "./Solicitante";
 import CamposDinamicos from "./CamposDinamicos";
-import PreguntaNumero from "./PreguntaNumero"
-import NumeroMaterial from "./NumeroMaterial"
+import PreguntaNumero from "./PreguntaNumero";
+import NumeroMaterial from "./NumeroMaterial";
 
 import "../../App.css";
 
@@ -14,8 +15,16 @@ class Form extends Component {
     super(props);
 
     this.state = {
+      loadingPlantillas: true,
+      plantillas: [],
       plantillaSeleccionada: ""
     };
+  }
+
+  componentDidMount() {
+    GoogleApi.init().then(result =>
+      this.setState({ plantillas: result, loadingPlantillas: false })
+    );
   }
 
   seleccionarPlantilla = plantilla => {
@@ -23,8 +32,7 @@ class Form extends Component {
   };
 
   render() {
-    const { data } = this.props;
-    const { plantillaSeleccionada } = this.state;
+    const { plantillaSeleccionada, plantillas, loadingPlantillas } = this.state;
 
     return (
       <React.Fragment>
@@ -40,12 +48,13 @@ class Form extends Component {
         <Solicitante />
 
         <Divider />
-        <PreguntaNumero/>
-        <NumeroMaterial/>
+        <PreguntaNumero />
+        <NumeroMaterial />
         <Plantilla
-          data={data}
+          data={plantillas}
           selectPlantilla={this.seleccionarPlantilla}
           plantillaSeleccionada={plantillaSeleccionada}
+          loading={loadingPlantillas}
         />
         <Divider />
         <CamposDinamicos plantillaSeleccionada={plantillaSeleccionada} />
