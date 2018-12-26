@@ -17,26 +17,7 @@ class CamposDinamicos extends Component {
     super(props);
 
     this.state = {
-      plantillaSeleccionada: {
-       "Característica 1": "TIPO",
-        "Característica 2": "PRESENTACIÓN",
-        "Característica 3": "",
-        "Característica 4": "",
-        "Característica 5": "",
-        "Característica 6": "",
-        "Comentarios": "",
-        "Creador": "Lucas Costansi",
-        "Item Type": "Item",
-        "Modified By": "Hernan Franch",
-        "Nombre Plantilla": "PASTA",
-        "Nombre Plantilla (breve)": "PASTA",
-        "Número Base Material": "0",
-        "Path": "sites/Abastecimientos/almacenes/ABM_Materiales/Lists/Plantillas",
-        "Taxonomia BOLD": "C31200000",
-        "Taxonomia BOLD:Descripción": "Adhesivos y selladores",
-        "Tipo de Material": "ZRES",
-        "Vigente": "VERDADERO"
-      }
+
     };
   }
 
@@ -977,53 +958,72 @@ class CamposDinamicos extends Component {
   render() {
 
 
+
     return (
         <Grid>
 
+          {this.props.plantillaSeleccionada["Característica 1"] != null
+            &&
+            this.props.plantillaSeleccionada["Característica 1"]!== ""
+            && (<Grid.Row>
+              <Grid.Column width={16}>
+                <Header as="h4">{this.props.plantillaSeleccionada["Característica 1"] }</Header>
+                <Input fluid control="input" placeholder=""/>
+              </Grid.Column>
+            </Grid.Row>)}
 
-          {this.state.plantillaSeleccionada["Característica 1"] !== "" && (<Grid.Row>
-            <Grid.Column width={16}>
-              <Header as="h4">{this.state.plantillaSeleccionada["Característica 1"] }</Header>
-              <Input fluid control="input" placeholder=""/>
-            </Grid.Column>
-          </Grid.Row>)}
+          {this.props.plantillaSeleccionada["Característica 2"] != null
+            &&
+            this.props.plantillaSeleccionada["Característica 2"]!== ""
 
-          {this.state.plantillaSeleccionada["Característica 2"] !== "" && (<Grid.Row>
-            <Grid.Column width={16}>
-              <Header as="h4">{this.state.plantillaSeleccionada["Característica 2"] }</Header>
-              <Input fluid control="input" placeholder=""/>
-            </Grid.Column>
-          </Grid.Row>)}
+            && (<Grid.Row>
+              <Grid.Column width={16}>
+                <Header as="h4">{this.props.plantillaSeleccionada["Característica 2"] }</Header>
+                <Input fluid control="input" placeholder=""/>
+              </Grid.Column>
+            </Grid.Row>)}
 
-          {this.state.plantillaSeleccionada["Característica 3"] !== "" && (<Grid.Row>
-            <Grid.Column width={16}>
-              <Header as="h4">{this.state.plantillaSeleccionada["Característica 3"] }</Header>
-              <Input fluid control="input" placeholder=""/>
-            </Grid.Column>
-          </Grid.Row>)}
+          {this.props.plantillaSeleccionada["Característica 3"] !== undefined
+            &&
+            this.props.plantillaSeleccionada["Característica 3"]!== ""
+            && (<Grid.Row>
+              <Grid.Column width={16}>
+                <Header as="h4">{this.props.plantillaSeleccionada["Característica 3"] }</Header>
+                <Input fluid control="input" placeholder=""/>
+              </Grid.Column>
+            </Grid.Row>)}
 
-          {this.state.plantillaSeleccionada["Característica 4"] !== "" && (<Grid.Row>
-            <Grid.Column width={16}>
-              <Header as="h4">{this.state.plantillaSeleccionada["Característica 4"] }</Header>
-              <Input fluid control="input" placeholder=""/>
-            </Grid.Column>
-          </Grid.Row>)}
+          {this.props.plantillaSeleccionada["Característica 4"] !== undefined
+            &&
+            this.props.plantillaSeleccionada["Característica 4"]!== ""
+            && (<Grid.Row>
+              <Grid.Column width={16}>
+                <Header as="h4">{this.props.plantillaSeleccionada["Característica 4"] }</Header>
+                <Input fluid control="input" placeholder=""/>
+              </Grid.Column>
+            </Grid.Row>)}
 
-          {this.state.plantillaSeleccionada["Característica 5"] !== "" && (<Grid.Row>
-            <Grid.Column width={16}>
-              <Header as="h4">{this.state.plantillaSeleccionada["Característica 5"] }</Header>
-              <Input fluid control="input" placeholder=""/>
-            </Grid.Column>
-          </Grid.Row>)}
+          {this.props.plantillaSeleccionada["Característica 5"] !== undefined
+            &&
+            this.props.plantillaSeleccionada["Característica 5"]!== ""
+            && (<Grid.Row>
+              <Grid.Column width={16}>
+                <Header as="h4">{this.props.plantillaSeleccionada["Característica 5"] }</Header>
+                <Input fluid control="input" placeholder=""/>
+                  </Grid.Column>
+                  </Grid.Row>)}
 
-          {this.state.plantillaSeleccionada["Característica 6"] !== "" && (<Grid.Row>
-            <Grid.Column width={16}>
-              <Header as="h4">{this.state.plantillaSeleccionada["Característica 6"] }</Header>
-              <Input fluid control="input" placeholder=""/>
-            </Grid.Column>
-          </Grid.Row>)}
+                  {this.props.plantillaSeleccionada["Característica 6"] !== undefined
+                  &&
+                  this.props.plantillaSeleccionada["Característica 6"]!== ""
+                  && (<Grid.Row>
+                  <Grid.Column width={16}>
+                  <Header as="h4">{this.props.plantillaSeleccionada["Característica 6"] }</Header>
+                  <Input fluid control="input" placeholder=""/>
+              </Grid.Column>
+            </Grid.Row>)}
 
-          {this.state.plantillaSeleccionada["Nombre Plantilla"] !== "" && (<Grid.Row>
+          {this.props.plantillaSeleccionada["Nombre Plantilla"] !== undefined  && (<Grid.Row>
             <Grid.Column width={16}>
               <Header as="h4">Unidad de Medida Sugerida</Header>
               <Dropdown placeholder='Seleccione' fluid={true} search={true} selection={true} options={this.opcionesUnidadesDeMedida}/>

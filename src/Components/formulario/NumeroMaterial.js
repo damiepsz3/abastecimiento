@@ -20,15 +20,13 @@ class NumeroMaterial extends Component {
   }
 
   render() {
-
+    const {numMaterial} = this.state
     return (
         <Grid>
-
-
           <Grid.Row>
             <Grid.Column width={16}>
               <Header as="h4">Número de material a solicitar</Header>
-              <Input fluid control="input" onChange={this.handleChange}/>
+              <Input fluid control="input" value={numMaterial} onChange={this.handleChange}/>
             </Grid.Column>
           </Grid.Row>
         </Grid>
