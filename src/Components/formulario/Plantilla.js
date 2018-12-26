@@ -16,7 +16,7 @@ class Plantilla extends Component {
   };
 
   render() {
-    const { data, selectPlantilla, plantillaSeleccionada } = this.props;
+    const { data, selectPlantilla } = this.props;
     const { query, nombrePlantillaSeleccionada } = this.state;
 
     return (
@@ -38,17 +38,18 @@ class Plantilla extends Component {
                     //chequea que no se repita  ningun nombre de plantilla.
                     if (
                       !acum
-                        .map(a => a["Nombre Plantilla"])
-                        .includes(currentValue["Nombre Plantilla"])
+                      .map(a => a["Nombre Plantilla"])
+                      .includes(currentValue["Nombre Plantilla"])
                     )
-                      acum.push(currentValue);
+                    acum.push(currentValue);
                     return acum;
                   }, [])
                   .filter(
                     //filtra por caratecres ingresados
                     item =>
-                      item["Nombre Plantilla"].toLowerCase().search(query) !==
-                      -1
+                      item["Nombre Plantilla"]
+                    .toLowerCase()
+                    .search(query.toLowerCase()) !== -1
                   )
                   .sort(
                     //ordenamiento alfabetico
