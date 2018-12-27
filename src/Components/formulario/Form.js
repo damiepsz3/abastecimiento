@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Container, Header, Grid, Divider, Button } from "semantic-ui-react";
+import { Container, Header, Grid, Button } from "semantic-ui-react";
 import GoogleApi from "../../GoogleApi";
 import Plantilla from "./Plantilla";
 import Camposcomunes from "./Camposcomunes";
@@ -17,7 +17,8 @@ class Form extends Component {
     this.state = {
       loadingPlantillas: true,
       plantillas: [],
-      plantillaSeleccionada: ""
+      plantillaSeleccionada: "",
+      conoceCodigo: null
     };
   }
 
@@ -31,35 +32,44 @@ class Form extends Component {
     this.setState({ plantillaSeleccionada: plantilla });
   };
 
+  handleConoceCodigo = conoceCodigo => {
+    this.setState({ conoceCodigo: conoceCodigo });
+  };
+
   render() {
-    const { plantillaSeleccionada, plantillas, loadingPlantillas } = this.state;
+    const {
+      plantillaSeleccionada,
+      plantillas,
+      loadingPlantillas,
+      conoceCodigo
+    } = this.state;
 
     return (
       <React.Fragment>
-        <Header
-          as="h1"
-          style={{
-            marginTop: 40
-          }}
-        >
+        <Header as="h1" style={{ marginTop: 40 }}>
           Formulario de abastecimiento
         </Header>
 
         <Solicitante />
 
-        <Divider />
-        <PreguntaNumero />
-        <NumeroMaterial />
-        <Plantilla
-          data={plantillas}
-          selectPlantilla={this.seleccionarPlantilla}
-          plantillaSeleccionada={plantillaSeleccionada}
-          loading={loadingPlantillas}
+        <PreguntaNumero
+          conoceCodigo={conoceCodigo}
+          handleCodigo={this.handleConoceCodigo}
         />
-        <Divider />
+
+        {this.state.conoceCodigo === "Si" && <NumeroMaterial />}
+        {this.state.conoceCodigo === "No" && (
+          <Plantilla
+            data={plantillas}
+            selectPlantilla={this.seleccionarPlantilla}
+            plantillaSeleccionada={plantillaSeleccionada}
+            loading={loadingPlantillas}
+          />
+        )}
+
         <CamposDinamicos plantillaSeleccionada={plantillaSeleccionada} />
-        <Divider />
-        <Camposcomunes />
+
+        {this.state.conoceCodigo !== null && <Camposcomunes />}
 
         <Grid style={{ marginTop: 40 }}>
           <Grid.Row>
