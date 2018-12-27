@@ -11,8 +11,8 @@ class CamposDinamicos extends Component {
         <Grid>
           {plantillaSeleccionada["Nombre Plantilla"] !== undefined && (
             <Header>
-              Complete características para:{" "}
-              {plantillaSeleccionada["Nombre Plantilla"]}, Cat.:{" "}
+              Complete las características de{" "}
+              {plantillaSeleccionada["Nombre Plantilla"]} para la Categoría{" "}
               {plantillaSeleccionada["Taxonomia BOLD:Descripción"]}.
             </Header>
           )}

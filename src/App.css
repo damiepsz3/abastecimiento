@@ -28,7 +28,22 @@
 
 .ui.segment.segmentCategorias:hover {
   cursor: pointer;
-  background-color: rgb(226, 230, 240);
+  background-color: rgba(228, 233, 241, 1);
+}
+
+#root .ui.segment.blue {
+  background-color: rgba(228, 233, 241, 1) !important;
+  color: rgb(46, 162, 248) !important;
+  font-weight: 700;
+}
+
+#root .ui.segment .check.inverted {
+  color: rgb(46, 162, 248) !important;
+}
+
+#root .ui.segment {
+  box-shadow: none;
+  -webkit-box-shadow: none;
 }
 
 #root .ui.divider {
