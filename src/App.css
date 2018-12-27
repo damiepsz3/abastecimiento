@@ -36,10 +36,9 @@
   margin-top: 60px;
 }
 
-
-#root .NumeroMaterial i.check{
-  color: green
+#root .NumeroMaterial i.check {
+  color: green;
 }
-#root .question{
+#root .question {
   font-size: 16px;
 }
