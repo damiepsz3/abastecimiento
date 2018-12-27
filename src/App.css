@@ -42,3 +42,7 @@
 #root .question {
   font-size: 16px;
 }
+
+#root .requerido {
+  color: red;
+}

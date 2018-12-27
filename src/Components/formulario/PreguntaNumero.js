@@ -15,7 +15,8 @@ class PreguntaNumero extends Component {
 
         <Grid>
           <Header as="h4">
-            ¿Conoce el numero del material que desea solicitar?
+            ¿Conoce el numero del material que desea solicitar?{" "}
+            <span className={"requerido"}>*</span>
           </Header>
           <Grid.Row>
             <Grid.Column width={1}>

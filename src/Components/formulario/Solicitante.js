@@ -33,11 +33,15 @@ class Solicitante extends Component {
       <Grid>
         <Grid.Row>
           <Grid.Column width={8}>
-            <Header as="h4">Nombre y Apellido</Header>
+            <Header as="h4">
+              Nombre y Apellido <span className={"requerido"}>*</span>
+            </Header>
             <Input fluid control="input" placeholder="Nombre y Apellido" />
           </Grid.Column>
           <Grid.Column width={8}>
-            <Header as="h4">Email</Header>
+            <Header as="h4">
+              Email <span className={"requerido"}>*</span>
+            </Header>
             <Input
               fluid
               control="input"
