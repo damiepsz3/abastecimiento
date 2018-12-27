@@ -5,8 +5,13 @@ import Plantilla from "./Plantilla";
 import Camposcomunes from "./Camposcomunes";
 import Solicitante from "./Solicitante";
 import CamposDinamicos from "./CamposDinamicos";
+<<<<<<< Updated upstream
 import PreguntaNumero from "./PreguntaNumero";
 import NumeroMaterial from "./NumeroMaterial";
+=======
+import PreguntaNumero from "./PreguntaNumero"
+import NumeroMaterial from "./NumeroMaterial"
+>>>>>>> Stashed changes
 
 import "../../App.css";
 
@@ -51,6 +56,7 @@ class Form extends Component {
         </Header>
 
         <Solicitante />
+<<<<<<< Updated upstream
 
         <PreguntaNumero
           conoceCodigo={conoceCodigo}
@@ -70,6 +76,16 @@ class Form extends Component {
         <CamposDinamicos plantillaSeleccionada={plantillaSeleccionada} />
 
         {this.state.conoceCodigo !== null && <Camposcomunes />}
+=======
+        <Divider />
+        <PreguntaNumero />
+        <NumeroMaterial />
+        <Plantilla data={data} />
+        <Divider />
+        <CamposDinamicos plantillaSeleccionada={plantillaSeleccionada}/>
+        <Divider />
+        <Camposcomunes />
+>>>>>>> Stashed changes
 
         <Grid style={{ marginTop: 40 }}>
           <Grid.Row>
