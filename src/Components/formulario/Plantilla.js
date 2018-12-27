@@ -1,5 +1,14 @@
 import React, { Component } from "react";
-import { Grid, Header, Segment, Input, Loader } from "semantic-ui-react";
+import {
+  Grid,
+  Header,
+  Segment,
+  Input,
+  Loader,
+  Image,
+  Container
+} from "semantic-ui-react";
+import selectCategoria from "../../assets/select_categoria.png";
 
 class Plantilla extends Component {
   constructor(props) {
@@ -7,7 +16,7 @@ class Plantilla extends Component {
 
     this.state = {
       query: "",
-      nombrePlantillaSeleccionada: ""
+      nombrePlantillaSeleccionada: {}
     };
   }
 
@@ -31,6 +40,9 @@ class Plantilla extends Component {
         //filtra por caratecres ingresados
         item =>
           item["Nombre Plantilla"]
+            .toLowerCase()
+            .search(this.state.query.toLowerCase()) !== -1 ||
+          item["Taxonomia BOLD:Descripción"]
             .toLowerCase()
             .search(this.state.query.toLowerCase()) !== -1
       )
@@ -77,7 +89,7 @@ class Plantilla extends Component {
   render() {
     const { data, loading } = this.props;
     const { nombrePlantillaSeleccionada } = this.state;
-    console.log(loading);
+
     return (
       <Grid>
         <Grid.Row columns="equal">
@@ -92,23 +104,42 @@ class Plantilla extends Component {
                 onChange={this.handleSearch}
                 disabled={loading}
               />
-              <div className="contenedorCategorias">
-                {loading ? (
+              {loading ? (
+                <div
+                  className="contenedorCategorias"
+                  style={{ overflowY: "hidden" }}
+                >
                   <Loader active size="big" />
-                ) : (
-                  this.formatListPlantillas(data)
-                )}
-              </div>
+                </div>
+              ) : (
+                <div className="contenedorCategorias">
+                  {this.formatListPlantillas(data)}
+                </div>
+              )}
             </Segment.Group>
           </Grid.Column>
 
           <Grid.Column>
-            {nombrePlantillaSeleccionada !== "" && (
-              <React.Fragment>
-                <Header as="h4">Seleccione Categoría</Header>
-                <Segment.Group>{this.formatListCategorias(data)}</Segment.Group>
-              </React.Fragment>
-            )}
+            <Header as="h4">Seleccione Categoría</Header>
+            <Segment.Group>
+              {Object.keys(nombrePlantillaSeleccionada).length > 0 ? (
+                <div className="contenedorCategorias" style={{ height: 558 }}>
+                  {this.formatListCategorias(data)}
+                </div>
+              ) : (
+                <div
+                  className="contenedorCategorias"
+                  style={{ height: 558, overflowY: "hidden" }}
+                >
+                  <Container centered style={{ marginTop: 184 }}>
+                    <Image src={selectCategoria} size="small" centered />
+                    <Header as="h4" textAlign="center" disabled>
+                      Seleccione una plantilla para poder elegir una categoría.
+                    </Header>
+                  </Container>
+                </div>
+              )}
+            </Segment.Group>
           </Grid.Column>
         </Grid.Row>
       </Grid>
