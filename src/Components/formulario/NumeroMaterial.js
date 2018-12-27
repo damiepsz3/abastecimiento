@@ -1,6 +1,6 @@
 import React, {Component} from "react";
 import { Icon } from 'semantic-ui-react'
-import Tutorial from './tutorial.png'
+import Tutorial from '../../assets/tutorial.png'
 import {Form, Radio,
   Header,
   Grid,
@@ -70,7 +70,7 @@ class NumeroMaterial extends Component {
                   El numero de material es un numero compuesto por 9 a 18 digitos numericos el cual puede incluir la letras "INS" al principio.
                 </Popup>
               </Header>
-
+              
               <Input fluid control="input" icon={iconState} className={"NumeroMaterial"} value={numMaterial} error={errorState} onBlur={this.handleValidation} onChange={this.handleChange}/>
             </Grid.Column>
             <Grid.Column width={5} verticalAlign={'bottom'}>
