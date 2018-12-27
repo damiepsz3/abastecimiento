@@ -53,7 +53,7 @@ class NumeroMaterial extends Component {
     this.setState({ iconState: null, errorState:false  })
   }
   else if (  isnum && numero.length >= 9 &&  numero.length <= 18 ) {
-    this.setState({ iconState: 'check',  errorState: true})}
+    this.setState({ iconState: 'check',  errorState: false})}
   else  {
     this.setState({ iconState: null,  errorState: true })
   }
