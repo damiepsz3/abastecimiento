@@ -1,12 +1,15 @@
 import React, {Component} from "react";
 import { Icon } from 'semantic-ui-react'
-
+import Tutorial from './tutorial.png'
 import {Form, Radio,
   Header,
   Grid,
   Input,
   Popup,
-  Icons
+  Icons,
+  Modal,
+  Button,
+  Image
 
 } from "semantic-ui-react";
 import "../../App.css";
@@ -21,7 +24,7 @@ class NumeroMaterial extends Component {
     };
   }
   handleChange = (e, { value }) => {
-
+    this.setState({ numMaterial: value })
     var numero = value
     //remove the ins string from the value if there is any.
     numero = numero.replace(/^ins/gi, '')
@@ -37,7 +40,6 @@ class NumeroMaterial extends Component {
     else{
        this.setState({ iconState: null, errorState: false})
     }
-      this.setState({ numMaterial: value })
 
   }
 
@@ -47,25 +49,38 @@ class NumeroMaterial extends Component {
   numero = numero.replace(/^ins/gi, '')
   //check if the result contains only digits.
   var isnum = /^\d+$/.test(numero);
-  if (  isnum && numero.length >= 16 &&  numero.length <= 18) {
-  this.setState({ iconState: 'check' })}
+  if (numero.length === 0) {
+    this.setState({ iconState: null, errorState:false  })
+  }
+  else if (  isnum && numero.length >= 9 &&  numero.length <= 18 ) {
+    this.setState({ iconState: 'check',  errorState: true})}
   else  {
-  this.setState({ iconState: null,  errorState: true })
+    this.setState({ iconState: null,  errorState: true })
   }
 }
 
   render() {
     const {numMaterial, errorState, iconState} = this.state
     return (
-        <Grid>
+        <Grid stackable>
           <Grid.Row>
-            <Grid.Column width={8}>
-              <Header as="h4">Número de material a solicitar <Popup trigger={ <Icon size='tiny' name='question circle outline' />} wide>
-                Hello. This is a wide pop-up which allows for lots of content with additional space. You can
-                fit a lot of words here and the paragraphs will be pretty wide.
-              </Popup> </Header>
+            <Grid.Column width={11}>
+              <Header as="h4">Número de material a solicitar
+                <Popup trigger={ <Icon size='tiny'  name='question circle outline' />} wide>
+                  El numero de material es un numero compuesto por 9 a 18 digitos numericos el cual puede incluir la letras "INS" al principio.
+                </Popup>
+              </Header>
 
               <Input fluid control="input" icon={iconState} className={"NumeroMaterial"} value={numMaterial} error={errorState} onBlur={this.handleValidation} onChange={this.handleChange}/>
+            </Grid.Column>
+            <Grid.Column width={5} verticalAlign={'bottom'}>
+              <Modal
+                size={"fullscreen"}  closeIcon  trigger={<Button fluid>Ver instrucciones para buscar código en SAP</Button>}>
+                <Modal.Header>Instrucciones para buscar código en SAP</Modal.Header>
+                <Modal.Content image>
+                  <Image fluid src={Tutorial} />
+                </Modal.Content>
+              </Modal>
             </Grid.Column>
           </Grid.Row>
         </Grid>
