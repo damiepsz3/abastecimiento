@@ -14,7 +14,7 @@ import selectCategoria from "../../assets/select_categoria.png";
 class Plantilla extends Component {
   constructor(props) {
     super(props);
-    this.myRef = React.createRef();
+
     this.state = {
       query: "",
       nombrePlantillaSeleccionada: {},
@@ -67,7 +67,7 @@ class Plantilla extends Component {
               idxPlantillaSeleccionada: idx,
               idxCategoriaSeleccionada: null
             });
-            this.props.selectPlantilla("");
+            this.props.selectPlantilla("plantillaSeleccionada", "");
           }}
           color={this.state.idxPlantillaSeleccionada === idx ? "blue" : null}
           inverted={this.state.idxPlantillaSeleccionada === idx && true}
@@ -95,15 +95,8 @@ class Plantilla extends Component {
           className="segmentCategorias"
           key={idx}
           onClick={e => {
-            this.props.selectPlantilla(plantilla);
+            this.props.selectPlantilla("plantillaSeleccionada", plantilla);
             this.setState({ idxCategoriaSeleccionada: idx });
-            setTimeout(() => {
-              window.scrollTo({
-                top: this.myRef.current.offsetTop,
-                left: 0,
-                behavior: "smooth"
-              });
-            }, 200);
           }}
           color={this.state.idxCategoriaSeleccionada === idx ? "blue" : null}
           inverted={this.state.idxCategoriaSeleccionada === idx && true}
@@ -173,7 +166,6 @@ class Plantilla extends Component {
             </Segment.Group>
           </Grid.Column>
         </Grid.Row>
-        <div ref={this.myRef} />
       </Grid>
     );
   }

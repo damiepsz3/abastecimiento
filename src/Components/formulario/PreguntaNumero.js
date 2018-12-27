@@ -4,7 +4,7 @@ import "../../App.css";
 
 class PreguntaNumero extends Component {
   render() {
-    const { handleCodigo } = this.props;
+    const { handleCodigo, conoceCodigo } = this.props;
     return (
       <Fragment>
         <Divider />
@@ -17,20 +17,18 @@ class PreguntaNumero extends Component {
           <Grid.Row>
             <Grid.Column width={16}>
               <Radio
-                label="Si    "
-                name="radioGroup"
-                value="Si"
-                checked={this.props.conoceCodigo === "Si"}
-                onChange={(e, { value }) => handleCodigo(value)}
+                label="Si"
+                name="conoceCodigo"
+                checked={conoceCodigo === "" ? false : conoceCodigo}
+                onChange={() => handleCodigo("conoceCodigo", true)}
                 style={{ paddingRight: "35px" }}
               />
 
               <Radio
                 label="No"
-                name="radioGroup"
-                value="No"
-                checked={this.props.conoceCodigo === "No"}
-                onChange={(e, { value }) => handleCodigo(value)}
+                name="conoceCodigo"
+                checked={conoceCodigo === "" ? false : !conoceCodigo}
+                onChange={() => handleCodigo("conoceCodigo", false)}
               />
             </Grid.Column>
           </Grid.Row>

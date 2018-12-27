@@ -35,6 +35,7 @@ class NumeroMaterial extends Component {
       this.setState({ iconState: null, errorState: true });
     } else {
       this.setState({ iconState: null, errorState: false });
+      this.props.handleChanges("numeroMaterial", value);
     }
   };
 

@@ -105,11 +105,7 @@ class Camposcomunes extends Component {
                 TAG de equipo que lo utiliza{" "}
                 <span className={"requerido"}>*</span>
               </Header>
-              <Input
-                fluid={true}
-                control="input"
-                placeholder="Ej: 3 unidades"
-              />
+              <Input fluid={true} control="input" />
             </Grid.Column>
           </Grid.Row>
 
