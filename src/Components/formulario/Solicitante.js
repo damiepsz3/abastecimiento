@@ -22,6 +22,11 @@ class Solicitante extends Component {
 
 handleChange = ( e, {value} ) => {
   this.setState({emailValue: value,})
+}
+
+handleValidation = () => {
+var email = this.state.emailValue
+
 
 }
 
@@ -38,7 +43,7 @@ handleChange = ( e, {value} ) => {
           </Grid.Column>
           <Grid.Column width={8}>
             <Header as="h4">Email</Header>
-            <Input fluid control="input" error={emailError} onChange={this.handleChange} value={emailValue} placeholder="Email"/>
+            <Input fluid control="input" error={emailError} onChange={this.handleChange} onBlur={this.handleValidation} value={emailValue} placeholder="Email"/>
           </Grid.Column>
         </Grid.Row>
 

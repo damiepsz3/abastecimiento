@@ -23,44 +23,41 @@ class Camposcomunes extends Component {
       key: '1',
       value: '  A2- No previsible- Afecta Prod',
       text: '  A2- No previsible- Afecta Prod'
-    }, {
-      key: '2',
-      value: 'D3- Eq Auxiliar- No critico',
-      text: 'D3- Eq Auxiliar- No critico'
-    }, {
+    },  {
       key: '3',
       value: '  B1- Previsible- Oc Parada',
       text: '  B1- Previsible- Oc Parada'
     }
     , {
       key: '4',
-      value: '  B1- Previsible- Oc Parada',
-      text: '  B1- Previsible- Oc Parada'
-    }
-    , {
-      key: '5',
       value: 'B2- Previsible- Afecta Prod',
       text: 'B2- Previsible- Afecta Prod'
     }
     , {
-      key: '6',
+      key: '5',
       value: 'B3- Previsible- No critico',
       text: 'B3- Previsible- No critico'
     }
     , {
-      key: '7',
+      key: '6',
       value: 'C1- Reparable- Oc Parada',
       text: 'C1- Reparable- Oc Parada'
     }
     , {
+      key: '7',
+      value: 'C2- Reparable- Afecta Prod',
+      text: 'C2- Reparable- Afecta Prod'
+    },
+     {
       key: '8',
       value: 'C3- Reparable- No critico',
       text: 'C3- Reparable- No critico'
-    }
-    , {
+    },
+
+    {
       key: '9',
-      value: 'C2- Reparable- Afecta Prod',
-      text: 'C2- Reparable- Afecta Prod'
+      value: 'D3- Eq Auxiliar- No critico',
+      text: 'D3- Eq Auxiliar- No critico'
     }
 
   ]
@@ -1883,7 +1880,8 @@ class Camposcomunes extends Component {
      key: '66'
     ,value:'U301 - LDC Trading & Service Co'
     ,text:'U301 - LDC Trading & Service Co'
-  }]
+  }
+]
 
   componentDidMount() {}
 
