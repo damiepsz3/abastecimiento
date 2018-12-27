@@ -4,7 +4,7 @@ import "../../App.css";
 
 class Solicitante extends Component {
   render() {
-    const { nombreApellido, email, handleValorNombre } = this.props;
+    const { nombreApellido, email, handleInputChange } = this.props;
 
     return (
       <Grid>
@@ -17,7 +17,7 @@ class Solicitante extends Component {
               fluid
               control="input"
               onChange={(e, { value }) =>
-                handleValorNombre("nombreApellido", value)
+                handleInputChange("nombreApellido", value)
               }
               value={nombreApellido}
               placeholder="Nombre y Apellido"
@@ -30,7 +30,7 @@ class Solicitante extends Component {
             <Input
               fluid
               control="input"
-              onChange={(e, { value }) => handleValorNombre("email", value)}
+              onChange={(e, { value }) => handleInputChange("email", value)}
               value={email}
               placeholder="Email"
             />
