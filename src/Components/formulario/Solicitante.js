@@ -22,11 +22,13 @@ class Solicitante extends Component {
 
 handleChange = ( e, {value} ) => {
   this.setState({emailValue: value,})
+  value.length ===0 || value.includes('@ldc.com') || value.includes('bril') ? this.setState({emailError: false,}) : null
+
 }
 
 handleValidation = () => {
-var email = this.state.emailValue
-
+const email = this.state.emailValue
+email.length === 0 || email.includes('@ldc.com') || email.includes('bril') ? this.setState({emailError: false,}) : this.setState({emailError: true,})
 
 }
 
