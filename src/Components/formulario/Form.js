@@ -15,6 +15,8 @@ class Form extends Component {
     super(props);
 
     this.state = {
+      nameError: false,
+      nameValue: "",
       loadingPlantillas: true,
       plantillas: [],
       plantillaSeleccionada: "",
@@ -50,7 +52,7 @@ class Form extends Component {
           Formulario de abastecimiento
         </Header>
 
-        <Solicitante />
+        <Solicitante handleValorNombre={this.handleValorNombre} />
 
         <PreguntaNumero
           conoceCodigo={conoceCodigo}

@@ -29,7 +29,7 @@ class Solicitante extends Component {
   };
 
   render() {
-    const { emailError, emailValue, nameValue } = this.state;
+    const { emailError, emailValue, nameValue, nameError } = this.state;
 
     return (
       <Grid>
