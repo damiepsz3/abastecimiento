@@ -14,7 +14,8 @@ class CamposDinamicos extends Component {
               Complete características para:{" "}
               {plantillaSeleccionada["Nombre Plantilla"]
                 .toLowerCase()
-                .replace(/^\w/, c => c.toUpperCase())}, Cat.:{" "}
+                .replace(/^\w/, c => c.toUpperCase())}
+              , Cat.:{" "}
               {plantillaSeleccionada["Taxonomia BOLD:Descripción"]
                 .toLowerCase()
                 .replace(/^\w/, c => c.toUpperCase())}
@@ -42,6 +43,7 @@ class CamposDinamicos extends Component {
                     {plantillaSeleccionada["Característica 2"]
                       .toLowerCase()
                       .replace(/^\w/, c => c.toUpperCase())}
+                    <span className={"requerido"}>*</span>
                   </Header>
                   <Input fluid control="input" placeholder="" />
                 </Grid.Column>
@@ -56,6 +58,7 @@ class CamposDinamicos extends Component {
                     {plantillaSeleccionada["Característica 3"]
                       .toLowerCase()
                       .replace(/^\w/, c => c.toUpperCase())}
+                    <span className={"requerido"}>*</span>
                   </Header>
                   <Input fluid control="input" placeholder="" />
                 </Grid.Column>
@@ -70,6 +73,7 @@ class CamposDinamicos extends Component {
                     {plantillaSeleccionada["Característica 4"]
                       .toLowerCase()
                       .replace(/^\w/, c => c.toUpperCase())}
+                    <span className={"requerido"}>*</span>
                   </Header>
                   <Input fluid control="input" placeholder="" />
                 </Grid.Column>
@@ -84,6 +88,7 @@ class CamposDinamicos extends Component {
                     {plantillaSeleccionada["Característica 5"]
                       .toLowerCase()
                       .replace(/^\w/, c => c.toUpperCase())}
+                    <span className={"requerido"}>*</span>
                   </Header>
                   <Input fluid control="input" placeholder="" />
                 </Grid.Column>
@@ -98,6 +103,7 @@ class CamposDinamicos extends Component {
                     {plantillaSeleccionada["Característica 6"]
                       .toLowerCase()
                       .replace(/^\w/, c => c.toUpperCase())}
+                    <span className={"requerido"}>*</span>
                   </Header>
                   <Input fluid control="input" placeholder="" />
                 </Grid.Column>
@@ -107,7 +113,10 @@ class CamposDinamicos extends Component {
           {plantillaSeleccionada["Nombre Plantilla"] !== undefined && (
             <Grid.Row>
               <Grid.Column width={16}>
-                <Header as="h4">Unidad de Medida Sugerida</Header>
+                <Header as="h4">
+                  Unidad de Medida Sugerida
+                  <span className={"requerido"}>*</span>
+                </Header>
                 <Dropdown
                   placeholder="Seleccione"
                   fluid={true}

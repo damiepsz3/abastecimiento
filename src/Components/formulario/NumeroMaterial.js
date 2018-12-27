@@ -64,10 +64,8 @@ class NumeroMaterial extends Component {
           <Grid.Column width={11}>
             <Header as="h4">
               Número de material a solicitar
-              <Popup
-                trigger={<Icon size="tiny" name="question circle " />}
-                wide
-              >
+              <span className={"requerido"}>*</span>{" "}
+              <Popup trigger={<Icon size="tiny" name="info circle" />} wide>
                 El numero de material es un numero compuesto por 9 a 18 digitos
                 numericos el cual puede incluir la letras "INS" al principio.
               </Popup>
@@ -88,11 +86,7 @@ class NumeroMaterial extends Component {
             <Modal
               size={"fullscreen"}
               closeIcon
-              trigger={
-                <Button fluid>
-                  Ver instrucciones para buscar código en SAP
-                </Button>
-              }
+              trigger={<Button fluid>¿Donde lo encuntro?</Button>}
             >
               <Modal.Header>
                 Instrucciones para buscar código en SAP

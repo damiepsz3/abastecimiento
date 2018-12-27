@@ -39,7 +39,8 @@
 #root .NumeroMaterial i.check {
   color: green;
 }
-#root .question {
+#root .info {
+  display: inline;
   font-size: 16px;
 }
 
