@@ -67,7 +67,9 @@ class Form extends Component {
           />
         )}
 
-        <CamposDinamicos plantillaSeleccionada={plantillaSeleccionada} />
+        {this.state.conoceCodigo === "No" && (
+          <CamposDinamicos plantillaSeleccionada={plantillaSeleccionada} />
+        )}
 
         {this.state.conoceCodigo !== null && <Camposcomunes />}
 

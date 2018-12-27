@@ -19,16 +19,16 @@ class PreguntaNumero extends Component {
             <span className={"requerido"}>*</span>
           </Header>
           <Grid.Row>
-            <Grid.Column width={1}>
+            <Grid.Column width={16}>
               <Radio
-                label="Si"
+                label="Si    "
                 name="radioGroup"
                 value="Si"
                 checked={this.props.conoceCodigo === "Si"}
                 onChange={(e, { value }) => handleCodigo(value)}
+                style={{ paddingRight: "35px" }}
               />
-            </Grid.Column>
-            <Grid.Column width={1}>
+
               <Radio
                 label="No"
                 name="radioGroup"

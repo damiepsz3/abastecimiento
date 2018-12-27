@@ -61,7 +61,7 @@ class NumeroMaterial extends Component {
     return (
       <Grid stackable>
         <Grid.Row>
-          <Grid.Column width={11}>
+          <Grid.Column width={12}>
             <Header as="h4">
               Número de material a solicitar
               <span className={"requerido"}>*</span>{" "}
@@ -82,7 +82,7 @@ class NumeroMaterial extends Component {
               onChange={this.handleChange}
             />
           </Grid.Column>
-          <Grid.Column width={5} verticalAlign={"bottom"}>
+          <Grid.Column width={4} verticalAlign={"bottom"}>
             <Modal
               size={"fullscreen"}
               closeIcon

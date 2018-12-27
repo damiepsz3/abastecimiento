@@ -117,7 +117,7 @@ class Plantilla extends Component {
     const { nombrePlantillaSeleccionada } = this.state;
 
     return (
-      <Grid>
+      <Grid stackable>
         <Grid.Row columns="equal">
           <Grid.Column>
             <Header as="h4">Seleccione Plantilla</Header>
