@@ -72,7 +72,9 @@ class Plantilla extends Component {
           color={this.state.idxPlantillaSeleccionada === idx ? "blue" : null}
           inverted={this.state.idxPlantillaSeleccionada === idx && true}
         >
-          {plantilla["Nombre Plantilla"]}
+          {plantilla["Nombre Plantilla"]
+            .toLowerCase()
+            .replace(/^\w/, c => c.toUpperCase())}
           {this.state.idxPlantillaSeleccionada === idx && (
             <Icon
               name="check"
