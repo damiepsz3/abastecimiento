@@ -12,12 +12,8 @@ class CamposDinamicos extends Component {
           {plantillaSeleccionada["Nombre Plantilla"] !== undefined && (
             <Header>
               Complete características para:{" "}
-              {plantillaSeleccionada["Nombre Plantilla"]
-                .toLowerCase()
-                .replace(/^\w/, c => c.toUpperCase())}, Cat.:{" "}
-              {plantillaSeleccionada["Taxonomia BOLD:Descripción"]
-                .toLowerCase()
-                .replace(/^\w/, c => c.toUpperCase())}
+              {plantillaSeleccionada["Nombre Plantilla"]}, Cat.:{" "}
+              {plantillaSeleccionada["Taxonomia BOLD:Descripción"]}.
             </Header>
           )}
           {plantillaSeleccionada["Característica 1"] !== undefined &&

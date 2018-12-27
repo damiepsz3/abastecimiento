@@ -72,9 +72,7 @@ class Plantilla extends Component {
           color={this.state.idxPlantillaSeleccionada === idx ? "blue" : null}
           inverted={this.state.idxPlantillaSeleccionada === idx && true}
         >
-          {plantilla["Nombre Plantilla"]
-            .toLowerCase()
-            .replace(/^\w/, c => c.toUpperCase())}
+          {plantilla["Nombre Plantilla"]}
           {this.state.idxPlantillaSeleccionada === idx && (
             <Icon
               name="check"
@@ -126,7 +124,7 @@ class Plantilla extends Component {
             <Segment.Group>
               <Input
                 className="searchCategoria"
-                action={{ icon: "search" }}
+                icon="search"
                 placeholder="Buscar..."
                 fluid
                 onChange={this.handleSearch}
