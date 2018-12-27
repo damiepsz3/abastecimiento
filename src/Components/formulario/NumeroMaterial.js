@@ -1,14 +1,11 @@
 import React, { Component } from "react";
-import { Icon } from "semantic-ui-react";
 import Tutorial from "../../assets/tutorial.png";
 import {
-  Form,
-  Radio,
   Header,
   Grid,
   Input,
   Popup,
-  Icons,
+  Icon,
   Modal,
   Button,
   Image

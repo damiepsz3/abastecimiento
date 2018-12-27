@@ -1,12 +1,8 @@
 import React, { Component, Fragment } from "react";
-import { Form, Radio, Header, Divider, Grid, Input } from "semantic-ui-react";
+import { Radio, Header, Divider, Grid } from "semantic-ui-react";
 import "../../App.css";
 
 class PreguntaNumero extends Component {
-  constructor(props) {
-    super(props);
-  }
-
   render() {
     const { handleCodigo } = this.props;
     return (
