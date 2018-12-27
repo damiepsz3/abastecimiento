@@ -8,7 +8,9 @@ class Solicitante extends Component {
 
     this.state = {
       emailError: false,
-      emailValue: ""
+      emailValue: "",
+      nameValue: "",
+      nameError: false
     };
   }
 
@@ -27,7 +29,7 @@ class Solicitante extends Component {
   };
 
   render() {
-    const { emailError, emailValue } = this.state;
+    const { emailError, emailValue, nameValue } = this.state;
 
     return (
       <Grid>
@@ -36,7 +38,13 @@ class Solicitante extends Component {
             <Header as="h4">
               Nombre y Apellido <span className={"requerido"}>*</span>
             </Header>
-            <Input fluid control="input" placeholder="Nombre y Apellido" />
+            <Input
+              fluid
+              control="input"
+              value={nameValue}
+              error={nameError}
+              placeholder="Nombre y Apellido"
+            />
           </Grid.Column>
           <Grid.Column width={8}>
             <Header as="h4">
