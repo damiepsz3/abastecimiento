@@ -67,11 +67,12 @@ class Form extends Component {
           />
         )}
 
-        {this.state.conoceCodigo === "No" && (
+        {this.state.plantillaSeleccionada !== "" && (
           <CamposDinamicos plantillaSeleccionada={plantillaSeleccionada} />
         )}
 
-        {this.state.conoceCodigo !== null && <Camposcomunes />}
+        {(this.state.conoceCodigo === "Si" ||
+          this.state.plantillaSeleccionada !== "") && <Camposcomunes />}
 
         <Grid style={{ marginTop: 40 }}>
           <Grid.Row>
