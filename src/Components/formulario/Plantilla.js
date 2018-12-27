@@ -6,7 +6,8 @@ import {
   Input,
   Loader,
   Image,
-  Container
+  Container,
+  Icon
 } from "semantic-ui-react";
 import selectCategoria from "../../assets/select_categoria.png";
 
@@ -16,7 +17,9 @@ class Plantilla extends Component {
 
     this.state = {
       query: "",
-      nombrePlantillaSeleccionada: {}
+      nombrePlantillaSeleccionada: {},
+      idxPlantillaSeleccionada: null,
+      idxCategoriaSeleccionada: null
     };
   }
 
@@ -60,12 +63,23 @@ class Plantilla extends Component {
           key={idx}
           onClick={e => {
             this.setState({
-              nombrePlantillaSeleccionada: plantilla
+              nombrePlantillaSeleccionada: plantilla,
+              idxPlantillaSeleccionada: idx,
+              idxCategoriaSeleccionada: null
             });
             this.props.selectPlantilla("");
           }}
+          color={this.state.idxPlantillaSeleccionada === idx ? "blue" : null}
+          inverted={this.state.idxPlantillaSeleccionada === idx && true}
         >
           {plantilla["Nombre Plantilla"]}
+          {this.state.idxPlantillaSeleccionada === idx && (
+            <Icon
+              name="check"
+              inverted
+              style={{ position: "absolute", right: 0, marginRight: 10 }}
+            />
+          )}
         </Segment>
       ));
 
@@ -80,9 +94,21 @@ class Plantilla extends Component {
         <Segment
           className="segmentCategorias"
           key={idx}
-          onClick={e => this.props.selectPlantilla(plantilla)}
+          onClick={e => {
+            this.props.selectPlantilla(plantilla);
+            this.setState({ idxCategoriaSeleccionada: idx });
+          }}
+          color={this.state.idxCategoriaSeleccionada === idx ? "blue" : null}
+          inverted={this.state.idxCategoriaSeleccionada === idx && true}
         >
           {plantilla["Taxonomia BOLD:Descripción"]}
+          {this.state.idxCategoriaSeleccionada === idx && (
+            <Icon
+              name="check"
+              inverted
+              style={{ position: "absolute", right: 0, marginRight: 10 }}
+            />
+          )}
         </Segment>
       ));
 
@@ -106,13 +132,13 @@ class Plantilla extends Component {
               />
               {loading ? (
                 <div
-                  className="contenedorCategorias"
+                  className="contenedorPlantillas"
                   style={{ overflowY: "hidden" }}
                 >
                   <Loader active size="big" />
                 </div>
               ) : (
-                <div className="contenedorCategorias">
+                <div className="contenedorPlantillas">
                   {this.formatListPlantillas(data)}
                 </div>
               )}
@@ -122,23 +148,21 @@ class Plantilla extends Component {
           <Grid.Column>
             <Header as="h4">Seleccione Categoría</Header>
             <Segment.Group>
-              {Object.keys(nombrePlantillaSeleccionada).length > 0 ? (
-                <div className="contenedorCategorias" style={{ height: 558 }}>
-                  {this.formatListCategorias(data)}
-                </div>
-              ) : (
-                <div
-                  className="contenedorCategorias"
-                  style={{ height: 558, overflowY: "hidden" }}
-                >
-                  <Container centered style={{ marginTop: 184 }}>
+              <div
+                className="contenedorCategorias"
+                style={{ height: 558, overflowY: "hidden", borderTop: 0 }}
+              >
+                {Object.keys(nombrePlantillaSeleccionada).length > 0 ? (
+                  this.formatListCategorias(data)
+                ) : (
+                  <Container style={{ marginTop: 184 }}>
                     <Image src={selectCategoria} size="small" centered />
                     <Header as="h4" textAlign="center" disabled>
                       Seleccione una plantilla para poder elegir una categoría.
                     </Header>
                   </Container>
-                </div>
-              )}
+                )}
+              </div>
             </Segment.Group>
           </Grid.Column>
         </Grid.Row>

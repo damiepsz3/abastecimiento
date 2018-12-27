@@ -1,6 +1,12 @@
 .contenedorCategorias {
   height: 500px;
   overflow-y: scroll;
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+}
+.contenedorPlantillas {
+  height: 500px;
+  overflow-y: scroll;
   border-top: 1px solid rgba(34, 36, 38, 0.15) !important;
   margin-left: 0 !important;
   margin-right: 0 !important;
@@ -20,11 +26,10 @@
   margin: 10px;
 }
 
-.ui.segment.segmentCategorias:hover{
+.ui.segment.segmentCategorias:hover {
   cursor: pointer;
   background-color: rgb(226, 230, 240);
 }
-
 
 #root .ui.divider {
   margin-bottom: 45px;
