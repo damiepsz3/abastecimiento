@@ -15,12 +15,13 @@ class Form extends Component {
     super(props);
 
     this.state = {
-      nameError: false,
-      nameValue: "",
       loadingPlantillas: true,
       plantillas: [],
       plantillaSeleccionada: "",
-      conoceCodigo: null
+      conoceCodigo: "",
+      nombreApellido: "",
+      email: "",
+      numeroMaterial: ""
     };
   }
 
@@ -30,12 +31,10 @@ class Form extends Component {
     );
   }
 
-  seleccionarPlantilla = plantilla => {
-    this.setState({ plantillaSeleccionada: plantilla });
-  };
-
-  handleConoceCodigo = conoceCodigo => {
-    this.setState({ conoceCodigo: conoceCodigo });
+  handleInputChange = (name, value) => {
+    this.setState({
+      [name]: value
+    });
   };
 
   render() {
@@ -43,8 +42,13 @@ class Form extends Component {
       plantillaSeleccionada,
       plantillas,
       loadingPlantillas,
-      conoceCodigo
+      conoceCodigo,
+      nombreApellido,
+      email,
+      numeroMaterial
     } = this.state;
+
+    console.log(this.state);
 
     return (
       <React.Fragment>
@@ -52,28 +56,39 @@ class Form extends Component {
           Formulario de abastecimiento
         </Header>
 
-        <Solicitante handleValorNombre={this.handleValorNombre} />
+        <Solicitante
+          handleValorNombre={this.handleInputChange}
+          nombreApellido={nombreApellido}
+          email={email}
+        />
 
         <PreguntaNumero
           conoceCodigo={conoceCodigo}
-          handleCodigo={this.handleConoceCodigo}
+          handleCodigo={this.handleInputChange}
         />
 
-        {this.state.conoceCodigo === "Si" && <NumeroMaterial />}
-        {this.state.conoceCodigo === "No" && (
-          <Plantilla
-            data={plantillas}
-            selectPlantilla={this.seleccionarPlantilla}
-            plantillaSeleccionada={plantillaSeleccionada}
-            loading={loadingPlantillas}
+        {this.state.conoceCodigo && (
+          <NumeroMaterial
+            numeroMaterial={numeroMaterial}
+            handleChanges={this.handleInputChange}
           />
         )}
+        {!this.state.conoceCodigo &&
+          this.state.conoceCodigo !== "" && (
+            <Plantilla
+              data={plantillas}
+              selectPlantilla={this.handleInputChange}
+              plantillaSeleccionada={plantillaSeleccionada}
+              loading={loadingPlantillas}
+            />
+          )}
 
-        {this.state.plantillaSeleccionada !== "" && (
-          <CamposDinamicos plantillaSeleccionada={plantillaSeleccionada} />
-        )}
+        {this.state.plantillaSeleccionada !== "" &&
+          !this.state.conoceCodigo && (
+            <CamposDinamicos plantillaSeleccionada={plantillaSeleccionada} />
+          )}
 
-        {(this.state.conoceCodigo === "Si" ||
+        {((this.state.conoceCodigo && this.state.conoceCodigo !== "") ||
           this.state.plantillaSeleccionada !== "") && <Camposcomunes />}
 
         <Grid style={{ marginTop: 40 }}>

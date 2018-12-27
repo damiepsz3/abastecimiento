@@ -3,33 +3,8 @@ import { Header, Grid, Input } from "semantic-ui-react";
 import "../../App.css";
 
 class Solicitante extends Component {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      emailError: false,
-      emailValue: "",
-      nameValue: "",
-      nameError: false
-    };
-  }
-
-  handleChange = (e, { value }) => {
-    this.setState({ emailValue: value });
-    value.length === 0 || value.includes("@ldc.com") || value.includes("bril")
-      ? this.setState({ emailError: false })
-      : null;
-  };
-
-  handleValidation = () => {
-    const email = this.state.emailValue;
-    email.length === 0 || email.includes("@ldc.com") || email.includes("bril")
-      ? this.setState({ emailError: false })
-      : this.setState({ emailError: true });
-  };
-
   render() {
-    const { emailError, emailValue, nameValue, nameError } = this.state;
+    const { nombreApellido, email, handleValorNombre } = this.props;
 
     return (
       <Grid>
@@ -41,8 +16,10 @@ class Solicitante extends Component {
             <Input
               fluid
               control="input"
-              value={nameValue}
-              error={nameError}
+              onChange={(e, { value }) =>
+                handleValorNombre("nombreApellido", value)
+              }
+              value={nombreApellido}
               placeholder="Nombre y Apellido"
             />
           </Grid.Column>
@@ -53,10 +30,8 @@ class Solicitante extends Component {
             <Input
               fluid
               control="input"
-              error={emailError}
-              onChange={this.handleChange}
-              onBlur={this.handleValidation}
-              value={emailValue}
+              onChange={(e, { value }) => handleValorNombre("email", value)}
+              value={email}
               placeholder="Email"
             />
           </Grid.Column>
