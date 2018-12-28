@@ -21,7 +21,9 @@ class Form extends Component {
       conoceCodigo: "",
       nombreApellido: "",
       email: "",
-      numeroMaterial: ""
+      numeroMaterial: "",
+      camposDinamicos: {},
+      unidadMedida: ""
     };
   }
 
@@ -29,6 +31,22 @@ class Form extends Component {
     GoogleApi.init().then(result =>
       this.setState({ plantillas: result, loadingPlantillas: false })
     );
+  }
+
+  componentDidUpdate() {
+    if (
+      this.state.plantillaSeleccionada &&
+      Object.keys(this.state.camposDinamicos).length === 0
+    )
+      this.setState({
+        camposDinamicos: Object.assign(
+          {},
+          ...Object.keys(this.state.plantillaSeleccionada)
+            .filter(prop => prop.includes("Característica"))
+            .filter(propFil => this.state.plantillaSeleccionada[propFil] !== "")
+            .map(c => ({ [this.state.plantillaSeleccionada[c]]: "" }))
+        )
+      });
   }
 
   handleInputChange = (name, value) => {
@@ -45,10 +63,9 @@ class Form extends Component {
       conoceCodigo,
       nombreApellido,
       email,
-      numeroMaterial
+      numeroMaterial,
+      camposDinamicos
     } = this.state;
-
-    console.log(this.state);
 
     return (
       <React.Fragment>
@@ -85,11 +102,17 @@ class Form extends Component {
 
         {this.state.plantillaSeleccionada !== "" &&
           !this.state.conoceCodigo && (
-            <CamposDinamicos plantillaSeleccionada={plantillaSeleccionada} />
+            <CamposDinamicos
+              plantillaSeleccionada={plantillaSeleccionada}
+              caracteristicas={camposDinamicos}
+              handleInputChange={this.handleInputChange}
+            />
           )}
 
         {((this.state.conoceCodigo && this.state.conoceCodigo !== "") ||
-          this.state.plantillaSeleccionada !== "") && <Camposcomunes />}
+          this.state.plantillaSeleccionada !== "") && (
+          <Camposcomunes handleInputChange={this.handleInputChange} />
+        )}
 
         <Grid style={{ marginTop: 40 }}>
           <Grid.Row>

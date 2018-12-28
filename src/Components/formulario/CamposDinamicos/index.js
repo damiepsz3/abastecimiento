@@ -3,109 +3,53 @@ import { Header, Grid, Input, Dropdown, Divider } from "semantic-ui-react";
 import opcionesUnidadesDeMedida from "./unidadesMedidas";
 
 class CamposDinamicos extends Component {
+  componentDidMount() {}
+
+  handleInput = (prop, value) => {
+    this.props.handleInputChange("camposDinamicos", {
+      ...this.props.caracteristicas,
+      [prop]: value
+    });
+  };
+
   render() {
-    const { plantillaSeleccionada } = this.props;
+    const {
+      plantillaSeleccionada,
+      handleInputChange,
+      caracteristicas
+    } = this.props;
+
     return (
       <Fragment>
         <Divider />
         <Grid>
-          {plantillaSeleccionada["Nombre Plantilla"] !== undefined && (
-            <Header>
-              Complete las características de{" "}
-              {plantillaSeleccionada["Nombre Plantilla"]} para la Categoría{" "}
-              {plantillaSeleccionada["Taxonomia BOLD:Descripción"]}.
-            </Header>
-          )}
-          {plantillaSeleccionada["Característica 1"] !== undefined &&
-            plantillaSeleccionada["Característica 1"] !== "" && (
-              <Grid.Row>
-                <Grid.Column width={16}>
-                  <Header as="h4">
-                    {plantillaSeleccionada["Característica 1"]
-                      .toLowerCase()
-                      .replace(/^\w/, c => c.toUpperCase())}
-                  </Header>
-                  <Input fluid control="input" placeholder="" />
-                </Grid.Column>
-              </Grid.Row>
-            )}
+          <Header>
+            Complete las características de{" "}
+            {plantillaSeleccionada["Nombre Plantilla"]} para la Categoría{" "}
+            {plantillaSeleccionada["Taxonomia BOLD:Descripción"]}.
+          </Header>
+          {Object.keys(caracteristicas).map((caracteristica, idx) => (
+            <Grid.Row key={idx}>
+              <Grid.Column width={16}>
+                <Header as="h4">
+                  {caracteristica
+                    .toLowerCase()
+                    .replace(/^\w/, c => c.toUpperCase())}
+                </Header>
+                <Input
+                  fluid
+                  control="input"
+                  placeholder=""
+                  value={caracteristicas[caracteristica]}
+                  onChange={(e, { value }) =>
+                    this.handleInput(caracteristica, value)
+                  }
+                />
+              </Grid.Column>
+            </Grid.Row>
+          ))}
 
-          {plantillaSeleccionada["Característica 2"] !== undefined &&
-            plantillaSeleccionada["Característica 2"] !== "" && (
-              <Grid.Row>
-                <Grid.Column width={16}>
-                  <Header as="h4">
-                    {plantillaSeleccionada["Característica 2"]
-                      .toLowerCase()
-                      .replace(/^\w/, c => c.toUpperCase())}
-                    <span className={"requerido"}>*</span>
-                  </Header>
-                  <Input fluid control="input" placeholder="" />
-                </Grid.Column>
-              </Grid.Row>
-            )}
-
-          {plantillaSeleccionada["Característica 3"] !== undefined &&
-            plantillaSeleccionada["Característica 3"] !== "" && (
-              <Grid.Row>
-                <Grid.Column width={16}>
-                  <Header as="h4">
-                    {plantillaSeleccionada["Característica 3"]
-                      .toLowerCase()
-                      .replace(/^\w/, c => c.toUpperCase())}
-                    <span className={"requerido"}>*</span>
-                  </Header>
-                  <Input fluid control="input" placeholder="" />
-                </Grid.Column>
-              </Grid.Row>
-            )}
-
-          {plantillaSeleccionada["Característica 4"] !== undefined &&
-            plantillaSeleccionada["Característica 4"] !== "" && (
-              <Grid.Row>
-                <Grid.Column width={16}>
-                  <Header as="h4">
-                    {plantillaSeleccionada["Característica 4"]
-                      .toLowerCase()
-                      .replace(/^\w/, c => c.toUpperCase())}
-                    <span className={"requerido"}>*</span>
-                  </Header>
-                  <Input fluid control="input" placeholder="" />
-                </Grid.Column>
-              </Grid.Row>
-            )}
-
-          {plantillaSeleccionada["Característica 5"] !== undefined &&
-            plantillaSeleccionada["Característica 5"] !== "" && (
-              <Grid.Row>
-                <Grid.Column width={16}>
-                  <Header as="h4">
-                    {plantillaSeleccionada["Característica 5"]
-                      .toLowerCase()
-                      .replace(/^\w/, c => c.toUpperCase())}
-                    <span className={"requerido"}>*</span>
-                  </Header>
-                  <Input fluid control="input" placeholder="" />
-                </Grid.Column>
-              </Grid.Row>
-            )}
-
-          {plantillaSeleccionada["Característica 6"] !== undefined &&
-            plantillaSeleccionada["Característica 6"] !== "" && (
-              <Grid.Row>
-                <Grid.Column width={16}>
-                  <Header as="h4">
-                    {plantillaSeleccionada["Característica 6"]
-                      .toLowerCase()
-                      .replace(/^\w/, c => c.toUpperCase())}
-                    <span className={"requerido"}>*</span>
-                  </Header>
-                  <Input fluid control="input" placeholder="" />
-                </Grid.Column>
-              </Grid.Row>
-            )}
-
-          {plantillaSeleccionada["Nombre Plantilla"] !== undefined && (
+          {
             <Grid.Row>
               <Grid.Column width={16}>
                 <Header as="h4">
@@ -118,10 +62,13 @@ class CamposDinamicos extends Component {
                   search={true}
                   selection={true}
                   options={opcionesUnidadesDeMedida}
+                  onChange={(e, { value }) =>
+                    handleInputChange("unidadMedida", value)
+                  }
                 />
               </Grid.Column>
             </Grid.Row>
-          )}
+          }
         </Grid>
       </Fragment>
     );
