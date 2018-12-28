@@ -74,7 +74,7 @@ class Form extends Component {
         </Header>
 
         <Solicitante
-          handleValorNombre={this.handleInputChange}
+          handleInputChange={this.handleInputChange}
           nombreApellido={nombreApellido}
           email={email}
         />
@@ -90,15 +90,14 @@ class Form extends Component {
             handleChanges={this.handleInputChange}
           />
         )}
-        {!this.state.conoceCodigo &&
-          this.state.conoceCodigo !== "" && (
-            <Plantilla
-              data={plantillas}
-              selectPlantilla={this.handleInputChange}
-              plantillaSeleccionada={plantillaSeleccionada}
-              loading={loadingPlantillas}
-            />
-          )}
+        {!this.state.conoceCodigo && this.state.conoceCodigo !== "" && (
+          <Plantilla
+            data={plantillas}
+            selectPlantilla={this.handleInputChange}
+            plantillaSeleccionada={plantillaSeleccionada}
+            loading={loadingPlantillas}
+          />
+        )}
 
         {this.state.plantillaSeleccionada !== "" &&
           !this.state.conoceCodigo && (
