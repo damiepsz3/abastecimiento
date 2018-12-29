@@ -14,14 +14,21 @@ class CamposDinamicos extends Component {
 
   shouldComponentUpdate(nextProps, nextState) {
     // solo deberia re-renderizar si cambia el valor.
+    if (
+      Object.keys(nextProps.caracteristicas).reduce((acum, currentValue) => {
+        if (this.props[currentValue] !== nextProps[currentValue])
+          return (acum = true);
+      }, false)
+    )
+      return true;
     // cambio de caracteristicas
-    return Object.keys(nextProps.caracteristicas).reduce(
-      (acum, currentValue) => {
+    if (
+      Object.keys(nextProps.caracteristicas).reduce((acum, currentValue) => {
         //ver si la nueva caracteristicas existe en el objeto anterior
         if (this.props[currentValue] === undefined) return (acum = true);
-      },
-      false
-    );
+      }, false)
+    )
+      return true;
   }
 
   render() {
