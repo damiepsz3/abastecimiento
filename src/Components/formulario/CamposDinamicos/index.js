@@ -1,8 +1,8 @@
-import React, { Component, Fragment } from "react";
+import React, { PureComponent, Fragment } from "react";
 import { Header, Grid, Input, Dropdown, Divider } from "semantic-ui-react";
 import opcionesUnidadesDeMedida from "./unidadesMedidas";
 
-class CamposDinamicos extends Component {
+class CamposDinamicos extends PureComponent {
   componentDidMount() {}
 
   handleInput = (prop, value) => {
@@ -12,24 +12,24 @@ class CamposDinamicos extends Component {
     });
   };
 
-  shouldComponentUpdate(nextProps, nextState) {
-    // solo deberia re-renderizar si cambia el valor.
-    if (
-      Object.keys(nextProps.caracteristicas).reduce((acum, currentValue) => {
-        if (this.props[currentValue] !== nextProps[currentValue])
-          return (acum = true);
-      }, false)
-    )
-      return true;
-    // cambio de caracteristicas
-    if (
-      Object.keys(nextProps.caracteristicas).reduce((acum, currentValue) => {
-        //ver si la nueva caracteristicas existe en el objeto anterior
-        if (this.props[currentValue] === undefined) return (acum = true);
-      }, false)
-    )
-      return true;
-  }
+  // shouldComponentUpdate(nextProps, nextState) {
+  //   // solo deberia re-renderizar si cambia el valor.
+  //   if (
+  //     Object.keys(nextProps.caracteristicas).reduce((acum, currentValue) => {
+  //       if (this.props[currentValue] !== nextProps[currentValue])
+  //         return (acum = true);
+  //     }, false)
+  //   )
+  //     return true;
+  //   // cambio de caracteristicas
+  //   if (
+  //     Object.keys(nextProps.caracteristicas).reduce((acum, currentValue) => {
+  //       //ver si la nueva caracteristicas existe en el objeto anterior
+  //       if (this.props[currentValue] === undefined) return (acum = true);
+  //     }, false)
+  //   )
+  //     return true;
+  // }
 
   render() {
     const {
