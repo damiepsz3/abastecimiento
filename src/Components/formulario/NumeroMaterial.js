@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { PureComponent } from "react";
 import Tutorial from "../../assets/tutorial.png";
 import {
   Header,
@@ -12,7 +12,7 @@ import {
 } from "semantic-ui-react";
 import "../../App.css";
 
-class NumeroMaterial extends Component {
+class NumeroMaterial extends PureComponent {
   constructor(props) {
     super(props);
     this.state = {

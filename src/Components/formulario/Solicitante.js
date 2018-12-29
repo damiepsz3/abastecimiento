@@ -1,8 +1,8 @@
-import React, { Component } from "react";
+import React, { PureComponent } from "react";
 import { Header, Grid, Input } from "semantic-ui-react";
 import "../../App.css";
 
-class Solicitante extends Component {
+class Solicitante extends PureComponent {
   render() {
     const { nombreApellido, email, handleInputChange } = this.props;
 

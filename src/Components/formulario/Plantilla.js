@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { PureComponent } from "react";
 import {
   Grid,
   Header,
@@ -11,7 +11,7 @@ import {
 } from "semantic-ui-react";
 import selectCategoria from "../../assets/select_categoria.png";
 
-class Plantilla extends Component {
+class Plantilla extends PureComponent {
   constructor(props) {
     super(props);
     this.myRef = React.createRef();

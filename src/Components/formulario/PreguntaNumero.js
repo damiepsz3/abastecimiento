@@ -1,8 +1,8 @@
-import React, { Component, Fragment } from "react";
+import React, { PureComponent, Fragment } from "react";
 import { Radio, Header, Divider, Grid } from "semantic-ui-react";
 import "../../App.css";
 
-class PreguntaNumero extends Component {
+class PreguntaNumero extends PureComponent {
   render() {
     const { handleCodigo, conoceCodigo } = this.props;
     return (
