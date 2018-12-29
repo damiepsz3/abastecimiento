@@ -33,20 +33,27 @@ class Form extends Component {
     );
   }
 
-  componentDidUpdate() {
+  componentDidUpdate(prevProps, prevState) {
+    //llenar las propiedades del campo dinamico solo cuando se selecciona plantilla
     if (
-      this.state.plantillaSeleccionada &&
-      Object.keys(this.state.camposDinamicos).length === 0
+      prevState.plantillaSeleccionada === "" &&
+      typeof this.state.plantillaSeleccionada === "object"
     )
-      this.setState({
-        camposDinamicos: Object.assign(
-          {},
-          ...Object.keys(this.state.plantillaSeleccionada)
-            .filter(prop => prop.includes("Característica"))
-            .filter(propFil => this.state.plantillaSeleccionada[propFil] !== "")
-            .map(c => ({ [this.state.plantillaSeleccionada[c]]: "" }))
-        )
-      });
+      if (
+        prevState.plantillaSeleccionada["Nombre Plantilla"] !==
+        this.state.plantillaSeleccionada["Nombre Plantilla"]
+      )
+        this.setState({
+          camposDinamicos: Object.assign(
+            {},
+            ...Object.keys(this.state.plantillaSeleccionada)
+              .filter(prop => prop.includes("Característica"))
+              .filter(
+                propFil => this.state.plantillaSeleccionada[propFil] !== ""
+              )
+              .map(c => ({ [this.state.plantillaSeleccionada[c]]: "" }))
+          )
+        });
   }
 
   handleInputChange = (name, value) => {
@@ -90,14 +97,15 @@ class Form extends Component {
             handleChanges={this.handleInputChange}
           />
         )}
-        {!this.state.conoceCodigo && this.state.conoceCodigo !== "" && (
-          <Plantilla
-            data={plantillas}
-            selectPlantilla={this.handleInputChange}
-            plantillaSeleccionada={plantillaSeleccionada}
-            loading={loadingPlantillas}
-          />
-        )}
+        {!this.state.conoceCodigo &&
+          this.state.conoceCodigo !== "" && (
+            <Plantilla
+              data={plantillas}
+              selectPlantilla={this.handleInputChange}
+              plantillaSeleccionada={plantillaSeleccionada}
+              loading={loadingPlantillas}
+            />
+          )}
 
         {this.state.plantillaSeleccionada !== "" &&
           !this.state.conoceCodigo && (

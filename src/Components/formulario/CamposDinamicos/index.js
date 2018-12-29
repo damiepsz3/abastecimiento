@@ -12,11 +12,23 @@ class CamposDinamicos extends Component {
     });
   };
 
+  shouldComponentUpdate(nextProps, nextState) {
+    // solo deberia re-renderizar si cambia el valor.
+    // cambio de caracteristicas
+    return Object.keys(nextProps.caracteristicas).reduce(
+      (acum, currentValue) => {
+        //ver si la nueva caracteristicas existe en el objeto anterior
+        if (this.props[currentValue] === undefined) return (acum = true);
+      },
+      false
+    );
+  }
+
   render() {
     const {
-      plantillaSeleccionada,
       handleInputChange,
-      caracteristicas
+      caracteristicas,
+      plantillaSeleccionada
     } = this.props;
 
     return (
@@ -24,9 +36,7 @@ class CamposDinamicos extends Component {
         <Divider />
         <Grid>
           <Header>
-            Complete las características de{" "}
-            {plantillaSeleccionada["Nombre Plantilla"]} para la Categoría{" "}
-            {plantillaSeleccionada["Taxonomia BOLD:Descripción"]}.
+            Complete las características de la plantilla seleccionada
           </Header>
           {Object.keys(caracteristicas).map((caracteristica, idx) => (
             <Grid.Row key={idx}>
