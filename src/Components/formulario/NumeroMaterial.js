@@ -37,7 +37,7 @@ class NumeroMaterial extends PureComponent {
     //check if the result contains only digits.
     var isnum = /^\d+$/.test(numero);
     if (this.state.numMaterial.length === 0) {
-      this.setState({ iconState: null, errorState: false });
+      this.setState({ iconState: null, errorState: true });
     } else if (isnum && numero.length >= 9 && numero.length <= 18) {
       this.setState({ iconState: "check", errorState: false });
     } else {
