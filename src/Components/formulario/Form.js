@@ -62,6 +62,7 @@ class Form extends Component {
           ? e =>
               e !== "plantillaSeleccionada" &&
               e !== "unidadMedida" &&
+              e !== "proveedor" &&
               e !== "presentacion"
           : e =>
               e !== "proveedor" &&
