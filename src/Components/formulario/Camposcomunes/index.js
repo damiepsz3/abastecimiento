@@ -7,13 +7,9 @@ class Camposcomunes extends PureComponent {
   constructor(props) {
     super(props);
     this.state = {
-      requiereStock: ""
+      requiereStock: false
     };
   }
-  //obj = {value: 'des'}
-  handleChange = (e, { value }) => this.setState({ requiereStock: value });
-
-  componentDidMount() {}
 
   render() {
     const {
@@ -22,6 +18,7 @@ class Camposcomunes extends PureComponent {
       opcionesSiNo,
       opcionesGradoDeCriticidad
     } = opciones;
+    const { handleInputChange } = this.props;
     const { requiereStock } = this.state;
     return (
       <Fragment>
@@ -30,11 +27,25 @@ class Camposcomunes extends PureComponent {
           <Grid.Row>
             <Grid.Column>
               <Header as="h4">Proveedor/ Marca Sugeridos</Header>
-              <Input fluid={true} control="input" placeholder="" />
+              <Input
+                fluid={true}
+                control="input"
+                placeholder=""
+                onChange={(e, { value }) =>
+                  handleInputChange("proveedor", value)
+                }
+              />
             </Grid.Column>
             <Grid.Column>
               <Header as="h4">Presentación</Header>
-              <Input fluid={true} control="input" placeholder="" />
+              <Input
+                fluid={true}
+                control="input"
+                placeholder=""
+                onChange={(e, { value }) =>
+                  handleInputChange("presentacion", value)
+                }
+              />
             </Grid.Column>
           </Grid.Row>
 
@@ -49,6 +60,9 @@ class Camposcomunes extends PureComponent {
                 search={true}
                 selection={true}
                 options={opcionesPlanta}
+                onChange={(e, { value }) =>
+                  handleInputChange("opcionPlanta", value)
+                }
               />
             </Grid.Column>
             <Grid.Column>
@@ -61,6 +75,9 @@ class Camposcomunes extends PureComponent {
                 fluid={true}
                 search={true}
                 selection={true}
+                onChange={(e, { value }) =>
+                  handleInputChange("opcionSector", value)
+                }
               />
             </Grid.Column>
           </Grid.Row>
@@ -76,6 +93,9 @@ class Camposcomunes extends PureComponent {
                 search={false}
                 selection={true}
                 options={opcionesGradoDeCriticidad}
+                onChange={(e, { value }) =>
+                  handleInputChange("criticidad", value)
+                }
               />
             </Grid.Column>
             <Grid.Column>
@@ -88,6 +108,7 @@ class Camposcomunes extends PureComponent {
                 fluid={true}
                 search={false}
                 selection={true}
+                onChange={(e, { value }) => handleInputChange("repara", value)}
               />
             </Grid.Column>
           </Grid.Row>
@@ -97,7 +118,14 @@ class Camposcomunes extends PureComponent {
               <Header as="h4">
                 Valor Unitario (U$D) <span className={"requerido"}>*</span>
               </Header>
-              <Input label="USD$" fluid={true} placeholder="Monto" />
+              <Input
+                label="USD$"
+                fluid={true}
+                placeholder="Monto"
+                onChange={(e, { value }) =>
+                  handleInputChange("valorUSD", value)
+                }
+              />
             </Grid.Column>
 
             <Grid.Column>
@@ -105,7 +133,13 @@ class Camposcomunes extends PureComponent {
                 TAG de equipo que lo utiliza{" "}
                 <span className={"requerido"}>*</span>
               </Header>
-              <Input fluid={true} control="input" />
+              <Input
+                fluid={true}
+                control="input"
+                onChange={(e, { value }) =>
+                  handleInputChange("valorTAG", value)
+                }
+              />
             </Grid.Column>
           </Grid.Row>
 
@@ -116,16 +150,18 @@ class Camposcomunes extends PureComponent {
               </Header>
               <Dropdown
                 placeholder="Seleccione Planta Requiriente"
-                onChange={this.handleChange}
-                value={requiereStock}
                 fluid={true}
                 search={false}
                 selection={true}
                 options={opcionesSiNo}
+                onChange={(e, { value }) => {
+                  handleInputChange("requiereStock", value);
+                  this.setState({ requiereStock: value });
+                }}
               />
             </Grid.Column>
 
-            {requiereStock === "Si" && (
+            {requiereStock && (
               <Grid.Column>
                 <Header as="h4">
                   Consumo Anual Esperable <span className={"requerido"}>*</span>{" "}
@@ -134,6 +170,9 @@ class Camposcomunes extends PureComponent {
                   fluid={true}
                   control="input"
                   placeholder="Ej: 300 unidades"
+                  onChange={(e, { value }) =>
+                    handleInputChange("consumoAnual", value)
+                  }
                 />
               </Grid.Column>
             )}

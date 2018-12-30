@@ -1524,12 +1524,12 @@ export default {
   opcionesSiNo: [
     {
       key: "0",
-      value: "Si",
+      value: true,
       text: "Si"
     },
     {
       key: "1",
-      value: "No",
+      value: false,
       text: "No"
     }
   ],

@@ -23,7 +23,17 @@ class Form extends Component {
       email: "",
       numeroMaterial: "",
       camposDinamicos: {},
-      unidadMedida: ""
+      unidadMedida: "",
+      opcionPlanta: "",
+      opcionSector: "",
+      criticidad: "",
+      repara: "",
+      valorUSD: "",
+      valorTAG: "",
+      requiereStock: "",
+      consumoAnual: "",
+      proveedor: "",
+      presentacion: ""
     };
   }
 
@@ -74,6 +84,8 @@ class Form extends Component {
       camposDinamicos
     } = this.state;
 
+    console.log(this.state);
+
     return (
       <React.Fragment>
         <Header as="h1" style={{ marginTop: 40 }}>
@@ -117,19 +129,16 @@ class Form extends Component {
           )}
 
         {((this.state.conoceCodigo && this.state.conoceCodigo !== "") ||
-          this.state.plantillaSeleccionada !== "") && (
+        this.state.plantillaSeleccionada !== "") && (
           <Camposcomunes handleInputChange={this.handleInputChange} />
         )}
 
-        <Grid style={{ marginTop: 40 }}>
+        <Grid textAlign="center" style={{ marginTop: 50 }}>
           <Grid.Row>
-            <Container
-              textAlign="center"
-              style={{
-                marginTop: 60
-              }}
-            >
-              <Button type="submit">Solicitar</Button>
+            <Container textAlign="center">
+              <Button primary type="submit">
+                Solicitar
+              </Button>
             </Container>
           </Grid.Row>
         </Grid>
