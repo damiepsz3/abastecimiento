@@ -59,8 +59,14 @@ class Form extends Component {
       .filter(prop => this.state[prop] === "")
       .filter(
         this.state.conoceCodigo === true
-          ? e => e !== "plantillaSeleccionada" && e !== "unidadMedida"
-          : e => e !== "proveedor" && e !== "presentacion"
+          ? e =>
+              e !== "plantillaSeleccionada" &&
+              e !== "unidadMedida" &&
+              e !== "presentacion"
+          : e =>
+              e !== "proveedor" &&
+              e !== "presentacion" &&
+              e !== "numeroMaterial"
       )
       .concat(
         Object.keys(this.state.camposDinamicos).filter(
