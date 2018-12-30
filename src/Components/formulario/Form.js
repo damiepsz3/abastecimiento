@@ -19,9 +19,9 @@ class Form extends Component {
       plantillas: [],
       plantillaSeleccionada: "",
       conoceCodigo: "",
+      numeroMaterial: "",
       nombreApellido: "",
       email: "",
-      numeroMaterial: "",
       camposDinamicos: {},
       unidadMedida: "",
       opcionPlanta: "",
@@ -33,7 +33,8 @@ class Form extends Component {
       requiereStock: "",
       consumoAnual: "",
       proveedor: "",
-      presentacion: ""
+      presentacion: "",
+      errors: []
     };
   }
 
@@ -42,6 +43,17 @@ class Form extends Component {
       this.setState({ plantillas: result, loadingPlantillas: false })
     );
   }
+
+  validarCampos = () => {
+    const errors = Object.keys(this.state)
+      .filter(prop => this.state[prop] === "")
+      .concat(
+        Object.keys(this.state.camposDinamicos).filter(
+          prop => this.state.camposDinamicos[prop] === ""
+        )
+      );
+    this.setState({ errors });
+  };
 
   componentDidUpdate(prevProps, prevState) {
     //llenar las propiedades del campo dinamico solo cuando se selecciona plantilla
@@ -78,13 +90,10 @@ class Form extends Component {
       plantillas,
       loadingPlantillas,
       conoceCodigo,
-      nombreApellido,
-      email,
       numeroMaterial,
-      camposDinamicos
+      camposDinamicos,
+      errors
     } = this.state;
-
-    console.log(this.state);
 
     return (
       <React.Fragment>
@@ -94,8 +103,7 @@ class Form extends Component {
 
         <Solicitante
           handleInputChange={this.handleInputChange}
-          nombreApellido={nombreApellido}
-          email={email}
+          errors={errors}
         />
 
         <PreguntaNumero
@@ -106,6 +114,7 @@ class Form extends Component {
         {this.state.conoceCodigo && (
           <NumeroMaterial
             numeroMaterial={numeroMaterial}
+            errors={errors}
             handleChanges={this.handleInputChange}
           />
         )}
@@ -124,19 +133,23 @@ class Form extends Component {
             <CamposDinamicos
               plantillaSeleccionada={plantillaSeleccionada}
               caracteristicas={camposDinamicos}
+              errors={errors}
               handleInputChange={this.handleInputChange}
             />
           )}
 
         {((this.state.conoceCodigo && this.state.conoceCodigo !== "") ||
-        this.state.plantillaSeleccionada !== "") && (
-          <Camposcomunes handleInputChange={this.handleInputChange} />
+          this.state.plantillaSeleccionada !== "") && (
+          <Camposcomunes
+            handleInputChange={this.handleInputChange}
+            errors={errors}
+          />
         )}
 
         <Grid textAlign="center" style={{ marginTop: 50 }}>
           <Grid.Row>
             <Container textAlign="center">
-              <Button primary type="submit">
+              <Button primary type="submit" onClick={this.validarCampos}>
                 Solicitar
               </Button>
             </Container>

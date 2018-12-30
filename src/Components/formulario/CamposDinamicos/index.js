@@ -32,7 +32,7 @@ class CamposDinamicos extends PureComponent {
   // }
 
   render() {
-    const { handleInputChange, caracteristicas } = this.props;
+    const { handleInputChange, caracteristicas, errors } = this.props;
 
     return (
       <Fragment>
@@ -48,12 +48,13 @@ class CamposDinamicos extends PureComponent {
                   {caracteristica
                     .toLowerCase()
                     .replace(/^\w/, c => c.toUpperCase())}
+                  <span className={"requerido"}>*</span>
                 </Header>
                 <Input
                   fluid
                   control="input"
                   placeholder=""
-                  value={caracteristicas[caracteristica]}
+                  error={errors.includes(caracteristica)}
                   onChange={(e, { value }) =>
                     this.handleInput(caracteristica, value)
                   }
@@ -74,6 +75,7 @@ class CamposDinamicos extends PureComponent {
                   fluid={true}
                   search={true}
                   selection={true}
+                  error={errors.includes("unidadMedida")}
                   options={opcionesUnidadesDeMedida}
                   onChange={(e, { value }) =>
                     handleInputChange("unidadMedida", value)
