@@ -6,20 +6,20 @@ class Solicitante extends PureComponent {
   constructor(props) {
     super(props);
     this.state = {
-      emailValue: "",
       emailError: false
     };
   }
 
   handleChange = (e, { value }) => {
-    this.setState({ emailValue: value });
+    this.props.handleInputChange("email", value);
     value.length === 0 || value.includes("@ldc.com") || value.includes("bril")
       ? this.setState({ emailError: false })
-      : (e, { value }) => this.props.handleInputChange("email", value);
+      : this.props.handleInputChange("email", value);
   };
 
   handleValidation = () => {
-    const email = this.state.emailValue;
+    console.log(this.props.email);
+    const email = this.props.email;
     email.length === 0 || email.includes("@ldc.com") || email.includes("bril")
       ? this.setState({ emailError: false })
       : this.setState({ emailError: true });
@@ -52,9 +52,9 @@ class Solicitante extends PureComponent {
             <Input
               fluid
               control="input"
-              onBlur={this.handleValidation}
+              error={this.state.emailError}
+              onBlur={() => this.handleValidation(this.props.email)}
               onChange={this.handleChange}
-              value={email}
               placeholder="Email"
             />
           </Grid.Column>
