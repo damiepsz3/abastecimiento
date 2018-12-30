@@ -1,5 +1,5 @@
 import React, { PureComponent } from "react";
-import { Header, Grid, Input } from "semantic-ui-react";
+import { Header, Grid, Input, Label } from "semantic-ui-react";
 import "../../App.css";
 
 class Solicitante extends PureComponent {
@@ -41,6 +41,7 @@ class Solicitante extends PureComponent {
             </Header>
             <Input
               fluid
+              error={this.props.errors.includes("nombreApellido")}
               control="input"
               onChange={(e, { value }) =>
                 handleInputChange("nombreApellido", value)
@@ -61,6 +62,12 @@ class Solicitante extends PureComponent {
               onChange={this.handleChange}
               placeholder="Email"
             />
+
+            {this.state.emailError && (
+              <Label basic color="red" pointing>
+                Debes utilizar tu dirección de correo corporativa
+              </Label>
+            )}
           </Grid.Column>
         </Grid.Row>
       </Grid>

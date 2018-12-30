@@ -30,6 +30,7 @@ class Camposcomunes extends PureComponent {
               <Input
                 fluid={true}
                 control="input"
+                error={this.props.errors.includes("proveedor")}
                 placeholder=""
                 onChange={(e, { value }) =>
                   handleInputChange("proveedor", value)
@@ -42,6 +43,7 @@ class Camposcomunes extends PureComponent {
                 fluid={true}
                 control="input"
                 placeholder=""
+                error={this.props.errors.includes("presentacion")}
                 onChange={(e, { value }) =>
                   handleInputChange("presentacion", value)
                 }
@@ -59,6 +61,7 @@ class Camposcomunes extends PureComponent {
                 fluid={true}
                 search={true}
                 selection={true}
+                error={this.props.errors.includes("opcionPlanta")}
                 options={opcionesPlanta}
                 onChange={(e, { value }) =>
                   handleInputChange("opcionPlanta", value)
@@ -73,6 +76,7 @@ class Camposcomunes extends PureComponent {
                 options={opcionesSector}
                 placeholder="Seleccione Sector"
                 fluid={true}
+                error={this.props.errors.includes("opcionSector")}
                 search={true}
                 selection={true}
                 onChange={(e, { value }) =>
@@ -91,6 +95,7 @@ class Camposcomunes extends PureComponent {
                 placeholder="Seleccione"
                 fluid={true}
                 search={false}
+                error={this.props.errors.includes("criticidad")}
                 selection={true}
                 options={opcionesGradoDeCriticidad}
                 onChange={(e, { value }) =>
@@ -106,6 +111,7 @@ class Camposcomunes extends PureComponent {
                 options={opcionesSiNo}
                 placeholder="Seleccione"
                 fluid={true}
+                error={this.props.errors.includes("repara")}
                 search={false}
                 selection={true}
                 onChange={(e, { value }) => handleInputChange("repara", value)}
@@ -122,6 +128,7 @@ class Camposcomunes extends PureComponent {
                 label="USD$"
                 fluid={true}
                 placeholder="Monto"
+                error={this.props.errors.includes("valorUSD")}
                 onChange={(e, { value }) =>
                   handleInputChange("valorUSD", value)
                 }
@@ -136,6 +143,7 @@ class Camposcomunes extends PureComponent {
               <Input
                 fluid={true}
                 control="input"
+                error={this.props.errors.includes("valorTAG")}
                 onChange={(e, { value }) =>
                   handleInputChange("valorTAG", value)
                 }
@@ -152,6 +160,7 @@ class Camposcomunes extends PureComponent {
                 placeholder="Seleccione Planta Requiriente"
                 fluid={true}
                 search={false}
+                error={this.props.errors.includes("requiereStock")}
                 selection={true}
                 options={opcionesSiNo}
                 onChange={(e, { value }) => {
@@ -169,6 +178,7 @@ class Camposcomunes extends PureComponent {
                 <Input
                   fluid={true}
                   control="input"
+                  error={this.props.errors.includes("consumoAnual")}
                   placeholder="Ej: 300 unidades"
                   onChange={(e, { value }) =>
                     handleInputChange("consumoAnual", value)
