@@ -26,7 +26,7 @@ class NumeroMaterial extends PureComponent {
       this.setState({ iconState: null, errorState: true });
     } else {
       this.setState({ iconState: null, errorState: false });
-      this.props.handleChanges("numeroMaterial", value);
+      if (numero.length > 9) this.props.handleChanges("numeroMaterial", value);
     }
   };
 
