@@ -30,7 +30,6 @@ class Camposcomunes extends PureComponent {
               <Input
                 fluid={true}
                 control="input"
-                error={this.props.errors.includes("proveedor")}
                 placeholder=""
                 onChange={(e, { value }) =>
                   handleInputChange("proveedor", value)
@@ -43,7 +42,6 @@ class Camposcomunes extends PureComponent {
                 fluid={true}
                 control="input"
                 placeholder=""
-                error={this.props.errors.includes("presentacion")}
                 onChange={(e, { value }) =>
                   handleInputChange("presentacion", value)
                 }

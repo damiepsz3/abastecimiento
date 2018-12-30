@@ -77,6 +77,7 @@ class NumeroMaterial extends PureComponent {
               value={numMaterial}
               error={errorState}
               onBlur={this.handleValidation}
+              error={this.props.errors.includes("numeroMaterial")}
               onChange={this.handleChange}
             />
           </Grid.Column>

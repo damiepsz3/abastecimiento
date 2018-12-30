@@ -12,25 +12,6 @@ class CamposDinamicos extends PureComponent {
     });
   };
 
-  // shouldComponentUpdate(nextProps, nextState) {
-  //   // solo deberia re-renderizar si cambia el valor.
-  //   if (
-  //     Object.keys(nextProps.caracteristicas).reduce((acum, currentValue) => {
-  //       if (this.props[currentValue] !== nextProps[currentValue])
-  //         return (acum = true);
-  //     }, false)
-  //   )
-  //     return true;
-  //   // cambio de caracteristicas
-  //   if (
-  //     Object.keys(nextProps.caracteristicas).reduce((acum, currentValue) => {
-  //       //ver si la nueva caracteristicas existe en el objeto anterior
-  //       if (this.props[currentValue] === undefined) return (acum = true);
-  //     }, false)
-  //   )
-  //     return true;
-  // }
-
   render() {
     const { handleInputChange, caracteristicas, errors } = this.props;
 
@@ -54,7 +35,10 @@ class CamposDinamicos extends PureComponent {
                   fluid
                   control="input"
                   placeholder=""
-                  error={errors.includes(caracteristica)}
+                  error={
+                    errors.includes(caracteristica) &&
+                    caracteristicas[caracteristica] === ""
+                  }
                   onChange={(e, { value }) =>
                     this.handleInput(caracteristica, value)
                   }

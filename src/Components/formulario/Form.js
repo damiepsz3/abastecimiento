@@ -79,9 +79,12 @@ class Form extends Component {
   }
 
   handleInputChange = (name, value) => {
-    this.setState({
-      [name]: value
-    });
+    console.log(name);
+    console.log(this.state.errors);
+    this.setState(prevState => ({
+      [name]: value,
+      errors: prevState.errors.filter(e => e !== name)
+    }));
   };
 
   render() {
@@ -118,14 +121,15 @@ class Form extends Component {
             handleChanges={this.handleInputChange}
           />
         )}
-        {!this.state.conoceCodigo && this.state.conoceCodigo !== "" && (
-          <Plantilla
-            data={plantillas}
-            selectPlantilla={this.handleInputChange}
-            plantillaSeleccionada={plantillaSeleccionada}
-            loading={loadingPlantillas}
-          />
-        )}
+        {!this.state.conoceCodigo &&
+          this.state.conoceCodigo !== "" && (
+            <Plantilla
+              data={plantillas}
+              selectPlantilla={this.handleInputChange}
+              plantillaSeleccionada={plantillaSeleccionada}
+              loading={loadingPlantillas}
+            />
+          )}
 
         {this.state.plantillaSeleccionada !== "" &&
           !this.state.conoceCodigo && (
@@ -148,7 +152,18 @@ class Form extends Component {
         <Grid textAlign="center" style={{ marginTop: 50 }}>
           <Grid.Row>
             <Container textAlign="center">
-              <Button primary type="submit" onClick={this.validarCampos}>
+              <Button
+                primary
+                type="submit"
+                onClick={this.validarCampos}
+                disabled={
+                  !(
+                    (this.state.conoceCodigo &&
+                      this.state.conoceCodigo !== "") ||
+                    this.state.plantillaSeleccionada !== ""
+                  )
+                }
+              >
                 Solicitar
               </Button>
             </Container>

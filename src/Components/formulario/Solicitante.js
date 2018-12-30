@@ -15,11 +15,7 @@ class Solicitante extends PureComponent {
     this.setState({ emailValue: value });
     if (value.includes("@ldc.com") || value.includes("bril"))
       this.props.handleInputChange("email", value);
-    if (
-      value.length === 0 ||
-      value.includes("@ldc.com") ||
-      value.includes("bril")
-    )
+    if (value.includes("@ldc.com") || value.includes("bril"))
       this.setState({ emailError: false });
   };
 
@@ -33,7 +29,7 @@ class Solicitante extends PureComponent {
   };
 
   render() {
-    const { handleInputChange } = this.props;
+    const { handleInputChange, errors } = this.props;
 
     return (
       <Grid>
@@ -44,7 +40,7 @@ class Solicitante extends PureComponent {
             </Header>
             <Input
               fluid
-              error={this.props.errors.includes("nombreApellido")}
+              error={errors.includes("nombreApellido")}
               control="input"
               onChange={(e, { value }) =>
                 handleInputChange("nombreApellido", value)
@@ -59,9 +55,7 @@ class Solicitante extends PureComponent {
             <Input
               fluid
               control="input"
-              error={
-                this.state.emailError || this.props.errors.includes("email")
-              }
+              error={this.state.emailError || errors.includes("email")}
               onBlur={this.handleValidation}
               onChange={this.handleChange}
               placeholder="Email"
