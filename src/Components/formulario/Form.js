@@ -78,8 +78,6 @@ class Form extends Component {
       plantillas,
       loadingPlantillas,
       conoceCodigo,
-      nombreApellido,
-      email,
       numeroMaterial,
       camposDinamicos
     } = this.state;
@@ -92,11 +90,7 @@ class Form extends Component {
           Formulario de abastecimiento
         </Header>
 
-        <Solicitante
-          handleInputChange={this.handleInputChange}
-          nombreApellido={nombreApellido}
-          email={email}
-        />
+        <Solicitante handleInputChange={this.handleInputChange} />
 
         <PreguntaNumero
           conoceCodigo={conoceCodigo}
@@ -129,7 +123,7 @@ class Form extends Component {
           )}
 
         {((this.state.conoceCodigo && this.state.conoceCodigo !== "") ||
-        this.state.plantillaSeleccionada !== "") && (
+          this.state.plantillaSeleccionada !== "") && (
           <Camposcomunes handleInputChange={this.handleInputChange} />
         )}
 

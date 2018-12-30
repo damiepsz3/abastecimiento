@@ -15,9 +15,12 @@ class Solicitante extends PureComponent {
     this.setState({ emailValue: value });
     if (value.includes("@ldc.com") || value.includes("bril"))
       this.props.handleInputChange("email", value);
-    value.length === 0 || value.includes("@ldc.com") || value.includes("bril")
-      ? this.setState({ emailError: false })
-      : null;
+    if (
+      value.length === 0 ||
+      value.includes("@ldc.com") ||
+      value.includes("bril")
+    )
+      this.setState({ emailError: false });
   };
 
   handleValidation = () => {
@@ -30,7 +33,7 @@ class Solicitante extends PureComponent {
   };
 
   render() {
-    const { nombreApellido, email, handleInputChange } = this.props;
+    const { handleInputChange } = this.props;
 
     return (
       <Grid>
@@ -45,7 +48,6 @@ class Solicitante extends PureComponent {
               onChange={(e, { value }) =>
                 handleInputChange("nombreApellido", value)
               }
-              value={nombreApellido}
               placeholder="Nombre y Apellido"
             />
           </Grid.Column>
