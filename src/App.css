@@ -66,3 +66,7 @@
 #root .requerido {
   color: red;
 }
+
+#root a {
+  cursor: pointer;
+}

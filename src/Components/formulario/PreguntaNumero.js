@@ -1,6 +1,17 @@
 import React, { PureComponent, Fragment } from "react";
-import { Radio, Header, Divider, Grid, Popup, Icon } from "semantic-ui-react";
+import {
+  Radio,
+  Header,
+  Divider,
+  Grid,
+  Popup,
+  Icon,
+  Modal,
+  Button,
+  Image
+} from "semantic-ui-react";
 import "../../App.css";
+import Tutorial from "../../assets/tutorial.png";
 
 class PreguntaNumero extends PureComponent {
   render() {
@@ -14,10 +25,22 @@ class PreguntaNumero extends PureComponent {
             ¿Conoce el numero del material que desea solicitar?{" "}
             <span className={"requerido"}>*</span>
             <Popup trigger={<Icon size="tiny" name="info circle" />} wide>
-              Si encontro el material catalogado en SAP en otro centro, ingrese
-              el codigo. Esto ayudara a reducir los datos a solicitar y los
-              tiempos de catalogación.
+              Si encontró el material catalogado en SAP en otro centro,
+              selecciones "Si" e ingrese su número. Esto ayudará a reducir la
+              cantidad datos a ingresar y los tiempos de catalogación.
             </Popup>
+            <Modal
+              size={"fullscreen"}
+              closeIcon
+              trigger={<a>¿Donde lo encuntro?</a>}
+            >
+              <Modal.Header>
+                Instrucciones para buscar código en SAP
+              </Modal.Header>
+              <Modal.Content image>
+                <Image fluid src={Tutorial} />
+              </Modal.Content>
+            </Modal>
           </Header>
 
           <Grid.Row>

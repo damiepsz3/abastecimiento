@@ -1,15 +1,6 @@
 import React, { PureComponent } from "react";
 import Tutorial from "../../assets/tutorial.png";
-import {
-  Header,
-  Grid,
-  Input,
-  Popup,
-  Icon,
-  Modal,
-  Button,
-  Image
-} from "semantic-ui-react";
+import { Header, Grid, Input, Popup, Icon } from "semantic-ui-react";
 import "../../App.css";
 
 class NumeroMaterial extends PureComponent {
@@ -59,7 +50,7 @@ class NumeroMaterial extends PureComponent {
     return (
       <Grid stackable>
         <Grid.Row>
-          <Grid.Column width={12}>
+          <Grid.Column width={16}>
             <Header as="h4">
               Número de material a solicitar
               <span className={"requerido"}>*</span>{" "}
@@ -80,20 +71,6 @@ class NumeroMaterial extends PureComponent {
               error={this.props.errors.includes("numeroMaterial")}
               onChange={this.handleChange}
             />
-          </Grid.Column>
-          <Grid.Column width={4} verticalAlign={"bottom"}>
-            <Modal
-              size={"fullscreen"}
-              closeIcon
-              trigger={<Button fluid>¿Donde lo encuntro?</Button>}
-            >
-              <Modal.Header>
-                Instrucciones para buscar código en SAP
-              </Modal.Header>
-              <Modal.Content image>
-                <Image fluid src={Tutorial} />
-              </Modal.Content>
-            </Modal>
           </Grid.Column>
         </Grid.Row>
       </Grid>

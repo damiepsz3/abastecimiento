@@ -9,7 +9,7 @@ import {
   Container,
   Icon
 } from "semantic-ui-react";
-import selectCategoria from "../../assets/select_categoria.png";
+import selectCategoria from "../../assets/lista.svg";
 
 class Plantilla extends PureComponent {
   constructor(props) {
