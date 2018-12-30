@@ -1,5 +1,12 @@
 import React, { Component } from "react";
-import { Container, Header, Grid, Button } from "semantic-ui-react";
+import {
+  Container,
+  Header,
+  Grid,
+  Button,
+  Modal,
+  List
+} from "semantic-ui-react";
 import GoogleApi from "../../GoogleApi";
 import Plantilla from "./Plantilla";
 import Camposcomunes from "./Camposcomunes";
@@ -169,6 +176,27 @@ class Form extends Component {
             </Container>
           </Grid.Row>
         </Grid>
+        <Modal basic closeIcon open={true}>
+          <Header icon="browser" content="Valores" />
+          <Modal.Content>
+            <List.List>
+              {Object.keys(this.state)
+                .filter(
+                  f =>
+                    f !== "plantillas" &&
+                    f !== "camposDinamicos" &&
+                    f !== "errors" &&
+                    f !== "loadingPlantillas"
+                )
+                .map((t, idx) => (
+                  <List.Item key={idx}>{`${t}: ${this.state[t]}`}</List.Item>
+                ))}
+              {Object.keys(this.state.camposDinamicos).map((cd, idx) => (
+                <List.Item key={idx}>{`${cd}: ${this.state[cd]}`}</List.Item>
+              ))}
+            </List.List>
+          </Modal.Content>
+        </Modal>
       </React.Fragment>
     );
   }
