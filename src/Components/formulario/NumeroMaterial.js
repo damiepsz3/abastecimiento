@@ -66,9 +66,8 @@ class NumeroMaterial extends PureComponent {
               icon={iconState}
               className={"NumeroMaterial"}
               value={numMaterial}
-              error={errorState}
+              error={errorState || this.props.errors.includes("numeroMaterial")}
               onBlur={this.handleValidation}
-              error={this.props.errors.includes("numeroMaterial")}
               onChange={this.handleChange}
             />
           </Grid.Column>

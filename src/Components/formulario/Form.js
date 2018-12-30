@@ -3,6 +3,8 @@ import {
   Container,
   Header,
   Grid,
+  Table,
+  Icon,
   Button,
   Modal,
   List
@@ -128,15 +130,14 @@ class Form extends Component {
             handleChanges={this.handleInputChange}
           />
         )}
-        {!this.state.conoceCodigo &&
-          this.state.conoceCodigo !== "" && (
-            <Plantilla
-              data={plantillas}
-              selectPlantilla={this.handleInputChange}
-              plantillaSeleccionada={plantillaSeleccionada}
-              loading={loadingPlantillas}
-            />
-          )}
+        {!this.state.conoceCodigo && this.state.conoceCodigo !== "" && (
+          <Plantilla
+            data={plantillas}
+            selectPlantilla={this.handleInputChange}
+            plantillaSeleccionada={plantillaSeleccionada}
+            loading={loadingPlantillas}
+          />
+        )}
 
         {this.state.plantillaSeleccionada !== "" &&
           !this.state.conoceCodigo && (
@@ -159,44 +160,124 @@ class Form extends Component {
         <Grid textAlign="center" style={{ marginTop: 50 }}>
           <Grid.Row>
             <Container textAlign="center">
-              <Button
-                primary
-                type="submit"
-                onClick={this.validarCampos}
-                disabled={
-                  !(
-                    (this.state.conoceCodigo &&
-                      this.state.conoceCodigo !== "") ||
-                    this.state.plantillaSeleccionada !== ""
-                  )
+              <Modal
+                trigger={
+                  <Button
+                    primary
+                    type="submit"
+                    onClick={this.validarCampos}
+                    disabled={
+                      !(
+                        (this.state.conoceCodigo &&
+                          this.state.conoceCodigo !== "") ||
+                        this.state.plantillaSeleccionada !== ""
+                      )
+                    }
+                  >
+                    Solicitar
+                  </Button>
                 }
               >
-                Solicitar
-              </Button>
+                <Modal.Header>
+                  Informacion recolectada en el formulario
+                </Modal.Header>
+                <Modal.Content>
+                  <Table celled striped>
+                    <Table.Body>
+                      <Table.Row>
+                        <Table.Cell collapsing>Nombre y Apellido</Table.Cell>
+                        <Table.Cell>{this.state.nombreApellido}</Table.Cell>
+                      </Table.Row>
+                      <Table.Row>
+                        <Table.Cell>Email</Table.Cell>
+                        <Table.Cell>{this.state.email}</Table.Cell>
+                      </Table.Row>
+                      <Table.Row>
+                        <Table.Cell>Número de material a solicitar</Table.Cell>
+                        <Table.Cell>{this.state.numeroMaterial}</Table.Cell>
+                      </Table.Row>
+
+                      <Table.Row>
+                        <Table.Cell> Plantilla Seleccionada </Table.Cell>
+                        <Table.Cell>
+                          {this.state.plantillaSeleccionada["Nombre Plantilla"]}
+                        </Table.Cell>
+                      </Table.Row>
+
+                      <Table.Row>
+                        <Table.Cell>Categoría Seleccionada</Table.Cell>
+                        <Table.Cell>
+                          {" "}
+                          {
+                            this.state.plantillaSeleccionada[
+                              "Taxonomia BOLD:Descripción"
+                            ]
+                          }
+                        </Table.Cell>
+                      </Table.Row>
+
+                      {Object.keys(this.state.camposDinamicos).map(
+                        (cd, idx) => (
+                          <Table.Row key={idx}>
+                            <Table.Cell>{cd}</Table.Cell>
+                            <Table.Cell>
+                              {this.state.camposDinamicos[cd]}
+                            </Table.Cell>
+                          </Table.Row>
+                        )
+                      )}
+
+                      <Table.Row>
+                        <Table.Cell>Proveedor/ Marca Sugeridos</Table.Cell>
+                        <Table.Cell>{this.state.proveedor}</Table.Cell>
+                      </Table.Row>
+                      <Table.Row>
+                        <Table.Cell>Presentación</Table.Cell>
+                        <Table.Cell>{this.state.presentacion}</Table.Cell>
+                      </Table.Row>
+                      <Table.Row>
+                        <Table.Cell>Planta</Table.Cell>
+                        <Table.Cell>{this.state.opcionPlanta}</Table.Cell>
+                      </Table.Row>
+                      <Table.Row>
+                        <Table.Cell>Sector</Table.Cell>
+                        <Table.Cell>{this.state.opcionSector}</Table.Cell>
+                      </Table.Row>
+                      <Table.Row>
+                        <Table.Cell>Criticidad</Table.Cell>
+                        <Table.Cell>{this.state.criticidad}</Table.Cell>
+                      </Table.Row>
+                      <Table.Row>
+                        <Table.Cell>¿Se Repara?</Table.Cell>
+                        <Table.Cell>
+                          {this.state.repara ? "Si" : "No"}
+                        </Table.Cell>
+                      </Table.Row>
+                      <Table.Row>
+                        <Table.Cell>Valor Unitario (U$D)</Table.Cell>
+                        <Table.Cell>{this.state.valorUSD}</Table.Cell>
+                      </Table.Row>
+                      <Table.Row>
+                        <Table.Cell>TAG de equipo que lo utiliza</Table.Cell>
+                        <Table.Cell>{this.state.valorTAG}</Table.Cell>
+                      </Table.Row>
+                      <Table.Row>
+                        <Table.Cell>¿Requiere Stock? </Table.Cell>
+                        <Table.Cell>
+                          {this.state.requiereStock ? "Si" : "No"}
+                        </Table.Cell>
+                      </Table.Row>
+                      <Table.Row>
+                        <Table.Cell>Consumo Anual Esperable</Table.Cell>
+                        <Table.Cell>{this.state.consumoAnual}</Table.Cell>
+                      </Table.Row>
+                    </Table.Body>
+                  </Table>
+                </Modal.Content>
+              </Modal>
             </Container>
           </Grid.Row>
         </Grid>
-        <Modal basic closeIcon open={true}>
-          <Header icon="browser" content="Valores" />
-          <Modal.Content>
-            <List.List>
-              {Object.keys(this.state)
-                .filter(
-                  f =>
-                    f !== "plantillas" &&
-                    f !== "camposDinamicos" &&
-                    f !== "errors" &&
-                    f !== "loadingPlantillas"
-                )
-                .map((t, idx) => (
-                  <List.Item key={idx}>{`${t}: ${this.state[t]}`}</List.Item>
-                ))}
-              {Object.keys(this.state.camposDinamicos).map((cd, idx) => (
-                <List.Item key={idx}>{`${cd}: ${this.state[cd]}`}</List.Item>
-              ))}
-            </List.List>
-          </Modal.Content>
-        </Modal>
       </React.Fragment>
     );
   }
