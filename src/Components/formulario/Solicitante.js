@@ -59,7 +59,9 @@ class Solicitante extends PureComponent {
             <Input
               fluid
               control="input"
-              error={this.state.emailError}
+              error={
+                this.state.emailError || this.props.errors.includes("email")
+              }
               onBlur={this.handleValidation}
               onChange={this.handleChange}
               placeholder="Email"
