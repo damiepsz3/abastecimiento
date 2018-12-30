@@ -23,27 +23,27 @@ class Plantilla extends PureComponent {
     };
   }
 
-  shouldComponentUpdate(nextProps, nextState) {
-    if (
-      nextState.idxCategoriaSeleccionada !== this.state.idxCategoriaSeleccionada
-    ) {
-      return true;
-    }
-    if (
-      nextState.idxPlantillaSeleccionada !== this.state.idxPlantillaSeleccionada
-    ) {
-      return true;
-    }
-    if (nextState.query !== this.state.query) {
-      return true;
-    }
-    if (nextProps.data.length !== this.props.data.length) return true;
-    return false;
-  }
-
-  handleSearch = (e, { value }) => {
-    this.setState({ query: value });
-  };
+  // shouldComponentUpdate(nextProps, nextState) {
+  //   if (
+  //     nextState.idxCategoriaSeleccionada !== this.state.idxCategoriaSeleccionada
+  //   ) {
+  //     return true;
+  //   }
+  //   if (
+  //     nextState.idxPlantillaSeleccionada !== this.state.idxPlantillaSeleccionada
+  //   ) {
+  //     return true;
+  //   }
+  //   if (nextState.query !== this.state.query) {
+  //     return true;
+  //   }
+  //   if (nextProps.data.length !== this.props.data.length) return true;
+  //   return false;
+  // }
+  //
+  // handleSearch = (e, { value }) => {
+  //   this.setState({ query: value });
+  // };
 
   formatListPlantillas = data =>
     data

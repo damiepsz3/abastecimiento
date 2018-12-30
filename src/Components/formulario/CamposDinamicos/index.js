@@ -32,11 +32,7 @@ class CamposDinamicos extends PureComponent {
   // }
 
   render() {
-    const {
-      handleInputChange,
-      caracteristicas,
-      plantillaSeleccionada
-    } = this.props;
+    const { handleInputChange, caracteristicas } = this.props;
 
     return (
       <Fragment>
