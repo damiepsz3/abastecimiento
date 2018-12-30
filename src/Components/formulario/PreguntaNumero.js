@@ -1,5 +1,5 @@
 import React, { PureComponent, Fragment } from "react";
-import { Radio, Header, Divider, Grid } from "semantic-ui-react";
+import { Radio, Header, Divider, Grid, Popup, Icon } from "semantic-ui-react";
 import "../../App.css";
 
 class PreguntaNumero extends PureComponent {
@@ -13,7 +13,13 @@ class PreguntaNumero extends PureComponent {
           <Header as="h4">
             ¿Conoce el numero del material que desea solicitar?{" "}
             <span className={"requerido"}>*</span>
+            <Popup trigger={<Icon size="tiny" name="info circle" />} wide>
+              Si encontro el material catalogado en SAP en otro centro, ingrese
+              el codigo. Esto ayudara a reducir los datos a solicitar y los
+              tiempos de catalogación.
+            </Popup>
           </Header>
+
           <Grid.Row>
             <Grid.Column width={16}>
               <Radio
