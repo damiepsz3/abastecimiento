@@ -3,6 +3,28 @@ import { Header, Grid, Input } from "semantic-ui-react";
 import "../../App.css";
 
 class Solicitante extends PureComponent {
+  constructor(props) {
+    super(props);
+    this.state = {
+      emailValue: "",
+      emailError: false
+    };
+  }
+
+  handleChange = (e, { value }) => {
+    this.setState({ emailValue: value });
+    value.length === 0 || value.includes("@ldc.com") || value.includes("bril")
+      ? this.setState({ emailError: false })
+      : (e, { value }) => this.props.handleInputChange("email", value);
+  };
+
+  handleValidation = () => {
+    const email = this.state.emailValue;
+    email.length === 0 || email.includes("@ldc.com") || email.includes("bril")
+      ? this.setState({ emailError: false })
+      : this.setState({ emailError: true });
+  };
+
   render() {
     const { nombreApellido, email, handleInputChange } = this.props;
 
@@ -30,7 +52,8 @@ class Solicitante extends PureComponent {
             <Input
               fluid
               control="input"
-              onChange={(e, { value }) => handleInputChange("email", value)}
+              onBlur={this.handleValidation}
+              onChange={this.handleChange}
               value={email}
               placeholder="Email"
             />
