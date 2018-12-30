@@ -23,7 +23,7 @@ class NumeroMaterial extends PureComponent {
     if (numero.length === 0) {
       this.setState({ iconState: null, errorState: false });
     } else if ((value.length > 3 && isnum === false) || numero.length > 18) {
-      this.setState({ iconState: null, errorState: true });
+      this.setState({ iconState: null, errorState: true, numeroMaterial: "" });
     } else {
       this.setState({ iconState: null, errorState: false });
       this.props.handleChanges("numeroMaterial", value);
@@ -36,12 +36,13 @@ class NumeroMaterial extends PureComponent {
     numero = numero.replace(/^ins/gi, "");
     //check if the result contains only digits.
     var isnum = /^\d+$/.test(numero);
-    if (numero.length === 0) {
+    if (this.state.numMaterial.length === 0) {
       this.setState({ iconState: null, errorState: false });
     } else if (isnum && numero.length >= 9 && numero.length <= 18) {
       this.setState({ iconState: "check", errorState: false });
     } else {
       this.setState({ iconState: null, errorState: true });
+      this.props.handleChanges("numeroMaterial", "");
     }
   };
 

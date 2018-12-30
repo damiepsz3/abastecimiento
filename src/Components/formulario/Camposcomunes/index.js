@@ -18,6 +18,7 @@ class Camposcomunes extends PureComponent {
       opcionesSiNo,
       opcionesGradoDeCriticidad
     } = opciones;
+
     const { handleInputChange } = this.props;
     const { requiereStock } = this.state;
     return (
