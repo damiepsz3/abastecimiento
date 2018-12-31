@@ -164,6 +164,7 @@ class Camposcomunes extends PureComponent {
                 options={opcionesSiNo}
                 onChange={(e, { value }) => {
                   handleInputChange("requiereStock", value);
+                  if (!value) handleInputChange("consumoAnual", "No Aplica");
                   this.setState({ requiereStock: value });
                 }}
               />
@@ -179,9 +180,9 @@ class Camposcomunes extends PureComponent {
                   control="input"
                   error={this.props.errors.includes("consumoAnual")}
                   placeholder="Ej: 300 unidades"
-                  onChange={(e, { value }) =>
-                    handleInputChange("consumoAnual", value)
-                  }
+                  onChange={(e, { value }) => {
+                    handleInputChange("consumoAnual", value);
+                  }}
                 />
               </Grid.Column>
             )}
