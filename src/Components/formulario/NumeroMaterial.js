@@ -38,11 +38,16 @@ class NumeroMaterial extends PureComponent {
     var isnum = /^\d+$/.test(numero);
     if (this.state.numMaterial.length === 0) {
       this.setState({ iconState: null, errorState: true });
+      this.props.handleChanges("numeroMaterial", "");
     } else if (isnum && numero.length >= 9 && numero.length <= 18) {
       this.setState({ iconState: "check", errorState: false });
+      this.props.handleChanges("numeroMaterial", this.state.numMaterial);
     } else {
       this.setState({ iconState: null, errorState: true });
+<<<<<<< HEAD
       // if (numero.length > 9) this.props.handleChanges("numeroMaterial", "");
+=======
+>>>>>>> 407ed251d00151f01b45176019edd87d13b36ad7
     }
   };
 
