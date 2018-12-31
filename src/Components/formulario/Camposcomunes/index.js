@@ -164,7 +164,9 @@ class Camposcomunes extends PureComponent {
                 options={opcionesSiNo}
                 onChange={(e, { value }) => {
                   handleInputChange("requiereStock", value);
-                  if (!value) handleInputChange("consumoAnual", "No Aplica");
+                  value
+                    ? handleInputChange("consumoAnual", "")
+                    : handleInputChange("consumoAnual", "No Aplica");
                   this.setState({ requiereStock: value });
                 }}
               />
