@@ -1,13 +1,5 @@
 import React from "react";
-import {
-  Button,
-  Form,
-  Grid,
-  Header,
-  Image,
-  Message,
-  Segment
-} from "semantic-ui-react";
+import { Form, Grid, Header, Segment } from "semantic-ui-react";
 
 const Login = ({ inputPass }) => (
   <div className="login-form">

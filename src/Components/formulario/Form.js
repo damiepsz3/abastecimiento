@@ -4,10 +4,8 @@ import {
   Header,
   Grid,
   Table,
-  Icon,
   Button,
-  Modal,
-  List
+  Modal
 } from "semantic-ui-react";
 import GoogleApi from "../../GoogleApi";
 import Plantilla from "./Plantilla";
