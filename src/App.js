@@ -1,17 +1,18 @@
-import React, { Component } from "react";
+import React, { Component, Fragment } from "react";
 import { Container } from "semantic-ui-react";
+import { BrowserRouter as Router, Route } from "react-router-dom";
 
 import Form from "./Components/formulario/Form";
+import Admin from "./Components/admin/";
 import "./App.css";
 
-class App extends Component {
-  render() {
-    return (
-      <Container>
-        <Form />
-      </Container>
-    );
-  }
-}
+const App = () => (
+  <Router>
+    <Fragment>
+      <Route exact path="/" component={Form} />
+      <Route exact path="/admin" component={Admin} />
+    </Fragment>
+  </Router>
+);
 
 export default App;

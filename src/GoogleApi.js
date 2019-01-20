@@ -38,4 +38,29 @@ const init = () => {
   });
 };
 
-export default { init };
+const submitRow = values => {
+  window.gapi.load("client", () =>
+    window.gapi.client
+      .init({
+        apiKey: config.apiKey,
+        // Your API key will be automatically added to the Discovery Document URLs.
+        discoveryDocs: config.discoveryDocs
+      })
+      .then(() => {
+        window.gapi.client.load("sheets", "v4", () => {
+          window.gapi.client.sheets.spreadsheets.values
+            .update({
+              spreadsheetId: config.spreadsheetId,
+              range: "Sheet2",
+              resource: { values: [["Damian", "Epsz"]] }
+            })
+            .then(response => {
+              var result = response.result;
+              console.log(`${result.updatedCells} cells updated.`);
+            });
+        });
+      })
+  );
+};
+
+export default { init, submitRow };

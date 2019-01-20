@@ -127,7 +127,7 @@ class Form extends Component {
     } = this.state;
 
     return (
-      <React.Fragment>
+      <Container>
         <Header as="h1" style={{ marginTop: 40 }}>
           Formulario de abastecimiento
         </Header>
@@ -295,7 +295,7 @@ class Form extends Component {
             </Modal.Content>
           </Modal>
         </Grid>
-      </React.Fragment>
+      </Container>
     );
   }
 }
