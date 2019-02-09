@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 
 import Login from "./Login";
-
+import Nav from "./Nav";
 class Admin extends Component {
   constructor(props) {
     super(props);
@@ -17,8 +17,8 @@ class Admin extends Component {
 
   render() {
     const { password } = this.state;
-    if (password !== "Mundial78") return <Login inputPass={this.inputPass} />;
-    return <div>Cards</div>;
+    if (password !== "") return <Login inputPass={this.inputPass} />;
+    return <Nav />;
   }
 }
 
