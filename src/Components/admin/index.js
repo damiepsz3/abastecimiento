@@ -1,25 +1,31 @@
-import React, { Component } from "react";
-
+import React, { useState, useEffect } from "react";
 import Login from "./Login";
 import Nav from "./Nav";
-class Admin extends Component {
-  constructor(props) {
-    super(props);
+import { withFirebase } from "../../Firebase";
 
-    this.state = {
-      password: ""
-    };
-  }
+const Admin = ({ firebase }) => {
+  const [authUser, setAuthUser] = useState(null);
 
-  inputPass = password => {
-    this.setState({ password });
-  };
+  useEffect(() => {
+    firebase.auth.onAuthStateChanged(authUs => {
+      authUs ? setAuthUser(authUs) : setAuthUser(null);
+    });
+  });
+  console.log(authUser);
+  if (authUser) return <Nav />;
+  return <Login />;
+};
 
-  render() {
-    const { password } = this.state;
-    if (password !== "") return <Login inputPass={this.inputPass} />;
-    return <Nav />;
-  }
-}
+// class Admin extends Component {
+//
+//
+//
+//
+//   render() {
+//     const { password } = this.state;
+//     if (password !== "Mundial78") return <Login inputPass={this.inputPass} />;
+//     return <Nav />;
+//   }
+// }
 
-export default Admin;
+export default withFirebase(Admin);
