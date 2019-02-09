@@ -1,4 +1,4 @@
-import config from "./config";
+import { configSheet } from "./config";
 
 const init = () => {
   return new Promise((res, rej) => {
@@ -6,16 +6,16 @@ const init = () => {
     window.gapi.load("client", () =>
       window.gapi.client
         .init({
-          apiKey: config.apiKey,
+          apiKey: configSheet.apiKey,
           // Your API key will be automatically added to the Discovery Document URLs.
-          discoveryDocs: config.discoveryDocs
+          discoveryDocs: configSheet.discoveryDocs
         })
         .then(() => {
           // 3. Initialize and make the API request.
           window.gapi.client.load("sheets", "v4", () => {
             window.gapi.client.sheets.spreadsheets.values
               .get({
-                spreadsheetId: config.spreadsheetId,
+                spreadsheetId: configSheet.spreadsheetId,
                 range: "Sheet1"
               })
               .then(({ result }) => {
@@ -42,15 +42,15 @@ const submitRow = values => {
   window.gapi.load("client", () =>
     window.gapi.client
       .init({
-        apiKey: config.apiKey,
+        apiKey: configSheet.apiKey,
         // Your API key will be automatically added to the Discovery Document URLs.
-        discoveryDocs: config.discoveryDocs
+        discoveryDocs: configSheet.discoveryDocs
       })
       .then(() => {
         window.gapi.client.load("sheets", "v4", () => {
           window.gapi.client.sheets.spreadsheets.values
             .update({
-              spreadsheetId: config.spreadsheetId,
+              spreadsheetId: configSheet.spreadsheetId,
               range: "Sheet2",
               resource: { values: [["Damian", "Epsz"]] }
             })

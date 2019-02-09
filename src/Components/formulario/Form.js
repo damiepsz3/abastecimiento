@@ -14,6 +14,7 @@ import Solicitante from "./Solicitante";
 import CamposDinamicos from "./CamposDinamicos";
 import PreguntaNumero from "./PreguntaNumero";
 import NumeroMaterial from "./NumeroMaterial";
+import { FirebaseContext } from "../../Firebase";
 
 import "../../App.css";
 
@@ -112,6 +113,8 @@ class Form extends Component {
   handelOpenModal = () => {
     this.setState(prevState => ({ open: !prevState.open }));
   };
+
+  confirmarSolicitud = solicitud => {};
 
   render() {
     const {
@@ -290,6 +293,27 @@ class Form extends Component {
                   </Table.Row>
                 </Table.Body>
               </Table>
+              <Container textAlign="center">
+                <FirebaseContext.Consumer>
+                  {firebase => {
+                    firebase
+                      .solicitudes()
+                      .once("value")
+                      .then(snap => console.log(snap.val()));
+                    return (
+                      <Button
+                        positive
+                        onClick={() =>
+                          firebase.solicitud("test").set(this.state)
+                        }
+                      >
+                        Confirmar
+                      </Button>
+                    );
+                  }}
+                </FirebaseContext.Consumer>
+                <Button negative>Cancelar</Button>
+              </Container>
             </Modal.Content>
           </Modal>
         </Grid>
