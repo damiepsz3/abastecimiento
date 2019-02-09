@@ -5,6 +5,7 @@ import ExpansionPanelDetails from "@material-ui/core/ExpansionPanelDetails";
 import ExpansionPanelSummary from "@material-ui/core/ExpansionPanelSummary";
 import Typography from "@material-ui/core/Typography";
 import TarjetaCerrada from "./TarjetaCerrada";
+import TarjetaAbierta from "./TarjetaAbierta";
 
 const styles = theme => ({
   root: {
@@ -46,10 +47,7 @@ class Tarjetas extends React.Component {
             <TarjetaCerrada />
           </ExpansionPanelSummary>
           <ExpansionPanelDetails>
-            <Typography>
-              Nulla facilisi. Phasellus sollicitudin nulla et quam mattis
-              feugiat. Aliquam eget maximus est, id dignissim quam.
-            </Typography>
+            <TarjetaAbierta />
           </ExpansionPanelDetails>
         </ExpansionPanel>
         <ExpansionPanel
@@ -57,17 +55,10 @@ class Tarjetas extends React.Component {
           onChange={this.handleChange("panel2")}
         >
           <ExpansionPanelSummary>
-            <Typography className={classes.heading}>Users</Typography>
-            <Typography className={classes.secondaryHeading}>
-              You are currently not an owner
-            </Typography>
+            <TarjetaCerrada />
           </ExpansionPanelSummary>
           <ExpansionPanelDetails>
-            <Typography>
-              Donec placerat, lectus sed mattis semper, neque lectus feugiat
-              lectus, varius pulvinar diam eros in elit. Pellentesque convallis
-              laoreet laoreet.
-            </Typography>
+            <TarjetaAbierta />
           </ExpansionPanelDetails>
         </ExpansionPanel>
         <ExpansionPanel

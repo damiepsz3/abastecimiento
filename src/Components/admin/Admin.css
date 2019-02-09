@@ -17,6 +17,8 @@
 
 #root .ui.segment.active.tab {
   border: none;
+  max-width: 900px;
+  margin: auto;
 }
 
 .TarjetaCerrada {
@@ -31,6 +33,8 @@
 .nombre {
   font-weight: 700;
   flex-basis: 35%;
+  transition: transform 0.3s;
+  transform-origin: 0 0;
 }
 
 .Plantilla {
@@ -45,5 +49,71 @@
 
 .Centro {
   width: 100px;
+  text-align: right;
   padding-left: 10px;
+}
+
+#root [class*="MuiExpansionPanelSummary-expanded"] {
+  background-color: #ececec;
+}
+
+#root [class*="MuiExpansionPanelSummary-expanded"] .nombre .label {
+  display: none;
+}
+
+[class*="MuiExpansionPanelSummary-expanded"] .nombre {
+  transform: scale(1.5, 1.5);
+  transform-origin: 0 0;
+}
+
+[class*="MuiExpansionPanelSummary-expanded"] .Plantilla {
+  transform: scale(0, 0);
+  transform-origin: 0 0;
+}
+
+#root [class*="MuiExpansionPanelDetails"] {
+  padding: 0;
+}
+
+.TarjetaAbierta {
+  width: 100%;
+}
+
+.TarjetaAbierta .Plantilla {
+  font-size: 20px;
+  padding-top: 20px;
+  padding-left: 24px;
+}
+
+.TarjetaAbierta .Categoria {
+  margin-top: 6px;
+  padding-left: 24px;
+}
+
+.TarjetaAbierta .GridContainerPlantilla {
+  display: grid;
+  width: 100%;
+  grid-template-columns: auto auto;
+  grid-column-gap: 20px;
+  grid-row-gap: 20px;
+  padding: 20px 24px;
+  text-transform: uppercase;
+}
+
+.tituloPlantilla {
+  color: #979797;
+  font-size: 13px;
+}
+
+.itemCampoComun span {
+  padding-left: 10px;
+  vertical-align: sub;
+}
+
+.itemCampoComun img {
+  opacity: 0.5;
+}
+
+#root .ui.divider.fitted {
+  margin: 5px 0;
 }
