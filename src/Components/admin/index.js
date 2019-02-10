@@ -1,31 +1,23 @@
-import React, { useState, useEffect } from "react";
-import Login from "./Login";
-import Nav from "./Nav";
+import React, { useEffect } from "react";
 import { withFirebase } from "../../Firebase";
+import { Route, withRouter } from "react-router-dom";
+import { compose } from "recompose";
 
-const Admin = ({ firebase }) => {
-  const [authUser, setAuthUser] = useState(null);
+const protectedRoute = ({ firebase, location, history, ...rest }) => {
+  const handleResponse = currentUser => {
+    if (!currentUser) {
+      history.push({ pathname: "/login", state: { from: location.pathname } });
+    }
+  };
 
   useEffect(() => {
-    firebase.auth.onAuthStateChanged(authUs => {
-      authUs ? setAuthUser(authUs) : setAuthUser(null);
-    });
+    firebase.auth.onAuthStateChanged(handleResponse);
   });
-  console.log(authUser);
-  if (authUser) return <Nav />;
-  return <Login />;
+
+  return <Route {...rest} />;
 };
 
-// class Admin extends Component {
-//
-//
-//
-//
-//   render() {
-//     const { password } = this.state;
-//     if (password !== "Mundial78") return <Login inputPass={this.inputPass} />;
-//     return <Nav />;
-//   }
-// }
-
-export default withFirebase(Admin);
+export default compose(
+  withRouter,
+  withFirebase
+)(protectedRoute);
