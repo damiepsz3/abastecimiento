@@ -1,8 +1,8 @@
 import React, { Component } from "react";
-import { Label, Divider, Image } from "semantic-ui-react";
+import { Label, Divider, Image, Button, Icon } from "semantic-ui-react";
 import DreyfusBarcode from "../../assets/DreyfusBarcode.svg";
 import DreyfusCentro from "../../assets/DreyfusCentro.svg";
-import DreyfusDollar from "../../assets/DreyfusCentro.svg";
+import DreyfusDollar from "../../assets/DreyfusDollar.svg";
 import DreyfusSector from "../../assets/DreyfusSector.svg";
 import DreyfusStock from "../../assets/DreyfusStock.svg";
 import DreyfusTap from "../../assets/DreyfusTap.svg";
@@ -13,7 +13,9 @@ class TarjetaAbierta extends Component {
   constructor(props) {
     super(props);
 
-    this.state = {};
+    this.state = {
+      estado: ""
+    };
   }
 
   render() {
@@ -23,24 +25,20 @@ class TarjetaAbierta extends Component {
         <div className="Categoria">Bombas y compresores industriales</div>
         <div className="GridContainerPlantilla">
           <div className="grid-itemPlantilla">
-            <div className="tituloPlantilla">Titulo 1 </div>
-            Valor 1
+            <div className="tituloPlantilla">TIPO </div>
+            DENSIMETRO RANGO 0.65-0.85
           </div>
           <div className="grid-itemPlantilla">
-            <div className="tituloPlantilla">Titulo 2 </div>
-            Valor 2
+            <div className="tituloPlantilla">NUMERO DE PARTE</div>
+            500-834-AAAA
           </div>
           <div className="grid-itemPlantilla">
-            <div className="tituloPlantilla">Titulo 3 </div>
-            Valor 3
+            <div className="tituloPlantilla">APLICACION</div>
+            MICELA
           </div>
           <div className="grid-itemPlantilla">
-            <div className="tituloPlantilla">Titulo 4 </div>
-            Valor 4
-          </div>
-          <div className="grid-itemPlantilla">
-            <div className="tituloPlantilla">Titulo 5 </div>
-            Valor 5
+            <div className="tituloPlantilla">UNIDAD DE MEDIDA </div>
+            Pulgada cúbica [2 Pulgada cuadrada 3]
           </div>
         </div>
         <Divider fitted />
@@ -81,7 +79,22 @@ class TarjetaAbierta extends Component {
             <span>932342123 </span>
           </div>
         </div>
-        {/* <Divider fitted /> */}
+        <Divider fitted />
+
+        <div className="BotonesEstados">
+          <Button.Group>
+            <Button className="Aceptar" onClick={this.props.cambiarEstado}>
+              <Icon name="check" /> Aceptar
+            </Button>
+            <Button className="Pendiente" onClick={this.props.cambiarEstado}>
+              <Icon name="clock" /> Pendiente
+            </Button>
+
+            <Button className="Rechazar" onClick={this.props.cambiarEstado}>
+              <Icon name="times" /> Rechazar
+            </Button>
+          </Button.Group>
+        </div>
       </div>
     );
   }

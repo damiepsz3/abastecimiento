@@ -33,7 +33,7 @@
 .nombre {
   font-weight: 700;
   flex-basis: 35%;
-  transition: transform 0.3s;
+  transition: transform 0.2s;
   transform-origin: 0 0;
 }
 
@@ -93,7 +93,7 @@
 .TarjetaAbierta .GridContainerPlantilla {
   display: grid;
   width: 100%;
-  grid-template-columns: auto auto;
+  grid-template-columns: 50% 50%;
   grid-column-gap: 20px;
   grid-row-gap: 20px;
   padding: 20px 24px;
@@ -116,4 +116,29 @@
 
 #root .ui.divider.fitted {
   margin: 5px 0;
+}
+
+.BotonesEstados {
+  display: flex;
+  justify-content: center;
+  margin: 20px auto;
+}
+
+#root .BotonesEstados .Rechazar:hover {
+  background-color: #ffbbbe;
+}
+
+#root .BotonesEstados .Aceptar:hover {
+  background-color: #98e2a7;
+}
+#root .BotonesEstados .Rechazar:active,
+#root .BotonesEstados .Rechazar:focus {
+  color: white;
+  background-color: #ed1c24;
+}
+
+#root .BotonesEstados .Aceptar:active,
+#root .BotonesEstados .Aceptar:focus {
+  color: white;
+  background-color: #2db84b;
 }
