@@ -23,6 +23,8 @@
 
 #root .ui.segment.active.tab {
   border: none;
+  max-width: 900px;
+  margin: auto;
 }
 
 .TarjetaCerrada {
@@ -37,6 +39,8 @@
 .nombre {
   font-weight: 700;
   flex-basis: 35%;
+  transition: transform 0.2s;
+  transform-origin: 0 0;
 }
 
 .Plantilla {
@@ -51,5 +55,96 @@
 
 .Centro {
   width: 100px;
+  text-align: right;
   padding-left: 10px;
+}
+
+#root [class*="MuiExpansionPanelSummary-expanded"] {
+  background-color: #ececec;
+}
+
+#root [class*="MuiExpansionPanelSummary-expanded"] .nombre .label {
+  display: none;
+}
+
+[class*="MuiExpansionPanelSummary-expanded"] .nombre {
+  transform: scale(1.5, 1.5);
+  transform-origin: 0 0;
+}
+
+[class*="MuiExpansionPanelSummary-expanded"] .Plantilla {
+  transform: scale(0, 0);
+  transform-origin: 0 0;
+}
+
+#root [class*="MuiExpansionPanelDetails"] {
+  padding: 0;
+}
+
+.TarjetaAbierta {
+  width: 100%;
+}
+
+.TarjetaAbierta .Plantilla {
+  font-size: 20px;
+  padding-top: 20px;
+  padding-left: 24px;
+}
+
+.TarjetaAbierta .Categoria {
+  margin-top: 6px;
+  padding-left: 24px;
+}
+
+.TarjetaAbierta .GridContainerPlantilla {
+  display: grid;
+  width: 100%;
+  grid-template-columns: 50% 50%;
+  grid-column-gap: 20px;
+  grid-row-gap: 20px;
+  padding: 20px 24px;
+  text-transform: uppercase;
+}
+
+.tituloPlantilla {
+  color: #979797;
+  font-size: 13px;
+}
+
+.itemCampoComun span {
+  padding-left: 10px;
+  vertical-align: sub;
+}
+
+.itemCampoComun img {
+  opacity: 0.5;
+}
+
+#root .ui.divider.fitted {
+  margin: 5px 0;
+}
+
+.BotonesEstados {
+  display: flex;
+  justify-content: center;
+  margin: 20px auto;
+}
+
+#root .BotonesEstados .Rechazar:hover {
+  background-color: #ffbbbe;
+}
+
+#root .BotonesEstados .Aceptar:hover {
+  background-color: #98e2a7;
+}
+#root .BotonesEstados .Rechazar:active,
+#root .BotonesEstados .Rechazar:focus {
+  color: white;
+  background-color: #ed1c24;
+}
+
+#root .BotonesEstados .Aceptar:active,
+#root .BotonesEstados .Aceptar:focus {
+  color: white;
+  background-color: #2db84b;
 }

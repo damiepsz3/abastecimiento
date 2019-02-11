@@ -1,34 +1,27 @@
 import React from "react";
-import { withStyles } from "@material-ui/core/styles";
 import ExpansionPanel from "@material-ui/core/ExpansionPanel";
 import ExpansionPanelDetails from "@material-ui/core/ExpansionPanelDetails";
 import ExpansionPanelSummary from "@material-ui/core/ExpansionPanelSummary";
 import Typography from "@material-ui/core/Typography";
 import TarjetaCerrada from "./TarjetaCerrada";
-
-const styles = theme => ({
-  root: {
-    width: "100%"
-  },
-  heading: {
-    fontSize: theme.typography.pxToRem(15),
-    flexBasis: "33.33%",
-    flexShrink: 0
-  },
-  secondaryHeading: {
-    fontSize: theme.typography.pxToRem(15),
-    color: theme.palette.text.secondary
-  }
-});
+import TarjetaAbierta from "./TarjetaAbierta";
 
 class Tarjetas extends React.Component {
-  state = {
-    expanded: null
-  };
+  constructor() {
+    super();
+    this.cambiarEstado = this.cambiarEstado.bind(this);
+    this.state = { expanded: null, estado: null };
+  }
 
   handleChange = panel => (event, expanded) => {
     this.setState({
       expanded: expanded ? panel : false
+    });
+  };
+
+  cambiarEstado = nuevoEstado => {
+    this.setState({
+      estado: nuevoEstado
     });
   };
 
@@ -37,7 +30,7 @@ class Tarjetas extends React.Component {
     const { expanded } = this.state;
 
     return (
-      <div className={classes.root}>
+      <div>
         <ExpansionPanel
           expanded={expanded === "panel1"}
           onChange={this.handleChange("panel1")}
@@ -46,10 +39,7 @@ class Tarjetas extends React.Component {
             <TarjetaCerrada />
           </ExpansionPanelSummary>
           <ExpansionPanelDetails>
-            <Typography>
-              Nulla facilisi. Phasellus sollicitudin nulla et quam mattis
-              feugiat. Aliquam eget maximus est, id dignissim quam.
-            </Typography>
+            <TarjetaAbierta cambiarEstado={this.cambiarEstado} />
           </ExpansionPanelDetails>
         </ExpansionPanel>
         <ExpansionPanel
@@ -57,50 +47,10 @@ class Tarjetas extends React.Component {
           onChange={this.handleChange("panel2")}
         >
           <ExpansionPanelSummary>
-            <Typography className={classes.heading}>Users</Typography>
-            <Typography className={classes.secondaryHeading}>
-              You are currently not an owner
-            </Typography>
+            <TarjetaCerrada />
           </ExpansionPanelSummary>
           <ExpansionPanelDetails>
-            <Typography>
-              Donec placerat, lectus sed mattis semper, neque lectus feugiat
-              lectus, varius pulvinar diam eros in elit. Pellentesque convallis
-              laoreet laoreet.
-            </Typography>
-          </ExpansionPanelDetails>
-        </ExpansionPanel>
-        <ExpansionPanel
-          expanded={expanded === "panel3"}
-          onChange={this.handleChange("panel3")}
-        >
-          <ExpansionPanelSummary>
-            <Typography className={classes.heading}>
-              Advanced settings
-            </Typography>
-            <Typography className={classes.secondaryHeading}>
-              Filtering has been entirely disabled for whole web server
-            </Typography>
-          </ExpansionPanelSummary>
-          <ExpansionPanelDetails>
-            <Typography>
-              Nunc vitae orci ultricies, auctor nunc in, volutpat nisl. Integer
-              sit amet egestas eros, vitae egestas augue. Duis vel est augue.
-            </Typography>
-          </ExpansionPanelDetails>
-        </ExpansionPanel>
-        <ExpansionPanel
-          expanded={expanded === "panel4"}
-          onChange={this.handleChange("panel4")}
-        >
-          <ExpansionPanelSummary>
-            <Typography className={classes.heading}>Personal data</Typography>
-          </ExpansionPanelSummary>
-          <ExpansionPanelDetails>
-            <Typography>
-              Nunc vitae orci ultricies, auctor nunc in, volutpat nisl. Integer
-              sit amet egestas eros, vitae egestas augue. Duis vel est augue.
-            </Typography>
+            <TarjetaAbierta />
           </ExpansionPanelDetails>
         </ExpansionPanel>
       </div>
@@ -108,4 +58,4 @@ class Tarjetas extends React.Component {
   }
 }
 
-export default withStyles(styles)(Tarjetas);
+export default Tarjetas;
