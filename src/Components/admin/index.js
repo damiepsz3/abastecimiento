@@ -1,23 +1,29 @@
-import React, { useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { withFirebase } from "../../Firebase";
-import { Route, withRouter } from "react-router-dom";
-import { compose } from "recompose";
+import { Route, Redirect } from "react-router-dom";
+import { useAuthState } from "react-firebase-hooks/auth";
 
-const protectedRoute = ({ firebase, location, history, ...rest }) => {
-  const handleResponse = currentUser => {
-    if (!currentUser) {
-      history.push({ pathname: "/login", state: { from: location.pathname } });
-    }
-  };
-
-  useEffect(() => {
-    firebase.auth.onAuthStateChanged(handleResponse);
-  });
-
-  return <Route {...rest} />;
+const protectedRoute = ({ firebase, component: Component, ...rest }) => {
+  const { initialising, user } = useAuthState(firebase.auth);
+  if (initialising === true) return <div>Loading</div>;
+  return (
+    <Route
+      {...rest}
+      render={props =>
+        user ? (
+          <Component {...props} />
+        ) : (
+          <Redirect
+            to={{
+              pathname: "/login",
+              state: { from: props.location }
+            }}
+          />
+        )
+      }
+    />
+  );
 };
 
-export default compose(
-  withRouter,
-  withFirebase
-)(protectedRoute);
+const Wrapper = {};
+export default withFirebase(protectedRoute);

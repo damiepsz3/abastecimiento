@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { withRouter, Redirect } from "react-router-dom";
 import { compose } from "recompose";
 import {
@@ -12,10 +12,24 @@ import {
 import { withFirebase } from "../../Firebase";
 
 const Login = ({ firebase, history, location }) => {
-  const [currentUser, setCurrentUser] = useState(firebase.auth.currentUser);
+  const auths = async () => {
+    await firebase.auth.onAuthStateChanged(user => {
+      if (user) {
+        setCurrentUser(true);
+      } else {
+        setCurrentUser(false);
+      }
+    });
+    return false;
+  };
+  const [currentUser, setCurrentUser] = useState(false);
   const [pass, setPass] = useState(null);
   const [error, setError] = useState(null);
+  const { from } = location.state || {
+    from: { pathname: "/admin/procesadas" }
+  };
 
+  // auths();
   const onSubmit = () => {
     console.log(pass);
     setError(null);
@@ -23,21 +37,13 @@ const Login = ({ firebase, history, location }) => {
       .doSignInWithEmailAndPassword("damiepsz3@gmail.com", pass)
       .then(() => {
         setPass(null);
+        setCurrentUser(true);
       })
       .catch(setError);
   };
+  console.log(currentUser);
 
-  useEffect(() => {
-    if (firebase.auth.currentUser) {
-      setCurrentUser(true);
-    }
-  });
-  if (currentUser)
-    return (
-      <Redirect
-        to={location.state.from ? location.state.from : "/admin/procesadas"}
-      />
-    );
+  if (currentUser) return <Redirect to={from} />;
   return (
     <div className="login-form">
       {/*

@@ -6968,6 +6968,11 @@ react-event-listener@^0.6.2:
     prop-types "^15.6.0"
     warning "^4.0.1"
 
+react-firebase-hooks@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/react-firebase-hooks/-/react-firebase-hooks-1.0.0.tgz#62677d74d30d66c3dfc49669184f8e40bf7c2645"
+  integrity sha512-rsgDXW7+PBw/kP8fi85rSq2a8UTVQLy5phcXgG6CbnOzz99cps8PVQul4nJDeKc9e2qXtb/LbTfuJIJz2Zwt/w==
+
 react-is@^16.6.3, react-is@^16.7.0:
   version "16.8.1"
   resolved "https://registry.yarnpkg.com/react-is/-/react-is-16.8.1.tgz#a80141e246eb894824fb4f2901c0c50ef31d4cdb"
