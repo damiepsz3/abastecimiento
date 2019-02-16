@@ -1,5 +1,13 @@
 import React, { Component } from "react";
-import { Label, Divider, Image, Button, Icon } from "semantic-ui-react";
+import {
+  Label,
+  Divider,
+  Image,
+  Button,
+  Icon,
+  Form,
+  TextArea
+} from "semantic-ui-react";
 import DreyfusBarcode from "../../assets/DreyfusBarcode.svg";
 import DreyfusCentro from "../../assets/DreyfusCentro.svg";
 import DreyfusDollar from "../../assets/DreyfusDollar.svg";
@@ -12,10 +20,6 @@ import DreyfusWrench from "../../assets/DreyfusWrench.svg";
 class TarjetaAbierta extends Component {
   constructor(props) {
     super(props);
-
-    this.state = {
-      estado: ""
-    };
   }
 
   render() {
@@ -80,17 +84,20 @@ class TarjetaAbierta extends Component {
           </div>
         </div>
         <Divider fitted />
+        <Form className="TextRechazo">
+          <TextArea autoHeight placeholder="Razon de rechazo" />
+        </Form>
 
         <div className="BotonesEstados">
           <Button.Group>
-            <Button className="Aceptar" onClick={this.props.cambiarEstado}>
+            <Button className="Aceptar">
               <Icon name="check" /> Aceptar
             </Button>
-            <Button className="Pendiente" onClick={this.props.cambiarEstado}>
+            <Button className="Pendiente">
               <Icon name="clock" /> Pendiente
             </Button>
 
-            <Button className="Rechazar" onClick={this.props.cambiarEstado}>
+            <Button className="Rechazar">
               <Icon name="times" /> Rechazar
             </Button>
           </Button.Group>

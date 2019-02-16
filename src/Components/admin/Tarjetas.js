@@ -2,26 +2,19 @@ import React from "react";
 import ExpansionPanel from "@material-ui/core/ExpansionPanel";
 import ExpansionPanelDetails from "@material-ui/core/ExpansionPanelDetails";
 import ExpansionPanelSummary from "@material-ui/core/ExpansionPanelSummary";
-import Typography from "@material-ui/core/Typography";
 import TarjetaCerrada from "./TarjetaCerrada";
 import TarjetaAbierta from "./TarjetaAbierta";
 
 class Tarjetas extends React.Component {
   constructor() {
     super();
-    this.cambiarEstado = this.cambiarEstado.bind(this);
     this.state = { expanded: null, estado: null };
   }
 
   handleChange = panel => (event, expanded) => {
     this.setState({
+      estado: null,
       expanded: expanded ? panel : false
-    });
-  };
-
-  cambiarEstado = nuevoEstado => {
-    this.setState({
-      estado: nuevoEstado
     });
   };
 
@@ -39,9 +32,10 @@ class Tarjetas extends React.Component {
             <TarjetaCerrada />
           </ExpansionPanelSummary>
           <ExpansionPanelDetails>
-            <TarjetaAbierta cambiarEstado={this.cambiarEstado} />
+            <TarjetaAbierta />
           </ExpansionPanelDetails>
         </ExpansionPanel>
+
         <ExpansionPanel
           expanded={expanded === "panel2"}
           onChange={this.handleChange("panel2")}
