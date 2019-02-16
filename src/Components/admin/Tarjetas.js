@@ -20,10 +20,7 @@ class Tarjetas extends React.Component {
   componentDidMount() {
     this.props.firebase
       .getSolicitudes()
-      .then(solicitudes => {
-        console.log(solicitudes);
-        this.setState({ solicitudes });
-      })
+      .then(solicitudes => this.setState({ solicitudes }))
       .catch(fail => console.log(fail));
   }
 

@@ -35,7 +35,15 @@ class Firebase {
   // *** Solicitudes API ***
 
   solicitud = () => this.db.collection(`solicitudes`);
-  getSolicitudes = () => this.db.collection("solicitudes").get();
+  getSolicitudes = () =>
+    this.db
+      .collection("solicitudes")
+      .get()
+      .then(snapShot => {
+        const resp = [];
+        snapShot.forEach(snap => resp.push(snap.data()));
+        return resp;
+      });
 }
 
 export default Firebase;
