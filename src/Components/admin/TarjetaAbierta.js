@@ -24,7 +24,6 @@ class TarjetaAbierta extends Component {
 
   render() {
     const { solicitud } = this.props;
-    console.log(Object.keys(solicitud.camposDinamicos));
     const camposDinamicos = Object.keys(solicitud.camposDinamicos).map(
       caracteristica => (
         <div className="grid-itemPlantilla" key={caracteristica}>

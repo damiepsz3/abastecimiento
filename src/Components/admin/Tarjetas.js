@@ -17,18 +17,18 @@ class Tarjetas extends React.Component {
     });
   };
 
-  componentDidMount() {
-    this.props.firebase
-      .getSolicitudes()
-      .then(solicitudes => this.setState({ solicitudes }))
-      .catch(fail => console.log(fail));
-  }
+  // componentDidMount() {
+  //   this.props.firebase
+  //     .getSolicitudes()
+  //     .then(solicitudes => this.setState({ solicitudes }))
+  //     .catch(fail => console.log(fail));
+  // }
 
   render() {
-    const { classes } = this.props;
+    const { classes, solicitudes } = this.props;
     const { expanded } = this.state;
 
-    const ListaTarjetas = this.state.solicitudes.map(solicitud => (
+    const ListaTarjetas = solicitudes.map(solicitud => (
       <ExpansionPanel
         key={solicitud.id}
         expanded={expanded === solicitud.id}
