@@ -1,4 +1,5 @@
 import app from "firebase/app";
+import "firebase/firestore";
 import "firebase/auth";
 import "firebase/database";
 import { configFirebase } from "../config";
@@ -8,7 +9,7 @@ class Firebase {
     app.initializeApp(configFirebase);
 
     this.auth = app.auth();
-    this.db = app.database();
+    this.db = app.firestore();
   }
 
   // *** User API ***
@@ -33,9 +34,8 @@ class Firebase {
 
   // *** Solicitudes API ***
 
-  solicitud = uid => this.db.ref(`solicitudes/${uid}`);
-
-  solicitudes = () => this.db.ref("solicitudes");
+  solicitud = () => this.db.collection(`solicitudes`);
+  getSolicitudes = () => this.db.collection("solicitudes").get();
 }
 
 export default Firebase;

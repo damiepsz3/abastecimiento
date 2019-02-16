@@ -10,30 +10,17 @@ const protectedRoute = ({ firebase, component: Component, ...rest }) => {
   return (
     <Route
       {...rest}
-      render={
-        props => {
-          if (user) if (!user.isAnonymous) return <Component {...props} />;
-          return (
-            <Redirect
-              to={{
-                pathname: "/login",
-                state: { from: props.location }
-              }}
-            />
-          );
-        }
-
-        // user ? (
-        //   <Component {...props} />
-        // ) : (
-        //   <Redirect
-        //     to={{
-        //       pathname: "/login",
-        //       state: { from: props.location }
-        //     }}
-        //   />
-        // )
-      }
+      render={props => {
+        if (user) if (!user.isAnonymous) return <Component {...props} />;
+        return (
+          <Redirect
+            to={{
+              pathname: "/login",
+              state: { from: props.location }
+            }}
+          />
+        );
+      }}
     />
   );
 };
