@@ -34,7 +34,11 @@ class Firebase {
 
   // *** Solicitudes API ***
 
-  addSolicitud = solicitud => this.db.collection(`solicitudes`).add(solicitud);
+  addSolicitud = solicitud =>
+    this.db.collection(`solicitudes`).add({
+      createdDate: app.firestore.Timestamp.fromDate(new Date()),
+      ...solicitud
+    });
   getSolicitudes = () =>
     this.db
       .collection("solicitudes")
@@ -44,6 +48,9 @@ class Firebase {
         snapShot.forEach(snap => resp.push({ id: snap.id, ...snap.data() }));
         return resp;
       });
+
+  //Utils
+  timeStampToDate = ts => app.firestore.Timestamp.toDate(ts);
 }
 
 export default Firebase;
