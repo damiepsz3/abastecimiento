@@ -32,7 +32,7 @@ const Login = ({ firebase, history, location }) => {
   };
 
   //falta chequear que no sea anomimo!
-  if (user) return <Redirect to={from} />;
+  if (user) if (!user.isAnonymous) return <Redirect to={from} />;
   return (
     <div className="login-form">
       {/*
