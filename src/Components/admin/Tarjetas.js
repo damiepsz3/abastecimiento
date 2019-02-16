@@ -8,7 +8,7 @@ import { withFirebase } from "../../Firebase";
 class Tarjetas extends React.Component {
   constructor() {
     super();
-    this.state = { expanded: null, estado: "rechazada", solicitudes: [] };
+    this.state = { expanded: null, estado: "aceptada", solicitudes: [] };
   }
 
   handleChange = panel => (event, expanded) => {
@@ -27,34 +27,23 @@ class Tarjetas extends React.Component {
   render() {
     const { classes } = this.props;
     const { expanded } = this.state;
+    console.log(this.state.solicitudes);
+    const ListaTarjetas = this.state.solicitudes.map(solicitud => (
+      <ExpansionPanel
+        key={solicitud.id}
+        expanded={expanded === solicitud.id}
+        onChange={this.handleChange(solicitud.id)}
+      >
+        <ExpansionPanelSummary className={solicitud.estado}>
+          <TarjetaCerrada solicitud={solicitud} estado={solicitud.estado} />
+        </ExpansionPanelSummary>
+        <ExpansionPanelDetails>
+          <TarjetaAbierta solicitud={solicitud} />
+        </ExpansionPanelDetails>
+      </ExpansionPanel>
+    ));
 
-    return (
-      <div>
-        <ExpansionPanel
-          expanded={expanded === "panel1"}
-          onChange={this.handleChange("panel1")}
-        >
-          <ExpansionPanelSummary>
-            <TarjetaCerrada estado={this.state.estado} />
-          </ExpansionPanelSummary>
-          <ExpansionPanelDetails>
-            <TarjetaAbierta />
-          </ExpansionPanelDetails>
-        </ExpansionPanel>
-
-        <ExpansionPanel
-          expanded={expanded === "panel2"}
-          onChange={this.handleChange("panel2")}
-        >
-          <ExpansionPanelSummary>
-            <TarjetaCerrada estado={this.state.estado} />
-          </ExpansionPanelSummary>
-          <ExpansionPanelDetails>
-            <TarjetaAbierta />
-          </ExpansionPanelDetails>
-        </ExpansionPanel>
-      </div>
-    );
+    return <div>{ListaTarjetas}</div>;
   }
 }
 

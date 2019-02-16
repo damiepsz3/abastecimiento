@@ -59,8 +59,16 @@
   padding-left: 10px;
 }
 
-#root [class*="MuiExpansionPanelSummary-expanded"] {
+#root [class*="MuiExpansionPanelSummary-expanded"].pendiente {
   background-color: #ececec;
+}
+
+#root [class*="MuiExpansionPanelSummary-expanded"].rechazada {
+  background-color: #ffbbbe;
+}
+
+#root [class*="MuiExpansionPanelSummary-expanded"].aprobada {
+  background-color: #98e2a7;
 }
 
 #root [class*="MuiExpansionPanelSummary-expanded"] .nombre .label {
@@ -69,7 +77,7 @@
 
 [class*="MuiExpansionPanelSummary-expanded"] .nombre {
   transform: scale(1.5, 1.5);
-  transform-origin: 0 0;
+  transform-origin: 0 15px;
 }
 
 [class*="MuiExpansionPanelSummary-expanded"] .Plantilla {

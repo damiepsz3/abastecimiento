@@ -23,6 +23,7 @@ class TarjetaAbierta extends Component {
   }
 
   render() {
+    const { solicitud } = this.props;
     return (
       <div className="TarjetaAbierta">
         <div className="Plantilla">ABRIDOR DE COMPUERTA DE VAGON</div>
@@ -54,29 +55,38 @@ class TarjetaAbierta extends Component {
 
           <div className="itemCampoComun">
             <Image src={DreyfusStock} verticalAlign="middle" />
-            <span>Requiere Stock</span>
+            <span>
+              {solicitud.requiereStock ? "REQUIERE STOCK" : "NO REQUIERE STOCK"}
+            </span>
           </div>
           <div className="itemCampoComun">
             <Image src={DreyfusSector} verticalAlign="middle" />
-            <span>Produc. / Operación Lagos </span>
+            <span>{solicitud.opcionSector} </span>
           </div>
           <div className="itemCampoComun">
             <Image src={DreyfusDollar} verticalAlign="middle" />
-            <span>142 </span>
+            <span>{solicitud.valorUSD} </span>
           </div>
-          <div className="itemCampoComun">
-            <Image src={DreyfusVendedor} verticalAlign="middle" />
-            <span>Bombas SRL </span>
-          </div>
-
-          <div className="itemCampoComun">
-            <Image src={DreyfusTap} verticalAlign="middle" />
-            <span>300 UNIDADES </span>
-          </div>
+          {solicitud.proveedor !== "" && (
+            <div className="itemCampoComun">
+              <Image src={DreyfusVendedor} verticalAlign="middle" />
+              <span>{solicitud.proveedor}</span>
+            </div>
+          )}
+          {solicitud.consumoAnual !== "No Aplica" && (
+            <div className="itemCampoComun">
+              <Image src={DreyfusTap} verticalAlign="middle" />
+              <span>{solicitud.consumoAnual} </span>
+            </div>
+          )}
 
           <div className="itemCampoComun">
             <Image src={DreyfusWrench} verticalAlign="middle" />
-            <span>PRODUCTO REPARABLE </span>
+            <span>
+              {solicitud.repara
+                ? "PRODUCTO REPARABLE"
+                : "PRODUCTO NO REPARABLE"}
+            </span>
           </div>
           <div className="itemCampoComun">
             <Image src={DreyfusBarcode} verticalAlign="middle" />

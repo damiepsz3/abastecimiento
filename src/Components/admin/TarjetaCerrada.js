@@ -1,4 +1,6 @@
 import React, { Component } from "react";
+import { withFirebase } from "../../Firebase";
+
 import { Label, Flag } from "semantic-ui-react";
 class TarjetaCerrada extends Component {
   constructor(props) {
@@ -14,6 +16,7 @@ class TarjetaCerrada extends Component {
   }
 
   render() {
+    const { solicitud } = this.props;
     return (
       <div className="TarjetaCerrada">
         <div className="nombre">
@@ -21,16 +24,20 @@ class TarjetaCerrada extends Component {
             circular
             color={this.seleccionarColor(this.props.estado)}
             empty
-          />{" "}
-          Nombre Apellido{" "}
+          />
+          {solicitud.nombreApellido}
         </div>
-        <div className="Plantilla"> ABRIDOR DE COMPUERTA DE VAGON </div>
-        <div className="Fecha">30 Dic 2018</div>
+        <div className=" Plantilla">
+          {" "}
+          {solicitud.plantillaSeleccionada["Nombre Plantilla"]}{" "}
+        </div>
+        <div className="Fecha">
+          {this.props.firebase.timeStampToDate(solicitud.createdDate)}
+        </div>
         <div className="Centro">
           <Label image>
             <Flag name="argentina" />
-            {/* <img src="https://react.semantic-ui.com/images/avatar/small/joe.jpg" /> */}
-            A101
+            {solicitud.opcionPlanta.substring(0, 4)}
           </Label>
         </div>
       </div>
@@ -38,4 +45,4 @@ class TarjetaCerrada extends Component {
   }
 }
 
-export default TarjetaCerrada;
+export default withFirebase(TarjetaCerrada);
