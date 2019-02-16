@@ -24,33 +24,30 @@ class TarjetaAbierta extends Component {
 
   render() {
     const { solicitud } = this.props;
+    console.log(Object.keys(solicitud.camposDinamicos));
+    const camposDinamicos = Object.keys(solicitud.camposDinamicos).map(
+      caracteristica => (
+        <div className="grid-itemPlantilla" key={caracteristica}>
+          <div className="tituloPlantilla">{caracteristica}</div>
+          {solicitud.camposDinamicos[caracteristica]}
+        </div>
+      )
+    );
+
     return (
       <div className="TarjetaAbierta">
-        <div className="Plantilla">ABRIDOR DE COMPUERTA DE VAGON</div>
-        <div className="Categoria">Bombas y compresores industriales</div>
-        <div className="GridContainerPlantilla">
-          <div className="grid-itemPlantilla">
-            <div className="tituloPlantilla">TIPO </div>
-            DENSIMETRO RANGO 0.65-0.85
-          </div>
-          <div className="grid-itemPlantilla">
-            <div className="tituloPlantilla">NUMERO DE PARTE</div>
-            500-834-AAAA
-          </div>
-          <div className="grid-itemPlantilla">
-            <div className="tituloPlantilla">APLICACION</div>
-            MICELA
-          </div>
-          <div className="grid-itemPlantilla">
-            <div className="tituloPlantilla">UNIDAD DE MEDIDA </div>
-            Pulgada cúbica [2 Pulgada cuadrada 3]
-          </div>
+        <div className="Plantilla">
+          {solicitud.plantillaSeleccionada["Nombre Plantilla"]}
         </div>
+        <div className="Categoria">
+          {solicitud.plantillaSeleccionada["Taxonomia BOLD:Descripción"]}
+        </div>
+        <div className="GridContainerPlantilla">{camposDinamicos}</div>
         <Divider fitted />
         <div className="GridContainerPlantilla">
           <div className="itemCampoComun">
             <Image src={DreyfusCentro} verticalAlign="middle" />
-            <span>6101 - PUEBLA - LDC MEXICO SA de CV</span>
+            <span>{solicitud.opcionPlanta}</span>
           </div>
 
           <div className="itemCampoComun">
@@ -90,7 +87,7 @@ class TarjetaAbierta extends Component {
           </div>
           <div className="itemCampoComun">
             <Image src={DreyfusBarcode} verticalAlign="middle" />
-            <span>932342123 </span>
+            <span>{solicitud.valorTAG} </span>
           </div>
         </div>
         <Divider fitted />
