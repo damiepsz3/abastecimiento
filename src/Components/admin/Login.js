@@ -10,26 +10,16 @@ import {
   Message
 } from "semantic-ui-react";
 import { withFirebase } from "../../Firebase";
+import { useAuthState } from "react-firebase-hooks/auth";
 
 const Login = ({ firebase, history, location }) => {
-  const auths = async () => {
-    await firebase.auth.onAuthStateChanged(user => {
-      if (user) {
-        setCurrentUser(true);
-      } else {
-        setCurrentUser(false);
-      }
-    });
-    return false;
-  };
-  const [currentUser, setCurrentUser] = useState(false);
+  const { initialising, user } = useAuthState(firebase.auth);
   const [pass, setPass] = useState(null);
   const [error, setError] = useState(null);
   const { from } = location.state || {
     from: { pathname: "/admin/procesadas" }
   };
 
-  // auths();
   const onSubmit = () => {
     console.log(pass);
     setError(null);
@@ -37,13 +27,12 @@ const Login = ({ firebase, history, location }) => {
       .doSignInWithEmailAndPassword("damiepsz3@gmail.com", pass)
       .then(() => {
         setPass(null);
-        setCurrentUser(true);
       })
       .catch(setError);
   };
-  console.log(currentUser);
 
-  if (currentUser) return <Redirect to={from} />;
+  //falta chequear que no sea anomimo!
+  if (user) return <Redirect to={from} />;
   return (
     <div className="login-form">
       {/*
@@ -79,7 +68,7 @@ const Login = ({ firebase, history, location }) => {
                 onChange={(e, { value }) => setPass(value)}
               />
 
-              <Button fluid onClick={() => onSubmit()}>
+              <Button loading={initialising} fluid onClick={() => onSubmit()}>
                 Ingresar
               </Button>
             </Segment>

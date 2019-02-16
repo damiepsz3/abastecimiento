@@ -2,17 +2,14 @@ import React, { useState } from "react";
 import { Container, Table, Button, Modal } from "semantic-ui-react";
 import { withFirebase } from "../../Firebase";
 
-const ResultsModal = ({ firebase, solicitud }) => {
-  const [openModal, useOpenModal] = useState(false);
-  const handelOpenModal = () => useOpenModal(!openModal);
-
+const ResultsModal = ({ firebase, solicitud, open, handleOpenModal }) => {
   return (
     <Modal
-      onOpen={handelOpenModal}
-      onClose={handelOpenModal}
+      onOpen={handleOpenModal}
+      onClose={handleOpenModal}
       closeOnEscape
       closeOnDimmerClick
-      open={openModal}
+      open={open}
       closeIcon
     >
       <Modal.Header>Informacion recolectada en el formulario</Modal.Header>

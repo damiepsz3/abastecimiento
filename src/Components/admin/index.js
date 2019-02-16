@@ -1,15 +1,16 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { withFirebase } from "../../Firebase";
 import { Route, Redirect } from "react-router-dom";
 import { useAuthState } from "react-firebase-hooks/auth";
 
 const protectedRoute = ({ firebase, component: Component, ...rest }) => {
   const { initialising, user } = useAuthState(firebase.auth);
-  if (initialising === true) return <div>Loading</div>;
+  if (initialising) return <div>Loading</div>;
   return (
     <Route
       {...rest}
       render={props =>
+        //falta chequear que no sea anomimo
         user ? (
           <Component {...props} />
         ) : (
@@ -25,5 +26,4 @@ const protectedRoute = ({ firebase, component: Component, ...rest }) => {
   );
 };
 
-const Wrapper = {};
 export default withFirebase(protectedRoute);

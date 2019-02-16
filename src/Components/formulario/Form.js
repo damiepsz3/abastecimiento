@@ -8,6 +8,7 @@ import CamposDinamicos from "./CamposDinamicos";
 import PreguntaNumero from "./PreguntaNumero";
 import NumeroMaterial from "./NumeroMaterial";
 import ResultsModal from "./ResultsModal";
+import { withFirebase } from "../../Firebase";
 
 import "../../App.css";
 
@@ -44,6 +45,9 @@ class Form extends Component {
     GoogleApi.init().then(result =>
       this.setState({ plantillas: result, loadingPlantillas: false })
     );
+
+    //createTheAnonymousSession
+    this.props.firebase.doAnonymousSignIn();
   }
 
   validarCampos = () => {
@@ -71,6 +75,11 @@ class Form extends Component {
         this.setState({ open: true });
       }
     });
+    this.handleOpenModal();
+  };
+
+  handleOpenModal = () => {
+    this.setState(prevState => ({ open: !prevState.open }));
   };
 
   componentDidUpdate(prevProps, prevState) {
@@ -184,11 +193,15 @@ class Form extends Component {
               </Button>
             </Container>
           </Grid.Row>
-          <ResultsModal solicitud={this.state} openModal={this.state.open} />
+          <ResultsModal
+            solicitud={this.state}
+            open={this.state.open}
+            handleOpenModal={this.handleOpenModal}
+          />
         </Grid>
       </Container>
     );
   }
 }
 
-export default Form;
+export default withFirebase(Form);
