@@ -7,11 +7,22 @@ class TarjetaCerrada extends Component {
     this.state = {};
   }
 
+  seleccionarColor(estado) {
+    if (estado === "pendiente") return "grey";
+    if (estado === "rechazada") return "red";
+    return "green";
+  }
+
   render() {
     return (
       <div className="TarjetaCerrada">
         <div className="nombre">
-          <Label circular color={"grey"} empty /> Nombre Apellido{" "}
+          <Label
+            circular
+            color={this.seleccionarColor(this.props.estado)}
+            empty
+          />{" "}
+          Nombre Apellido{" "}
         </div>
         <div className="Plantilla"> ABRIDOR DE COMPUERTA DE VAGON </div>
         <div className="Fecha">30 Dic 2018</div>
