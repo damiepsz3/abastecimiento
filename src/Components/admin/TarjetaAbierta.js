@@ -16,6 +16,7 @@ import DreyfusStock from "../../assets/DreyfusStock.svg";
 import DreyfusTap from "../../assets/DreyfusTap.svg";
 import DreyfusVendedor from "../../assets/DreyfusVendedor.svg";
 import DreyfusWrench from "../../assets/DreyfusWrench.svg";
+import sapLogo from "../../assets/sap.svg";
 
 class TarjetaAbierta extends Component {
   constructor(props) {
@@ -41,7 +42,16 @@ class TarjetaAbierta extends Component {
         <div className="Categoria">
           {solicitud.plantillaSeleccionada["Taxonomia BOLD:Descripción"]}
         </div>
-        <div className="GridContainerPlantilla">{camposDinamicos}</div>
+        <div className="GridContainerPlantilla">
+          {camposDinamicos}
+          {solicitud.numeroMaterial !== "" && (
+            <span>
+              <img className="logoSap" src={sapLogo} />{" "}
+              {solicitud.numeroMaterial}{" "}
+            </span>
+          )}
+        </div>
+
         <Divider fitted />
         <div className="GridContainerPlantilla">
           <div className="itemCampoComun">
