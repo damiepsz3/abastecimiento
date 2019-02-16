@@ -1,23 +1,38 @@
 import React, { useState } from "react";
-import { Form, Grid, Header, Segment, Button } from "semantic-ui-react";
+import { withRouter, Redirect } from "react-router-dom";
+import { compose } from "recompose";
+import {
+  Form,
+  Grid,
+  Header,
+  Segment,
+  Button,
+  Message
+} from "semantic-ui-react";
 import { withFirebase } from "../../Firebase";
+import { useAuthState } from "react-firebase-hooks/auth";
 
-const Login = props => {
-  const [user, setUser] = useState(null);
+const Login = ({ firebase, history, location }) => {
+  const { initialising, user } = useAuthState(firebase.auth);
   const [pass, setPass] = useState(null);
   const [error, setError] = useState(null);
-  console.log(props);
+  const { from } = location.state || {
+    from: { pathname: "/admin/procesadas" }
+  };
+
   const onSubmit = () => {
-    props.firebase
-      .doSignInWithEmailAndPassword(user, pass)
+    console.log(pass);
+    setError(null);
+    firebase
+      .doSignInWithEmailAndPassword("damiepsz3@gmail.com", pass)
       .then(() => {
-        setUser(null);
         setPass(null);
-        //do redirect here
       })
       .catch(setError);
   };
 
+  //falta chequear que no sea anomimo!
+  if (user) return <Redirect to={from} />;
   return (
     <div className="login-form">
       {/*
@@ -41,17 +56,8 @@ const Login = props => {
           <Header as="h2" textAlign="center">
             Admin Abastecimiento
           </Header>
-          <Form size="large" onSubmit={onSubmit}>
+          <Form size="large">
             <Segment>
-              <Form.Input
-                required
-                fluid
-                icon="user"
-                iconPosition="left"
-                placeholder="Correo Electrónico"
-                type="email"
-                onChange={(e, { value }) => setUser(value)}
-              />
               <Form.Input
                 required
                 fluid
@@ -61,13 +67,27 @@ const Login = props => {
                 type="password"
                 onChange={(e, { value }) => setPass(value)}
               />
-              <Button fluid>Ingresar</Button>
+
+              <Button loading={initialising} fluid onClick={() => onSubmit()}>
+                Ingresar
+              </Button>
             </Segment>
           </Form>
+          {error && (
+            <Message attached="bottom" negative>
+              {error.message ===
+              "The password is invalid or the user does not have a password."
+                ? "Contraseña Incorrecta"
+                : error.message}
+            </Message>
+          )}
         </Grid.Column>
       </Grid>
     </div>
   );
 };
 
-export default withFirebase(Login);
+export default compose(
+  withRouter,
+  withFirebase
+)(Login);

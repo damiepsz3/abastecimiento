@@ -1,16 +1,18 @@
-import React, { Fragment } from "react";
-import { BrowserRouter as Router, Route } from "react-router-dom";
+import React from "react";
+import { Switch, BrowserRouter as Router, Route } from "react-router-dom";
 
 import Form from "./Components/formulario/Form";
-import Admin from "./Components/admin/";
-import "./App.css";
+import Login from "./Components/admin/Login";
+import Nav from "./Components/admin/Nav";
+import ProtectedRoute from "./Components/admin";
 
 const App = () => (
   <Router>
-    <Fragment>
+    <Switch>
       <Route exact path="/" component={Form} />
-      <Route exact path="/admin" component={Admin} />
-    </Fragment>
+      <Route exact path="/login" component={Login} />
+      <ProtectedRoute exact path="/admin/:type" component={Nav} />
+    </Switch>
   </Router>
 );
 

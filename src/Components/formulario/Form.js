@@ -1,12 +1,5 @@
 import React, { Component } from "react";
-import {
-  Container,
-  Header,
-  Grid,
-  Table,
-  Button,
-  Modal
-} from "semantic-ui-react";
+import { Container, Header, Grid, Button } from "semantic-ui-react";
 import GoogleApi from "../../GoogleApi";
 import Plantilla from "./Plantilla";
 import Camposcomunes from "./Camposcomunes";
@@ -14,7 +7,8 @@ import Solicitante from "./Solicitante";
 import CamposDinamicos from "./CamposDinamicos";
 import PreguntaNumero from "./PreguntaNumero";
 import NumeroMaterial from "./NumeroMaterial";
-import { FirebaseContext } from "../../Firebase";
+import ResultsModal from "./ResultsModal";
+import { withFirebase } from "../../Firebase";
 
 import "../../App.css";
 
@@ -51,6 +45,9 @@ class Form extends Component {
     GoogleApi.init().then(result =>
       this.setState({ plantillas: result, loadingPlantillas: false })
     );
+
+    //createTheAnonymousSession
+    this.props.firebase.doAnonymousSignIn();
   }
 
   validarCampos = () => {
@@ -78,6 +75,11 @@ class Form extends Component {
         this.setState({ open: true });
       }
     });
+    this.handleOpenModal();
+  };
+
+  handleOpenModal = () => {
+    this.setState(prevState => ({ open: !prevState.open }));
   };
 
   componentDidUpdate(prevProps, prevState) {
@@ -109,12 +111,6 @@ class Form extends Component {
       errors: prevState.errors.filter(e => e !== campo)
     }));
   };
-
-  handelOpenModal = () => {
-    this.setState(prevState => ({ open: !prevState.open }));
-  };
-
-  confirmarSolicitud = solicitud => {};
 
   render() {
     const {
@@ -197,129 +193,15 @@ class Form extends Component {
               </Button>
             </Container>
           </Grid.Row>
-
-          <Modal
-            onOpen={this.handelOpenModal}
-            onClose={this.handelOpenModal}
-            closeOnEscape
-            closeOnDimmerClick
+          <ResultsModal
+            solicitud={this.state}
             open={this.state.open}
-            closeIcon
-          >
-            <Modal.Header>
-              Informacion recolectada en el formulario
-            </Modal.Header>
-            <Modal.Content>
-              <Table celled striped>
-                <Table.Body>
-                  <Table.Row>
-                    <Table.Cell collapsing>Nombre y Apellido</Table.Cell>
-                    <Table.Cell>{this.state.nombreApellido}</Table.Cell>
-                  </Table.Row>
-                  <Table.Row>
-                    <Table.Cell>Email</Table.Cell>
-                    <Table.Cell>{this.state.email}</Table.Cell>
-                  </Table.Row>
-                  <Table.Row>
-                    <Table.Cell>Número de material a solicitar</Table.Cell>
-                    <Table.Cell>{this.state.numeroMaterial}</Table.Cell>
-                  </Table.Row>
-
-                  <Table.Row>
-                    <Table.Cell> Plantilla Seleccionada </Table.Cell>
-                    <Table.Cell>
-                      {this.state.plantillaSeleccionada["Nombre Plantilla"]}
-                    </Table.Cell>
-                  </Table.Row>
-
-                  <Table.Row>
-                    <Table.Cell>Categoría Seleccionada</Table.Cell>
-                    <Table.Cell>
-                      {" "}
-                      {
-                        this.state.plantillaSeleccionada[
-                          "Taxonomia BOLD:Descripción"
-                        ]
-                      }
-                    </Table.Cell>
-                  </Table.Row>
-                  {Object.keys(this.state.camposDinamicos).map((cd, idx) => (
-                    <Table.Row key={idx}>
-                      <Table.Cell>{cd}</Table.Cell>
-                      <Table.Cell>{this.state.camposDinamicos[cd]}</Table.Cell>
-                    </Table.Row>
-                  ))}
-                  <Table.Row>
-                    <Table.Cell>Proveedor/ Marca Sugeridos</Table.Cell>
-                    <Table.Cell>{this.state.proveedor}</Table.Cell>
-                  </Table.Row>
-                  <Table.Row>
-                    <Table.Cell>Presentación</Table.Cell>
-                    <Table.Cell>{this.state.presentacion}</Table.Cell>
-                  </Table.Row>
-                  <Table.Row>
-                    <Table.Cell>Planta</Table.Cell>
-                    <Table.Cell>{this.state.opcionPlanta}</Table.Cell>
-                  </Table.Row>
-                  <Table.Row>
-                    <Table.Cell>Sector</Table.Cell>
-                    <Table.Cell>{this.state.opcionSector}</Table.Cell>
-                  </Table.Row>
-                  <Table.Row>
-                    <Table.Cell>Criticidad</Table.Cell>
-                    <Table.Cell>{this.state.criticidad}</Table.Cell>
-                  </Table.Row>
-                  <Table.Row>
-                    <Table.Cell>¿Se Repara?</Table.Cell>
-                    <Table.Cell>{this.state.repara ? "Si" : "No"}</Table.Cell>
-                  </Table.Row>
-                  <Table.Row>
-                    <Table.Cell>Valor Unitario (U$D)</Table.Cell>
-                    <Table.Cell>{this.state.valorUSD}</Table.Cell>
-                  </Table.Row>
-                  <Table.Row>
-                    <Table.Cell>TAG de equipo que lo utiliza</Table.Cell>
-                    <Table.Cell>{this.state.valorTAG}</Table.Cell>
-                  </Table.Row>
-                  <Table.Row>
-                    <Table.Cell>¿Requiere Stock? </Table.Cell>
-                    <Table.Cell>
-                      {this.state.requiereStock ? "Si" : "No"}
-                    </Table.Cell>
-                  </Table.Row>
-                  <Table.Row>
-                    <Table.Cell>Consumo Anual Esperable</Table.Cell>
-                    <Table.Cell>{this.state.consumoAnual}</Table.Cell>
-                  </Table.Row>
-                </Table.Body>
-              </Table>
-              <Container textAlign="center">
-                <FirebaseContext.Consumer>
-                  {firebase => {
-                    firebase
-                      .solicitudes()
-                      .once("value")
-                      .then(snap => console.log(snap.val()));
-                    return (
-                      <Button
-                        positive
-                        onClick={() =>
-                          firebase.solicitud("test").set(this.state)
-                        }
-                      >
-                        Confirmar
-                      </Button>
-                    );
-                  }}
-                </FirebaseContext.Consumer>
-                <Button negative>Cancelar</Button>
-              </Container>
-            </Modal.Content>
-          </Modal>
+            handleOpenModal={this.handleOpenModal}
+          />
         </Grid>
       </Container>
     );
   }
 }
 
-export default Form;
+export default withFirebase(Form);
