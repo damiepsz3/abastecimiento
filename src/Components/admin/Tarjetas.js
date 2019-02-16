@@ -27,7 +27,7 @@ class Tarjetas extends React.Component {
   render() {
     const { classes } = this.props;
     const { expanded } = this.state;
-
+    console.log(this.state.solicitudes);
     const ListaTarjetas = this.state.solicitudes.map(solicitud => (
       <ExpansionPanel
         key={solicitud.id}
