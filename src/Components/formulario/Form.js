@@ -50,6 +50,28 @@ class Form extends Component {
     this.props.firebase.doAnonymousSignIn();
   }
 
+  reloadToInit = () => {
+    this.setState({
+      open: false,
+      plantillaSeleccionada: "",
+      conoceCodigo: "",
+      numeroMaterial: "",
+      camposDinamicos: {},
+      unidadMedida: "",
+      opcionPlanta: "",
+      opcionSector: "",
+      criticidad: "",
+      repara: "",
+      valorUSD: "",
+      valorTAG: "",
+      requiereStock: "",
+      consumoAnual: "",
+      proveedor: "",
+      presentacion: "",
+      errors: []
+    });
+  };
+
   validarCampos = () => {
     const errors = Object.keys(this.state)
       .filter(prop => this.state[prop] === "")
@@ -197,6 +219,7 @@ class Form extends Component {
             solicitud={this.state}
             open={this.state.open}
             handleOpenModal={this.handleOpenModal}
+            reload={this.reloadToInit}
           />
         </Grid>
       </Container>

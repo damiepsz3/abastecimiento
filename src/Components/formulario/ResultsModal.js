@@ -5,15 +5,48 @@ import {
   Button,
   Modal,
   Dimmer,
-  Loader,
-  Icon,
-  Message
+  Loader
 } from "semantic-ui-react";
 import { withFirebase } from "../../Firebase";
+import { Link } from "react-router-dom";
+import ModalMessages from "./ModalMessages";
 
-const ResultsModal = ({ firebase, solicitud, open, handleOpenModal }) => {
+const ResultsModal = ({
+  firebase,
+  solicitud,
+  open,
+  handleOpenModal,
+  reload
+}) => {
   const [loading, setLoading] = useState(false);
   const [results, setResults] = useState(null);
+  const submitSolicitud = () => {
+    const {
+      errors,
+      open,
+      conoceCodigo,
+      plantillas,
+      loadingPlantillas,
+      ...rest
+    } = solicitud;
+    setLoading(true);
+    firebase
+      .addSolicitud({ estado: "pendiente", ...rest })
+      .then(response => {
+        setLoading(false);
+        setResults({
+          success: true,
+          idSeguimiento: response.id
+        });
+      })
+      .catch(error => {
+        setLoading(false);
+        setResults({
+          success: false,
+          idSeguimiento: null
+        });
+      });
+  };
   return (
     <Modal
       onOpen={handleOpenModal}
@@ -27,17 +60,13 @@ const ResultsModal = ({ firebase, solicitud, open, handleOpenModal }) => {
         <Loader size="large">Subiendo solicitud</Loader>
       </Dimmer>
       {results ? (
-        <Modal.Content>
-          <Message icon positive>
-            <Icon name="check" />
-            <Message.Content>
-              <Message.Header>
-                Su solicitud fue enviada correctamente
-              </Message.Header>
-              Este es su numero de seguimiento: {results.idSeguimiento}
-            </Message.Content>
-          </Message>
-        </Modal.Content>
+        <ModalMessages
+          results={results}
+          setLoading={setLoading}
+          setResults={setResults}
+          submitSolicitud={submitSolicitud}
+          reload={reload}
+        />
       ) : (
         <Fragment>
           <Modal.Header>Informacion recolectada en el formulario</Modal.Header>
@@ -126,31 +155,7 @@ const ResultsModal = ({ firebase, solicitud, open, handleOpenModal }) => {
               </Table.Body>
             </Table>
             <Container textAlign="center">
-              <Button
-                positive
-                onClick={() => {
-                  const {
-                    errors,
-                    open,
-                    conoceCodigo,
-                    plantillas,
-                    loadingPlantillas,
-                    ...rest
-                  } = solicitud;
-                  setLoading(true);
-                  firebase
-                    .addSolicitud({ estado: "pendiente", ...rest })
-                    .then(response => {
-                      setLoading(false);
-                      console.log(response);
-                      setResults({
-                        success: true,
-                        idSeguimiento: response.id
-                      });
-                    })
-                    .catch(error => console.log(error));
-                }}
-              >
+              <Button positive onClick={() => submitSolicitud()}>
                 Confirmar
               </Button>
               <Button negative onClick={() => handleOpenModal()}>

@@ -48,9 +48,6 @@ class Firebase {
         snapShot.forEach(snap => resp.push({ id: snap.id, ...snap.data() }));
         return resp;
       });
-
-  //Utils
-  timeStampToDate = ts => app.firestore.Timestamp.toDate(ts);
 }
 
 export default Firebase;
