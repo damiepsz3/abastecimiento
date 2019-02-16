@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { Container, Table, Button, Modal } from "semantic-ui-react";
 import { withFirebase } from "../../Firebase";
 
@@ -94,11 +94,23 @@ const ResultsModal = ({ firebase, solicitud, open, handleOpenModal }) => {
         <Container textAlign="center">
           <Button
             positive
-            onClick={() => firebase.solicitud("test").set(solicitud)}
+            onClick={() => {
+              const {
+                errors,
+                open,
+                conoceCodigo,
+                plantillas,
+                loadingPlantillas,
+                ...rest
+              } = solicitud;
+              firebase.solicitud().add(rest);
+            }}
           >
             Confirmar
           </Button>
-          <Button negative>Cancelar</Button>
+          <Button negative onClick={() => handleOpenModal()}>
+            Cancelar
+          </Button>
         </Container>
       </Modal.Content>
     </Modal>

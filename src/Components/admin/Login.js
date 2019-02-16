@@ -31,7 +31,6 @@ const Login = ({ firebase, history, location }) => {
       .catch(setError);
   };
 
-  //falta chequear que no sea anomimo!
   if (user) if (!user.isAnonymous) return <Redirect to={from} />;
   return (
     <div className="login-form">
