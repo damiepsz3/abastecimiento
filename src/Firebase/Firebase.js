@@ -34,14 +34,14 @@ class Firebase {
 
   // *** Solicitudes API ***
 
-  solicitud = () => this.db.collection(`solicitudes`);
+  addSolicitud = solicitud => this.db.collection(`solicitudes`).add(solicitud);
   getSolicitudes = () =>
     this.db
       .collection("solicitudes")
       .get()
       .then(snapShot => {
         const resp = [];
-        snapShot.forEach(snap => resp.push(snap.data()));
+        snapShot.forEach(snap => resp.push({ id: snap.id, ...snap.data() }));
         return resp;
       });
 }
