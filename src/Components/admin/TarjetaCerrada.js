@@ -16,6 +16,7 @@ class TarjetaCerrada extends Component {
   }
 
   render() {
+    //var d = new Date(solicitud.createdDate.seconds);
     const { solicitud } = this.props;
     return (
       <div className="TarjetaCerrada">
@@ -32,7 +33,11 @@ class TarjetaCerrada extends Component {
           {solicitud.plantillaSeleccionada["Nombre Plantilla"]}{" "}
         </div>
         <div className="Fecha">
-          {this.props.firebase.timeStampToDate(solicitud.createdDate)}
+          {solicitud.createdDate.toDate().getDate() +
+            " " +
+            solicitud.createdDate
+              .toDate()
+              .toLocaleDateString("es-AR", { year: "numeric", month: "short" })}
         </div>
         <div className="Centro">
           <Label image>
