@@ -16,6 +16,12 @@ const Nav = ({ firebase, match, history }) => {
     firebase.db.collection("solicitudes")
   );
 
+  const sortBy = (a, b) => {
+    if (a[filter] > b[filter]) return -1;
+    if (a[filter] < b[filter]) return 1;
+    return 0;
+  };
+
   const panes = [
     {
       menuItem: (
@@ -29,26 +35,28 @@ const Nav = ({ firebase, match, history }) => {
             tarjetaSeleccionada={match.params.idSolicitud}
             solicitudes={
               search.length > 0
-                ? solPen.filter(s => {
-                    if (s.plantillaSeleccionada !== "") {
+                ? solPen
+                    .filter(s => {
+                      if (s.plantillaSeleccionada !== "") {
+                        return (
+                          s.nombreApellido.toLowerCase().includes(search) ||
+                          s.opcionPlanta.toLowerCase().includes(search) ||
+                          s.plantillaSeleccionada["Nombre Plantilla"]
+                            .toLowerCase()
+                            .includes(search) ||
+                          s.plantillaSeleccionada["Taxonomia BOLD:Descripción"]
+                            .toLowerCase()
+                            .includes(search)
+                        );
+                      }
                       return (
                         s.nombreApellido.toLowerCase().includes(search) ||
                         s.opcionPlanta.toLowerCase().includes(search) ||
-                        s.plantillaSeleccionada["Nombre Plantilla"]
-                          .toLowerCase()
-                          .includes(search) ||
-                        s.plantillaSeleccionada["Taxonomia BOLD:Descripción"]
-                          .toLowerCase()
-                          .includes(search)
+                        s.numeroMaterial.toLowerCase().includes(search)
                       );
-                    }
-                    return (
-                      s.nombreApellido.toLowerCase().includes(search) ||
-                      s.opcionPlanta.toLowerCase().includes(search) ||
-                      s.numeroMaterial.toLowerCase().includes(search)
-                    );
-                  })
-                : solPen
+                    })
+                    .sort(sortBy)
+                : solPen.sort(sortBy)
             }
           />
         </Tab.Pane>
@@ -64,22 +72,36 @@ const Nav = ({ firebase, match, history }) => {
         <Tab.Pane attached={false}>
           <Tarjetas
             tarjetaSeleccionada={match.params.idSolicitud}
-            solicitudes={solProc}
+            solicitudes={
+              search.length > 0
+                ? solProc
+                  .filter(s => {
+                    if (s.plantillaSeleccionada !== "") {
+                      return (
+                        s.nombreApellido.toLowerCase().includes(search) ||
+                        s.opcionPlanta.toLowerCase().includes(search) ||
+                          s.plantillaSeleccionada["Nombre Plantilla"]
+                        .toLowerCase()
+                        .includes(search) ||
+                          s.plantillaSeleccionada["Taxonomia BOLD:Descripción"]
+                        .toLowerCase()
+                        .includes(search)
+                      );
+                    }
+                    return (
+                      s.nombreApellido.toLowerCase().includes(search) ||
+                      s.opcionPlanta.toLowerCase().includes(search) ||
+                      s.numeroMaterial.toLowerCase().includes(search)
+                    );
+                  })
+                  .sort(sortBy)
+                : solProc.sort(sortBy)
+            }
           />
         </Tab.Pane>
       )
     }
   ];
-
-  // const parsingSol = (solicitudes) => {
-  //   switch(filter) {
-  //     case "fecha":
-  //       solicitudes.sort((a,b) => {
-  //         a.
-  //       })
-  //       break;
-  //   }
-  // }
 
   const filterOption = [
     { text: "Fecha", value: "createdDate" },
@@ -95,8 +117,12 @@ const Nav = ({ firebase, match, history }) => {
             const { createdDate, ...rest } = doc.data();
             return { id: doc.id, createdDate: createdDate.toDate(), ...rest };
           });
-          setSolPen(solicitudes.filter(sol => sol.estado === "pendiente"));
-          setSolProc(solicitudes.filter(sol => sol.estado !== "pendiente"));
+          setSolPen(
+            solicitudes.filter(sol => sol.estado === "pendiente").sort(sortBy)
+          );
+          setSolProc(
+            solicitudes.filter(sol => sol.estado !== "pendiente").sort(sortBy)
+          );
         }
     },
     [value]
