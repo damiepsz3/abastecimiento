@@ -37,6 +37,7 @@ class TarjetaCerrada extends Component {
             empty
           />
           {solicitud.nombreApellido}
+          <span className="email"> {solicitud.email}</span>
         </div>
         <div className=" Plantilla">
           {solicitud.numeroMaterial === "" ? (
