@@ -1,7 +1,7 @@
 import React, { Fragment, useState, useEffect } from "react";
 import { withRouter, Link } from "react-router-dom";
 import { compose } from "recompose";
-import { Tab, Input, Button, Menu } from "semantic-ui-react";
+import { Tab, Input, Button, Menu, Dropdown } from "semantic-ui-react";
 import Tarjetas from "../Tarjetas";
 import "../Admin.css";
 import { withFirebase } from "../../../Firebase";
@@ -10,6 +10,8 @@ const Nav = ({ firebase, match, history }) => {
   const [solProc, setSolProc] = useState([]);
   const [solPen, setSolPen] = useState([]);
   const [search, setSearch] = useState("");
+  const [filter, setFilter] = useState("createdDate");
+
   const panes = [
     {
       menuItem: (
@@ -24,17 +26,17 @@ const Nav = ({ firebase, match, history }) => {
             solicitudes={
               search.length > 0
                 ? solPen.filter(s => {
-                  if (s.plantillaSeleccionada !== "") {
-                    return (
-                      s.nombreApellido.toLowerCase().includes(search) ||
-                      s.opcionPlanta.toLowerCase().includes(search) ||
+                    if (s.plantillaSeleccionada !== "") {
+                      return (
+                        s.nombreApellido.toLowerCase().includes(search) ||
+                        s.opcionPlanta.toLowerCase().includes(search) ||
                         s.plantillaSeleccionada["Nombre Plantilla"]
-                      .toLowerCase()
-                      .includes(search) ||
+                          .toLowerCase()
+                          .includes(search) ||
                         s.plantillaSeleccionada["Taxonomia BOLD:Descripción"]
-                      .toLowerCase()
-                      .includes(search)
-                    );
+                          .toLowerCase()
+                          .includes(search)
+                      );
                     }
                     return (
                       s.nombreApellido.toLowerCase().includes(search) ||
@@ -65,10 +67,26 @@ const Nav = ({ firebase, match, history }) => {
     }
   ];
 
+  // const parsingSol = (solicitudes) => {
+  //   switch(filter) {
+  //     case "fecha":
+  //       solicitudes.sort((a,b) => {
+  //         a.
+  //       })
+  //       break;
+  //   }
+  // }
+
+  const filterOption = [
+    { text: "Fecha", value: "createdDate" },
+    { text: "Planta", value: "opcionPlanta" },
+    { text: "Estado", value: "estado" }
+  ];
+
   useEffect(() => {
     firebase.getSolicitudes().then(solicitudes => {
       console.log(solicitudes);
-      setSolPen(solicitudes.filter(sol => sol.estado === "pendiente"));
+      setSolPen(solicitudes.filter(sol => sol.estado === "pendiente").sort());
       setSolProc(solicitudes.filter(sol => sol.estado !== "pendiente"));
     });
   }, []);
@@ -86,6 +104,17 @@ const Nav = ({ firebase, match, history }) => {
         placeholder="Search..."
         onChange={(e, { value }) => setSearch(value.toLowerCase())}
         value={search}
+      />
+      <Dropdown
+        className="filtrarPor"
+        placeholder="Ordenar por"
+        selection
+        options={
+          match.params.type === "procesadas"
+            ? filterOption
+            : filterOption.filter(opt => opt.text !== "Estado")
+        }
+        onChange={(e, { value }) => setFilter(value)}
       />
       <Button
         className="cerrarSesion"

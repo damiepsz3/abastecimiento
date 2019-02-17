@@ -15,6 +15,12 @@
   right: 14px;
 }
 
+.ui.selection.dropdown.filtrarPor {
+  position: absolute !important;
+  top: 10px;
+  right: 260px;
+}
+
 #root .ui.secondary.pointing.menu .item {
   padding-bottom: 20px;
   padding-top: 20px;

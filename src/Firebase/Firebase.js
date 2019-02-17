@@ -45,7 +45,14 @@ class Firebase {
       .get()
       .then(snapShot => {
         const resp = [];
-        snapShot.forEach(snap => resp.push({ id: snap.id, ...snap.data() }));
+        snapShot.forEach(snap => {
+          const { createdDate, ...rest } = snap.data();
+          resp.push({
+            id: snap.id,
+            createdDate: createdDate.toDate(),
+            ...rest
+          });
+        });
         return resp;
       });
 }
