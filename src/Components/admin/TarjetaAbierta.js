@@ -22,6 +22,22 @@ import { withFirebase } from "../../Firebase";
 class TarjetaAbierta extends Component {
   constructor(props) {
     super(props);
+    this.state = { rechazando: false };
+  }
+
+  handleAceptar() {
+    this.setState({ rechazando: false });
+    this.props.cerrarPanel(this.props.solicitud.id);
+    this.props.firebase.updateSolicitud(this.props.solicitud.id, "aceptada");
+  }
+
+  handleRechazar() {
+    this.setState({ rechazando: true });
+  }
+
+  handleTerminarDeProcesar() {
+    this.props.cerrarPanel(this.props.solicitud.id);
+    this.props.firebase.updateSolicitud(this.props.solicitud.id, "rechazada");
   }
 
   render() {
@@ -102,9 +118,21 @@ class TarjetaAbierta extends Component {
         </div>
         <Divider fitted />
 
-        {solicitud.estado === "rechazada" && (
+        {(this.state.rechazando || solicitud.estado === "rechazada") && (
           <Form className="TextRechazo">
-            <TextArea autoHeight placeholder="Razon de rechazo" />
+            <TextArea
+              rows="2"
+              autoFocus
+              focus={true}
+              autoHeight
+              placeholder="Razon de rechazo"
+            />
+            <Button
+              floated="right"
+              onClick={() => this.handleTerminarDeProcesar()}
+            >
+              Terminar de Processar
+            </Button>
           </Form>
         )}
 
@@ -112,20 +140,25 @@ class TarjetaAbierta extends Component {
           <Button.Group>
             <Button
               className="Aceptar"
-              onClick={() =>
-                this.props.firebase.updateSolicitud(solicitud.id, "Aceptada")
-              }
-              active={solicitud.estado === "aceptada"}
+              onClick={() => this.handleAceptar()}
+              active={solicitud.estado === "aceptada" && !this.state.rechazando}
             >
               <Icon name="check" /> Aceptar
             </Button>
-            <Button className="Pendiente">
+            <Button
+              className="Pendiente"
+              onClick={() =>
+                this.props.firebase.updateSolicitud(solicitud.id, "pendiente")
+              }
+              active={solicitud.estado === "pendiente"}
+            >
               <Icon name="clock" /> Pendiente
             </Button>
 
             <Button
               className="Rechazar"
-              active={solicitud.estado === "rechazada"}
+              onClick={() => this.handleRechazar()}
+              active={solicitud.estado === "rechazada" || this.state.rechazando}
             >
               <Icon name="times" /> Rechazar
             </Button>

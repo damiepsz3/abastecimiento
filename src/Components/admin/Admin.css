@@ -183,6 +183,7 @@
   background-color: #2db84b;
 }
 #root .TextRechazo {
+  display: flex;
   padding-top: 24px;
   padding-left: 24px;
   padding-right: 24px;

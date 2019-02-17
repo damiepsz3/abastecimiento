@@ -31,7 +31,10 @@ class Tarjetas extends React.Component {
           <TarjetaCerrada solicitud={solicitud} estado={solicitud.estado} />
         </ExpansionPanelSummary>
         <ExpansionPanelDetails>
-          <TarjetaAbierta solicitud={solicitud} />
+          <TarjetaAbierta
+            solicitud={solicitud}
+            cerrarPanel={this.handleChange(solicitud.id)}
+          />
         </ExpansionPanelDetails>
       </ExpansionPanel>
     ));
