@@ -171,13 +171,13 @@
 #root .BotonesEstados .Aceptar:hover {
   background-color: #98e2a7;
 }
-#root .BotonesEstados .Rechazar:active,
+#root .BotonesEstados .Rechazar.active,
 #root .BotonesEstados .Rechazar:focus {
   color: white;
   background-color: #ed1c24;
 }
 
-#root .BotonesEstados .Aceptar:active,
+#root .BotonesEstados .Aceptar.active,
 #root .BotonesEstados .Aceptar:focus {
   color: white;
   background-color: #2db84b;
