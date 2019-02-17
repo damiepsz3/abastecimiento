@@ -101,9 +101,12 @@ class TarjetaAbierta extends Component {
           </div>
         </div>
         <Divider fitted />
-        <Form className="TextRechazo">
-          <TextArea autoHeight placeholder="Razon de rechazo" />
-        </Form>
+
+        {solicitud.estado === "rechazada" && (
+          <Form className="TextRechazo">
+            <TextArea autoHeight placeholder="Razon de rechazo" />
+          </Form>
+        )}
 
         <div className="BotonesEstados">
           <Button.Group>
@@ -112,6 +115,7 @@ class TarjetaAbierta extends Component {
               onClick={() =>
                 this.props.firebase.updateSolicitud(solicitud.id, "Aceptada")
               }
+              active={solicitud.estado === "aceptada"}
             >
               <Icon name="check" /> Aceptar
             </Button>
@@ -119,7 +123,10 @@ class TarjetaAbierta extends Component {
               <Icon name="clock" /> Pendiente
             </Button>
 
-            <Button className="Rechazar">
+            <Button
+              className="Rechazar"
+              active={solicitud.estado === "rechazada"}
+            >
               <Icon name="times" /> Rechazar
             </Button>
           </Button.Group>
