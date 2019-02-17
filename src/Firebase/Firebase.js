@@ -37,6 +37,7 @@ class Firebase {
   addSolicitud = solicitud =>
     this.db.collection(`solicitudes`).add({
       createdDate: app.firestore.Timestamp.fromDate(new Date()),
+      razon: "",
       ...solicitud
     });
   getSolicitudes = () =>
@@ -56,11 +57,11 @@ class Firebase {
         return resp;
       });
 
-  updateSolicitud = (id, estado) =>
+  updateSolicitud = (id, estado, razon = null) =>
     this.db
       .collection("solicitudes")
       .doc(id)
-      .update({ estado });
+      .update({ estado, razon });
 }
 
 export default Firebase;
