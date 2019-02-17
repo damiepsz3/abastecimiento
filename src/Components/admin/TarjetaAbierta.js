@@ -17,6 +17,7 @@ import DreyfusTap from "../../assets/DreyfusTap.svg";
 import DreyfusVendedor from "../../assets/DreyfusVendedor.svg";
 import DreyfusWrench from "../../assets/DreyfusWrench.svg";
 import sapLogo from "../../assets/sap.svg";
+import { withFirebase } from "../../Firebase";
 
 class TarjetaAbierta extends Component {
   constructor(props) {
@@ -106,7 +107,12 @@ class TarjetaAbierta extends Component {
 
         <div className="BotonesEstados">
           <Button.Group>
-            <Button className="Aceptar">
+            <Button
+              className="Aceptar"
+              onClick={() =>
+                this.props.firebase.updateSolicitud(solicitud.id, "Aceptada")
+              }
+            >
               <Icon name="check" /> Aceptar
             </Button>
             <Button className="Pendiente">
@@ -123,4 +129,4 @@ class TarjetaAbierta extends Component {
   }
 }
 
-export default TarjetaAbierta;
+export default withFirebase(TarjetaAbierta);

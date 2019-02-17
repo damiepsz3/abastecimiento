@@ -25,6 +25,7 @@ class Tarjetas extends React.Component {
   // }
 
   render() {
+    console.log("t");
     const { classes, solicitudes } = this.props;
     const { expanded } = this.state;
 

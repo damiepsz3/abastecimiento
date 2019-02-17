@@ -5,12 +5,16 @@ import { Tab, Input, Button, Menu, Dropdown } from "semantic-ui-react";
 import Tarjetas from "../Tarjetas";
 import "../Admin.css";
 import { withFirebase } from "../../../Firebase";
+import { useCollection } from "react-firebase-hooks/firestore";
 
 const Nav = ({ firebase, match, history }) => {
   const [solProc, setSolProc] = useState([]);
   const [solPen, setSolPen] = useState([]);
   const [search, setSearch] = useState("");
   const [filter, setFilter] = useState("createdDate");
+  const { error, loading, value } = useCollection(
+    firebase.db.collection("solicitudes")
+  );
 
   const panes = [
     {
@@ -83,13 +87,20 @@ const Nav = ({ firebase, match, history }) => {
     { text: "Estado", value: "estado" }
   ];
 
-  useEffect(() => {
-    firebase.getSolicitudes().then(solicitudes => {
-      console.log(solicitudes);
-      setSolPen(solicitudes.filter(sol => sol.estado === "pendiente").sort());
-      setSolProc(solicitudes.filter(sol => sol.estado !== "pendiente"));
-    });
-  }, []);
+  useEffect(
+    () => {
+      if (!loading)
+        if (!error) {
+          const solicitudes = value.docs.map(doc => {
+            const { createdDate, ...rest } = doc.data();
+            return { id: doc.id, createdDate: createdDate.toDate(), ...rest };
+          });
+          setSolPen(solicitudes.filter(sol => sol.estado === "pendiente"));
+          setSolProc(solicitudes.filter(sol => sol.estado !== "pendiente"));
+        }
+    },
+    [value]
+  );
 
   return (
     <Fragment>

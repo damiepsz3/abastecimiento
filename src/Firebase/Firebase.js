@@ -55,6 +55,12 @@ class Firebase {
         });
         return resp;
       });
+
+  updateSolicitud = (id, estado) =>
+    this.db
+      .collection("solicitudes")
+      .doc(id)
+      .update({ estado });
 }
 
 export default Firebase;
