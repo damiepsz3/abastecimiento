@@ -65,16 +65,36 @@
   padding-left: 10px;
 }
 
+.email {
+  display: none;
+}
+
+#root [class*="MuiExpansionPanelSummary-expanded"] .email {
+  display: inline;
+  font-weight: 200;
+  opacity: 0.5;
+  padding-left: 5px;
+  user-select: text;
+}
+
 #root [class*="MuiExpansionPanelSummary-expanded"].pendiente {
   background-color: #ececec;
+  border-top-right-radius: 5px;
+  border-top-left-radius: 5px;
 }
 
 #root [class*="MuiExpansionPanelSummary-expanded"].rechazada {
-  background-color: #ffbbbe;
+  background-color: #ed1c24;
+  color: white;
+  border-top-right-radius: 5px;
+  border-top-left-radius: 5px;
 }
 
-#root [class*="MuiExpansionPanelSummary-expanded"].aprobada {
-  background-color: #98e2a7;
+#root [class*="MuiExpansionPanelSummary-expanded"].aceptada {
+  background-color: #2db84b;
+  color: white;
+  border-top-right-radius: 5px;
+  border-top-left-radius: 5px;
 }
 
 #root [class*="MuiExpansionPanelSummary-expanded"] .nombre .label {
@@ -170,4 +190,5 @@
 
 .logoSap {
   vertical-align: sub;
+  padding-right: 2px;
 }
