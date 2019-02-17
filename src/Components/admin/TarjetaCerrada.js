@@ -50,11 +50,12 @@ class TarjetaCerrada extends Component {
           )}
         </div>
         <div className="Fecha">
-          {solicitud.createdDate.toDate().getDate() +
+          {solicitud.createdDate.getDate() +
             " " +
-            solicitud.createdDate
-              .toDate()
-              .toLocaleDateString("es-AR", { year: "numeric", month: "short" })}
+            solicitud.createdDate.toLocaleDateString("es-AR", {
+              year: "numeric",
+              month: "short"
+            })}
         </div>
         <div className="Centro">
           <Label image>
