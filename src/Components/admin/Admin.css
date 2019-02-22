@@ -2,17 +2,36 @@
   font-family: "Lato" !important;
 }
 
-.ui.icon.button.descargar {
+.ui.button.descargar {
+  height: 36px;
+  width: 32px;
   position: absolute;
   top: 10px;
+  margin: 0;
   right: 63px;
+}
+.ui.button.descargar a {
+  padding-left: 10px;
+  padding-right: 10px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  height: 40px;
+  top: 0;
+  color: #666868;
+  position: absolute;
+  left: 3px;
 }
 
 .ui.input.barraBusqueda {
   position: absolute;
   top: 10px;
-  width: 800px;
-  left: 25%;
+  width: calc(100% - 800px);
+  left: 300px;
+  right: 300px;
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 850px;
+  min-width: 200px;
 }
 
 .ui.button.cerrarSesion {
@@ -153,6 +172,13 @@
   vertical-align: sub;
 }
 
+span.CriticidadIcono {
+  font-weight: 900;
+  font-size: 24px;
+  opacity: 0.6;
+  padding-left: 5px;
+}
+
 .itemCampoComun img {
   opacity: 0.5;
 }
@@ -195,4 +221,20 @@
 .logoSap {
   vertical-align: sub;
   padding-right: 2px;
+}
+
+@media screen and (max-width: 800px) {
+  .ui.pointing.secondary.menu {
+    margin-bottom: 70px;
+  }
+
+  .ui.input.barraBusqueda {
+    top: 70px;
+    width: calc(100% - 245px);
+    left: 10px;
+  }
+  .ui.selection.dropdown.filtrarPor {
+    top: 70px;
+    right: 10px;
+  }
 }

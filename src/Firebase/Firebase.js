@@ -65,24 +65,6 @@ class Firebase {
       .update({ estado, razon });
 
   // *** Storage API ***
-  uploadCSV = file => {
-    // const metadata = {
-    //   contentType: "text/csv"
-    // };
-    //
-    // return this.storage
-    //   .ref()
-    //   .child("procesadas/" + "test")
-    //   .put(new Blob(file), metadata);
-    this.functions.https.onRequest((request, response) => {
-      response.setHeader(
-        "Content-disposition",
-        "attachment; filename=report.csv"
-      );
-      response.set("Content-Type", "text/csv");
-      response.status(200).send(file);
-    });
-  };
 }
 
 export default Firebase;
