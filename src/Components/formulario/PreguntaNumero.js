@@ -7,7 +7,6 @@ import {
   Popup,
   Icon,
   Modal,
-  Button,
   Image
 } from "semantic-ui-react";
 import "../../App.css";

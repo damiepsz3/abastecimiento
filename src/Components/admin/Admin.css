@@ -1,0 +1,202 @@
+#root {
+  font-family: "Lato" !important;
+}
+
+.ui.icon.button.descargar {
+  position: absolute;
+  top: 10px;
+  right: 63px;
+}
+
+.ui.input.barraBusqueda {
+  position: absolute;
+  top: 10px;
+  width: 800px;
+  left: 25%;
+}
+
+.ui.button.cerrarSesion {
+  position: absolute !important;
+  top: 10px;
+  right: 14px;
+}
+
+.ui.selection.dropdown.filtrarPor {
+  position: absolute !important;
+  top: 10px;
+  right: 120px;
+}
+
+#root .ui.secondary.pointing.menu .item {
+  padding-bottom: 20px;
+  padding-top: 20px;
+  font-size: 15px;
+}
+
+#root .ui.segment.active.tab {
+  border: none;
+  max-width: 900px;
+  margin: auto;
+}
+
+.TarjetaCerrada {
+  display: flex;
+  width: 100%;
+  padding-right: 5px !important;
+  align-items: center;
+}
+#root .nombre .label {
+  margin-right: 5px;
+}
+.nombre {
+  font-weight: 700;
+  flex-basis: 35%;
+  transition: transform 0.2s;
+  transform-origin: 0 0;
+}
+
+.Plantilla {
+  flex-basis: 40%;
+}
+
+.Fecha {
+  flex-basis: 25%;
+  text-align: right;
+  padding-left: 10px;
+}
+
+.Centro {
+  width: 100px;
+  text-align: right;
+  padding-left: 10px;
+}
+
+.email {
+  display: none;
+}
+
+#root [class*="MuiExpansionPanelSummary-expanded"] .email {
+  display: inline;
+  font-weight: 200;
+  opacity: 0.5;
+  padding-left: 5px;
+  user-select: text;
+}
+
+#root [class*="MuiExpansionPanelSummary-expanded"].pendiente {
+  background-color: #ececec;
+  border-top-right-radius: 5px;
+  border-top-left-radius: 5px;
+}
+
+#root [class*="MuiExpansionPanelSummary-expanded"].rechazada {
+  background-color: #ed1c24;
+  color: white;
+  border-top-right-radius: 5px;
+  border-top-left-radius: 5px;
+}
+
+#root [class*="MuiExpansionPanelSummary-expanded"].aceptada {
+  background-color: #2db84b;
+  color: white;
+  border-top-right-radius: 5px;
+  border-top-left-radius: 5px;
+}
+
+#root [class*="MuiExpansionPanelSummary-expanded"] .nombre .label {
+  display: none;
+}
+
+[class*="MuiExpansionPanelSummary-expanded"] .nombre {
+  transform: scale(1.5, 1.5);
+  transform-origin: 0 15px;
+  flex-basis: 50%;
+}
+
+[class*="MuiExpansionPanelSummary-expanded"] .Plantilla {
+  transform: scale(0, 0);
+  transform-origin: 0 0;
+}
+
+#root [class*="MuiExpansionPanelDetails"] {
+  padding: 0;
+}
+
+.TarjetaAbierta {
+  width: 100%;
+}
+
+.TarjetaAbierta .Plantilla {
+  font-size: 20px;
+  padding-top: 20px;
+  padding-left: 24px;
+}
+
+.TarjetaAbierta .Categoria {
+  margin-top: 6px;
+  padding-left: 24px;
+}
+
+.TarjetaAbierta .GridContainerPlantilla {
+  display: grid;
+  width: 100%;
+  grid-template-columns: 50% 50%;
+  grid-column-gap: 20px;
+  grid-row-gap: 20px;
+  padding: 20px 24px;
+  text-transform: uppercase;
+}
+
+.tituloPlantilla {
+  color: #979797;
+  font-size: 13px;
+}
+
+.itemCampoComun span {
+  padding-left: 10px;
+  vertical-align: sub;
+}
+
+.itemCampoComun img {
+  opacity: 0.5;
+}
+
+#root .ui.divider.fitted {
+  margin: 5px 0;
+}
+
+.BotonesEstados {
+  display: flex;
+  justify-content: center;
+  margin: 20px auto;
+}
+
+#root .BotonesEstados .Rechazar:hover {
+  background-color: #ffbbbe;
+}
+
+#root .BotonesEstados .Aceptar:hover {
+  background-color: #98e2a7;
+}
+#root .BotonesEstados .Rechazar.active,
+#root .BotonesEstados .Rechazar:focus {
+  color: white;
+  background-color: #ed1c24;
+}
+
+#root .BotonesEstados .Aceptar.active,
+#root .BotonesEstados .Aceptar:focus {
+  color: white;
+  background-color: #2db84b;
+}
+#root .TextRechazo {
+  display: flex;
+  padding-top: 24px;
+  padding-left: 24px;
+  padding-right: 24px;
+}
+
+.logoSap {
+  vertical-align: sub;
+  padding-right: 2px;
+}

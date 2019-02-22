@@ -1,5 +1,4 @@
 import React, { PureComponent } from "react";
-import Tutorial from "../../assets/tutorial.png";
 import { Header, Grid, Input, Popup, Icon } from "semantic-ui-react";
 import "../../App.css";
 
