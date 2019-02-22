@@ -11,8 +11,13 @@
 .ui.input.barraBusqueda {
   position: absolute;
   top: 10px;
-  width: 800px;
-  left: 25%;
+  width: calc(100% - 800px);
+  left: 300px;
+  right: 300px;
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 850px;
+  min-width: 200px;
 }
 
 .ui.button.cerrarSesion {
@@ -153,6 +158,13 @@
   vertical-align: sub;
 }
 
+span.CriticidadIcono {
+  font-weight: 900;
+  font-size: 24px;
+  opacity: 0.6;
+  padding-left: 5px;
+}
+
 .itemCampoComun img {
   opacity: 0.5;
 }
@@ -195,4 +207,20 @@
 .logoSap {
   vertical-align: sub;
   padding-right: 2px;
+}
+
+@media screen and (max-width: 800px) {
+  .ui.pointing.secondary.menu {
+    margin-bottom: 70px;
+  }
+
+  .ui.input.barraBusqueda {
+    top: 70px;
+    width: calc(100% - 245px);
+    left: 10px;
+  }
+  .ui.selection.dropdown.filtrarPor {
+    top: 70px;
+    right: 10px;
+  }
 }

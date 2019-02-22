@@ -71,6 +71,12 @@ class TarjetaAbierta extends Component {
         </div>
         <div className="GridContainerPlantilla">
           {camposDinamicos}
+          {solicitud.unidadMedida && (
+            <div className="grid-itemPlantilla">
+              <div className="tituloPlantilla">UNIDAD DE MEDIDA</div>
+              {solicitud.unidadMedida}
+            </div>
+          )}
           {solicitud.numeroMaterial !== "" && (
             <span>
               <img className="logoSap" src={sapLogo} />{" "}
@@ -124,6 +130,22 @@ class TarjetaAbierta extends Component {
           <div className="itemCampoComun">
             <Image src={DreyfusBarcode} verticalAlign="middle" />
             <span>{solicitud.valorTAG} </span>
+          </div>
+          <div className="itemCampoComun">
+            <div>
+              {" "}
+              <span className="CriticidadIcono">
+                {" "}
+                {solicitud.criticidad.charAt(0)}{" "}
+              </span>
+              <span>
+                {" "}
+                {solicitud.criticidad.slice(
+                  1,
+                  solicitud.criticidad.length
+                )}{" "}
+              </span>
+            </div>
           </div>
         </div>
         <Divider fitted />
