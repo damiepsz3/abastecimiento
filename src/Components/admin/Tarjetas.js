@@ -39,7 +39,9 @@ class Tarjetas extends React.Component {
       </ExpansionPanel>
     ));
 
-    return <div>{ListaTarjetas}</div>;
+    const NoHaySolicitudes = <h3> No hay solicitudes.. </h3>;
+
+    return <div>{solicitudes.length ? ListaTarjetas : NoHaySolicitudes}</div>;
   }
 }
 
