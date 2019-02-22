@@ -3,10 +3,23 @@
 }
 
 .ui.button.descargar {
-  padding: 10px;
+  height: 36px;
+  width: 32px;
   position: absolute;
   top: 10px;
+  margin: 0;
   right: 63px;
+}
+.ui.button.descargar a {
+  padding-left: 10px;
+  padding-right: 10px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  height: 40px;
+  top: 0;
+  color: #666868;
+  position: absolute;
+  left: 3px;
 }
 
 .ui.input.barraBusqueda {
