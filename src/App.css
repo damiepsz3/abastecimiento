@@ -31,10 +31,6 @@
   background-color: rgba(228, 233, 241, 1);
 }
 
-#root .ui.red.label {
-  /* background-color: white !important; */
-}
-
 #root .ui.segment.blue {
   background-color: rgba(228, 233, 241, 1) !important;
   color: rgb(46, 162, 248) !important;
