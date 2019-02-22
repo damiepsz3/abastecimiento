@@ -3,7 +3,6 @@ import "firebase/firestore";
 import "firebase/auth";
 import "firebase/functions";
 import { configFirebase } from "../config";
-import axios from "axios";
 
 class Firebase {
   constructor() {
@@ -66,12 +65,6 @@ class Firebase {
       .update({ estado, razon });
 
   // *** Storage API ***
-  downloadCSV = file => {
-    axios.post(
-      "https://us-central1-dreyfus-abasteci-1532905364976.cloudfunctions.net/downloadCSV",
-      file
-    );
-  };
 }
 
 export default Firebase;
