@@ -37,26 +37,26 @@ const Nav = ({ firebase, match, history }) => {
             solicitudes={
               search.length > 0
                 ? solPen
-                    .filter(s => {
-                      if (s.plantillaSeleccionada !== "") {
-                        return (
-                          s.nombreApellido.toLowerCase().includes(search) ||
-                          s.opcionPlanta.toLowerCase().includes(search) ||
-                          s.plantillaSeleccionada["Nombre Plantilla"]
-                            .toLowerCase()
-                            .includes(search) ||
-                          s.plantillaSeleccionada["Taxonomia BOLD:Descripción"]
-                            .toLowerCase()
-                            .includes(search)
-                        );
-                      }
+                  .filter(s => {
+                    if (s.plantillaSeleccionada !== "") {
                       return (
                         s.nombreApellido.toLowerCase().includes(search) ||
                         s.opcionPlanta.toLowerCase().includes(search) ||
-                        s.numeroMaterial.toLowerCase().includes(search)
+                          s.plantillaSeleccionada["Nombre Plantilla"]
+                        .toLowerCase()
+                        .includes(search) ||
+                          s.plantillaSeleccionada["Taxonomia BOLD:Descripción"]
+                        .toLowerCase()
+                        .includes(search)
                       );
-                    })
-                    .sort(sortBy)
+                    }
+                    return (
+                      s.nombreApellido.toLowerCase().includes(search) ||
+                      s.opcionPlanta.toLowerCase().includes(search) ||
+                      s.numeroMaterial.toLowerCase().includes(search)
+                    );
+                  })
+                  .sort(sortBy)
                 : solPen.sort(sortBy)
             }
           />
@@ -216,44 +216,44 @@ const Nav = ({ firebase, match, history }) => {
 
   return (
     <Fragment>
-      <Tab
-        menu={{ secondary: true, pointing: true }}
-        panes={panes}
-        defaultActiveIndex={match.params.type === "procesadas" ? 1 : 0}
-      />
-      <Input
-        className="barraBusqueda"
-        icon={{ name: "search", link: true }}
-        placeholder="Search..."
-        onChange={(e, { value }) => setSearch(value.toLowerCase())}
-        value={search}
-      />
-      <Dropdown
-        className="filtrarPor"
-        placeholder="Ordenar por"
-        selection
-        options={
-          match.params.type === "procesadas"
-            ? filterOption
-            : filterOption.filter(opt => opt.text !== "Estado")
-        }
-        onChange={(e, { value }) => setFilter(value)}
-      />
-      {match.params.type === "procesadas" && (
-        <Button
-          className="descargar"
-          icon="download"
-          onClick={() => descargar()}
+      <div className="topNavBar">
+        <Tab
+          menu={{ secondary: true, pointing: true }}
+          panes={panes}
+          defaultActiveIndex={match.params.type === "procesadas" ? 1 : 0}
         />
-      )}
-      <Button
-        className="cerrarSesion"
-        content="Cerrar Sesion"
-        icon="sign out"
-        labelPosition="right"
-        floated="right"
-        onClick={() => firebase.doSignOut()}
-      />
+        <Input
+          className="barraBusqueda"
+          icon={{ name: "search", link: true }}
+          placeholder="Search..."
+          onChange={(e, { value }) => setSearch(value.toLowerCase())}
+          value={search}
+        />
+        <Dropdown
+          className="filtrarPor"
+          placeholder="Ordenar por"
+          selection
+          options={
+            match.params.type === "procesadas"
+              ? filterOption
+              : filterOption.filter(opt => opt.text !== "Estado")
+          }
+          onChange={(e, { value }) => setFilter(value)}
+        />
+        {match.params.type === "procesadas" && (
+          <Button
+            className="descargar"
+            icon="download"
+            onClick={() => descargar()}
+          />
+        )}
+        <Button
+          className="cerrarSesion"
+          floated="right"
+          icon="sign out"
+          onClick={() => firebase.doSignOut()}
+        />
+      </div>
     </Fragment>
   );
 };

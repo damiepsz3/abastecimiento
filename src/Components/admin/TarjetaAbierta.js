@@ -22,7 +22,8 @@ import { withFirebase } from "../../Firebase";
 class TarjetaAbierta extends Component {
   constructor(props) {
     super(props);
-    this.state = { rechazando: false };
+    console.log(props);
+    this.state = { rechazando: false, razon: props.solicitud.razon };
   }
 
   handleAceptar() {
@@ -36,8 +37,17 @@ class TarjetaAbierta extends Component {
   }
 
   handleTerminarDeProcesar() {
+    console.log(this.state.razon);
     this.props.cerrarPanel(this.props.solicitud.id);
-    this.props.firebase.updateSolicitud(this.props.solicitud.id, "rechazada");
+    this.props.firebase.updateSolicitud(
+      this.props.solicitud.id,
+      "rechazada",
+      this.state.razon
+    );
+  }
+
+  handleRazon(event) {
+    this.setState({ razon: event.target.value });
   }
 
   render() {
@@ -125,6 +135,8 @@ class TarjetaAbierta extends Component {
               autoFocus
               focus={true}
               autoHeight
+              value={this.state.razon}
+              onChange={event => this.handleRazon(event)}
               placeholder="Razon de rechazo"
             />
             <Button
