@@ -3,6 +3,7 @@ import "firebase/firestore";
 import "firebase/auth";
 import "firebase/functions";
 import { configFirebase } from "../config";
+import axios from "axios";
 
 class Firebase {
   constructor() {
@@ -65,23 +66,11 @@ class Firebase {
       .update({ estado, razon });
 
   // *** Storage API ***
-  uploadCSV = file => {
-    // const metadata = {
-    //   contentType: "text/csv"
-    // };
-    //
-    // return this.storage
-    //   .ref()
-    //   .child("procesadas/" + "test")
-    //   .put(new Blob(file), metadata);
-    this.functions.https.onRequest((request, response) => {
-      response.setHeader(
-        "Content-disposition",
-        "attachment; filename=report.csv"
-      );
-      response.set("Content-Type", "text/csv");
-      response.status(200).send(file);
-    });
+  downloadCSV = file => {
+    axios.post(
+      "https://us-central1-dreyfus-abasteci-1532905364976.cloudfunctions.net/downloadCSV",
+      file
+    );
   };
 }
 

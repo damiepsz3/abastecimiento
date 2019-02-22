@@ -1,17 +1,19 @@
 import React, { Fragment, useState, useEffect } from "react";
 import { withRouter, Link } from "react-router-dom";
 import { compose } from "recompose";
-import { Tab, Input, Button, Menu, Dropdown } from "semantic-ui-react";
+import { Tab, Input, Button, Menu, Dropdown, Icon } from "semantic-ui-react";
 import Tarjetas from "../Tarjetas";
 import "../Admin.css";
 import { withFirebase } from "../../../Firebase";
 import { useCollection } from "react-firebase-hooks/firestore";
 import { parse } from "json2csv";
+import { CSVLink } from "react-csv";
 
 const Nav = ({ firebase, match, history }) => {
   const [solProc, setSolProc] = useState([]);
   const [solPen, setSolPen] = useState([]);
   const [search, setSearch] = useState("");
+  const [download, setDownload] = useState([]);
   const [filter, setFilter] = useState("createdDate");
   const { error, loading, value } = useCollection(
     firebase.db.collection("solicitudes")
@@ -37,26 +39,26 @@ const Nav = ({ firebase, match, history }) => {
             solicitudes={
               search.length > 0
                 ? solPen
-                  .filter(s => {
-                    if (s.plantillaSeleccionada !== "") {
+                    .filter(s => {
+                      if (s.plantillaSeleccionada !== "") {
+                        return (
+                          s.nombreApellido.toLowerCase().includes(search) ||
+                          s.opcionPlanta.toLowerCase().includes(search) ||
+                          s.plantillaSeleccionada["Nombre Plantilla"]
+                            .toLowerCase()
+                            .includes(search) ||
+                          s.plantillaSeleccionada["Taxonomia BOLD:Descripción"]
+                            .toLowerCase()
+                            .includes(search)
+                        );
+                      }
                       return (
                         s.nombreApellido.toLowerCase().includes(search) ||
                         s.opcionPlanta.toLowerCase().includes(search) ||
-                          s.plantillaSeleccionada["Nombre Plantilla"]
-                        .toLowerCase()
-                        .includes(search) ||
-                          s.plantillaSeleccionada["Taxonomia BOLD:Descripción"]
-                        .toLowerCase()
-                        .includes(search)
+                        s.numeroMaterial.toLowerCase().includes(search)
                       );
-                    }
-                    return (
-                      s.nombreApellido.toLowerCase().includes(search) ||
-                      s.opcionPlanta.toLowerCase().includes(search) ||
-                      s.numeroMaterial.toLowerCase().includes(search)
-                    );
-                  })
-                  .sort(sortBy)
+                    })
+                    .sort(sortBy)
                 : solPen.sort(sortBy)
             }
           />
@@ -138,8 +140,8 @@ const Nav = ({ firebase, match, history }) => {
           Caract_5: s.plantillaSeleccionada["Característica 5"],
           Val_caract_5:
             s.camposDinamicos[s.plantillaSeleccionada["Característica 5"]],
-          Caract_5: s.plantillaSeleccionada["Característica 6"],
-          Val_caract_1:
+          Caract_6: s.plantillaSeleccionada["Característica 6"],
+          Val_caract_6:
             s.camposDinamicos[s.plantillaSeleccionada["Característica 6"]],
           Unid_med_suj: s.unidadMedida,
           Present: s.presentacion,
@@ -178,8 +180,8 @@ const Nav = ({ firebase, match, history }) => {
         Val_caract_4: "",
         Caract_5: "",
         Val_caract_5: "",
-        Caract_5: "",
-        Val_caract_1: "",
+        Caract_6: "",
+        Val_caract_6: "",
         Unid_med_suj: s.unidadMedida,
         Present: s.presentacion,
         Homologado: null,
@@ -198,12 +200,7 @@ const Nav = ({ firebase, match, history }) => {
         "Texto Ampliado": ""
       };
     });
-    try {
-      const csv = parse(json);
-      firebase.uploadCSV(csv);
-    } catch (err) {
-      console.error(err);
-    }
+    setDownload(json);
   };
 
   useEffect(
@@ -253,11 +250,15 @@ const Nav = ({ firebase, match, history }) => {
           onChange={(e, { value }) => setFilter(value)}
         />
         {match.params.type === "procesadas" && (
-          <Button
-            className="descargar"
-            icon="download"
-            onClick={() => descargar()}
-          />
+          <Button className="descargar">
+            <CSVLink
+              data={download}
+              onClick={() => descargar()}
+              filename={"abastecimiento.csv"}
+            >
+              <Icon name="download" />
+            </CSVLink>
+          </Button>
         )}
         <Button
           className="cerrarSesion"
