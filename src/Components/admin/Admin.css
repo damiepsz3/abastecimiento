@@ -75,7 +75,7 @@
   display: none;
 }
 
-#root [class*="MuiExpansionPanelSummary-expanded"] .email {
+#root [aria-expanded="true"] .email {
   display: inline;
   font-weight: 200;
   opacity: 0.5;
@@ -83,43 +83,39 @@
   user-select: text;
 }
 
-#root [class*="MuiExpansionPanelSummary-expanded"].pendiente {
+#root [aria-expanded="true"].pendiente {
   background-color: #ececec;
   border-top-right-radius: 5px;
   border-top-left-radius: 5px;
 }
 
-#root [class*="MuiExpansionPanelSummary-expanded"].rechazada {
+#root [aria-expanded="true"].rechazada {
   background-color: #ed1c24;
   color: white;
   border-top-right-radius: 5px;
   border-top-left-radius: 5px;
 }
 
-#root [class*="MuiExpansionPanelSummary-expanded"].aceptada {
+#root [aria-expanded="true"].aceptada {
   background-color: #2db84b;
   color: white;
   border-top-right-radius: 5px;
   border-top-left-radius: 5px;
 }
 
-#root [class*="MuiExpansionPanelSummary-expanded"] .nombre .label {
+#root [aria-expanded="true"] .nombre .label {
   display: none;
 }
 
-[class*="MuiExpansionPanelSummary-expanded"] .nombre {
+[aria-expanded="true"] .nombre {
   transform: scale(1.5, 1.5);
   transform-origin: 0 15px;
   flex-basis: 50%;
 }
 
-[class*="MuiExpansionPanelSummary-expanded"] .Plantilla {
+[aria-expanded="true"] .Plantilla {
   transform: scale(0, 0);
   transform-origin: 0 0;
-}
-
-#root [class*="MuiExpansionPanelDetails"] {
-  padding: 0;
 }
 
 .TarjetaAbierta {
