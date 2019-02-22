@@ -1,7 +1,7 @@
 import app from "firebase/app";
 import "firebase/firestore";
 import "firebase/auth";
-import "firebase/database";
+import "firebase/functions";
 import { configFirebase } from "../config";
 
 class Firebase {
@@ -10,6 +10,7 @@ class Firebase {
 
     this.auth = app.auth();
     this.db = app.firestore();
+    this.functions = app.functions();
   }
 
   // *** User API ***
@@ -62,6 +63,26 @@ class Firebase {
       .collection("solicitudes")
       .doc(id)
       .update({ estado, razon });
+
+  // *** Storage API ***
+  uploadCSV = file => {
+    // const metadata = {
+    //   contentType: "text/csv"
+    // };
+    //
+    // return this.storage
+    //   .ref()
+    //   .child("procesadas/" + "test")
+    //   .put(new Blob(file), metadata);
+    this.functions.https.onRequest((request, response) => {
+      response.setHeader(
+        "Content-disposition",
+        "attachment; filename=report.csv"
+      );
+      response.set("Content-Type", "text/csv");
+      response.status(200).send(file);
+    });
+  };
 }
 
 export default Firebase;

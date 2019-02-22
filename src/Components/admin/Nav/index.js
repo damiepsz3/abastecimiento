@@ -6,7 +6,7 @@ import Tarjetas from "../Tarjetas";
 import "../Admin.css";
 import { withFirebase } from "../../../Firebase";
 import { useCollection } from "react-firebase-hooks/firestore";
-import { parser } from "json2csv";
+import { parse } from "json2csv";
 
 const Nav = ({ firebase, match, history }) => {
   const [solProc, setSolProc] = useState([]);
@@ -111,72 +111,75 @@ const Nav = ({ firebase, match, history }) => {
   ];
 
   const descargar = () => {
-    const headers = [
-      "Material_a_solic",
-      "Nombre_apellido",
-      "Mail_solicitante",
-      "Fecha_pidio",
-      "Extensión",
-      "Plantilla",
-      "Clas_n2_UNSPSC",
-      "Caract_1",
-      "Val_caract_1",
-      "Caract_2",
-      "Val_caract_2",
-      "Caract_3",
-      "Val_caract_3",
-      "Caract_4",
-      "Val_caract_4",
-      "Caract_5",
-      "Val_caract_5",
-      "Caract_6",
-      "Val_caract_6",
-      "Unid_med_suj",
-      "Present",
-      "Homologado",
-      "Planta_req",
-      "Sector_apr",
-      "Criticidad",
-      "Reparable",
-      "TAG_utiliza",
-      "Val_unit",
-      "Req_stk",
-      "Cons_anual_est",
-      "Tiempo_aprovisionamiento",
-      "Estado_aprob_Catalogación",
-      "Texto breve de material",
-      "Texto Datos Básicos",
-      "Texto Ampliado"
-    ];
     const json = solProc.map(s => {
-      let row = {
+      if (s.plantillaSeleccionada)
+        return {
+          Material_a_solic:
+            s.estado === "rechazada"
+              ? `Rechazada - ${s.razon}`
+              : s.numeroMaterial,
+          Nombre_apellido: s.nombreApellido,
+          Mail_solicitante: s.email,
+          Fecha_pidio: s.createdDate,
+          Plantilla: s.plantillaSeleccionada["Nombre Plantilla"],
+          Clas_n2_UNSPSC: s.plantillaSeleccionada["Taxonomia BOLD"],
+          Caract_1: s.plantillaSeleccionada["Característica 1"],
+          Val_caract_1:
+            s.camposDinamicos[s.plantillaSeleccionada["Característica 1"]],
+          Caract_2: s.plantillaSeleccionada["Característica 2"],
+          Val_caract_2:
+            s.camposDinamicos[s.plantillaSeleccionada["Característica 2"]],
+          Caract_3: s.plantillaSeleccionada["Característica 3"],
+          Val_caract_3:
+            s.camposDinamicos[s.plantillaSeleccionada["Característica 3"]],
+          Caract_4: s.plantillaSeleccionada["Característica 4"],
+          Val_caract_4:
+            s.camposDinamicos[s.plantillaSeleccionada["Característica 4"]],
+          Caract_5: s.plantillaSeleccionada["Característica 5"],
+          Val_caract_5:
+            s.camposDinamicos[s.plantillaSeleccionada["Característica 5"]],
+          Caract_5: s.plantillaSeleccionada["Característica 6"],
+          Val_caract_1:
+            s.camposDinamicos[s.plantillaSeleccionada["Característica 6"]],
+          Unid_med_suj: s.unidadMedida,
+          Present: s.presentacion,
+          Homologado: null,
+          Planta_req: s.opcionPlanta,
+          Sector_apr: s.opcionSector,
+          Criticidad: s.criticidad,
+          Reparable: s.repara ? "Si" : "No",
+          TAG_utiliza: s.valorTAG,
+          Val_unit: s.valorUSD,
+          Req_stk: s.requiereStock ? "Si" : "No",
+          Cons_anual_est: s.requiereStock ? s.consumoAnual : null,
+          Tiempo_aprovisionamiento: null,
+          estado: s.estado,
+          "Texto breve de material": "",
+          "Texto Datos Básicos": "",
+          "Texto Ampliado": ""
+        };
+      return {
         Material_a_solic:
           s.estado === "rechazada"
-            ? `Rechazado - ${s.razon}`
+            ? `Rechazada - ${s.razon}`
             : s.numeroMaterial,
         Nombre_apellido: s.nombreApellido,
         Mail_solicitante: s.email,
         Fecha_pidio: s.createdDate,
-        Plantilla: s.plantillaSeleccionada["Nombre Plantilla"],
-        Clas_n2_UNSPSC: s.plantillaSeleccionada["Taxonomia BOLD"],
-        Caract_1: s.plantillaSeleccionada["Característica 1"],
-        Val_caract_1:
-          s.camposDinamicos[s.plantillaSeleccionada["Característica 1"]],
-        Caract_2: s.plantillaSeleccionada["Característica 2"],
-        Val_caract_2:
-          s.camposDinamicos[s.plantillaSeleccionada["Característica 2"]],
-        Caract_3: s.plantillaSeleccionada["Característica 3"],
-        Val_caract_3:
-          s.camposDinamicos[s.plantillaSeleccionada["Característica 3"]],
-        Caract_4: s.plantillaSeleccionada["Característica 4"],
-        Val_caract_4:
-          s.camposDinamicos[s.plantillaSeleccionada["Característica 4"]],
-        Caract_5: s.plantillaSeleccionada["Característica 5"],
-        Val_caract_5:
-          s.camposDinamicos[s.plantillaSeleccionada["Característica 5"]],
-        Caract_5: s.plantillaSeleccionada["Característica 6"],
-        Val_caract_1:
-          s.camposDinamicos[s.plantillaSeleccionada["Característica 6"]],
+        Plantilla: "",
+        Clas_n2_UNSPSC: "",
+        Caract_1: "",
+        Val_caract_1: "",
+        Caract_2: "",
+        Val_caract_2: "",
+        Caract_3: "",
+        Val_caract_3: "",
+        Caract_4: "",
+        Val_caract_4: "",
+        Caract_5: "",
+        Val_caract_5: "",
+        Caract_5: "",
+        Val_caract_1: "",
         Unid_med_suj: s.unidadMedida,
         Present: s.presentacion,
         Homologado: null,
@@ -185,13 +188,22 @@ const Nav = ({ firebase, match, history }) => {
         Criticidad: s.criticidad,
         Reparable: s.repara ? "Si" : "No",
         TAG_utiliza: s.valorTAG,
+        Val_unit: s.valorUSD,
         Req_stk: s.requiereStock ? "Si" : "No",
         Cons_anual_est: s.requiereStock ? s.consumoAnual : null,
         Tiempo_aprovisionamiento: null,
-        estado: s.estado
+        estado: s.estado,
+        "Texto breve de material": "",
+        "Texto Datos Básicos": "",
+        "Texto Ampliado": ""
       };
-      return row;
     });
+    try {
+      const csv = parse(json);
+      firebase.uploadCSV(csv);
+    } catch (err) {
+      console.error(err);
+    }
   };
 
   useEffect(
