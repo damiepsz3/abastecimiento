@@ -1,5 +1,6 @@
 import app from "firebase/app";
-import "firebase/firestore";
+//import "firebase/firestore";
+import "firebase/database";
 import "firebase/auth";
 import "firebase/functions";
 import { configFirebase } from "../config";
@@ -9,7 +10,7 @@ class Firebase {
     app.initializeApp(configFirebase);
 
     this.auth = app.auth();
-    this.db = app.firestore();
+    this.db = app.database();
     this.functions = app.functions();
   }
 
@@ -35,12 +36,20 @@ class Firebase {
 
   // *** Solicitudes API ***
 
-  addSolicitud = solicitud =>
+  addSolicitudOLD = solicitud =>
     this.db.collection(`solicitudes`).add({
       createdDate: app.firestore.Timestamp.fromDate(new Date()),
       razon: "",
       ...solicitud
     });
+
+  addSolicitud = solicitud =>
+    this.db.ref(`solicitudes/`).push({
+      createdDate: app.database.ServerValue.TIMESTAMP,
+      razon: "",
+      ...solicitud
+    });
+
   getSolicitudes = () =>
     this.db
       .collection("solicitudes")

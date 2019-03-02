@@ -1,0 +1,25 @@
+[debug] [2019-03-02T16:00:59.996Z] ----------------------------------------------------------------------
+[debug] [2019-03-02T16:00:59.998Z] Command:       /usr/local/bin/node /usr/local/bin/firebase serve
+[debug] [2019-03-02T16:00:59.998Z] CLI Version:   6.4.0
+[debug] [2019-03-02T16:00:59.998Z] Platform:      darwin
+[debug] [2019-03-02T16:00:59.998Z] Node Version:  v10.14.2
+[debug] [2019-03-02T16:00:59.999Z] Time:          Sat Mar 02 2019 13:00:59 GMT-0300 (Argentina Standard Time)
+[debug] [2019-03-02T16:00:59.999Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2019-03-02T16:01:00.005Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2019-03-02T16:01:00.006Z] > authorizing via signed-in user
+[debug] [2019-03-02T16:01:00.006Z] [iam] checking project dreyfus-abasteci-1532905364976 for permissions ["firebase.projects.get"]
+[debug] [2019-03-02T16:01:00.007Z] >>> HTTP REQUEST POST https://cloudresourcemanager.googleapis.com/v1/projects/dreyfus-abasteci-1532905364976:testIamPermissions  
+
+[debug] [2019-03-02T16:01:01.303Z] <<< HTTP RESPONSE 200
+[debug] [2019-03-02T16:01:01.305Z] >>> HTTP REQUEST GET https://cloudresourcemanager.googleapis.com/v1/projects/dreyfus-abasteci-1532905364976  
+ 
+[debug] [2019-03-02T16:01:02.528Z] <<< HTTP RESPONSE 200
+[info] 
+[info] === Serving from '/Users/guille/Documents/GitHub/abastecimiento-testing'...
+[info] 
+[debug] [2019-03-02T16:01:02.530Z] >>> HTTP REQUEST GET https://mobilesdk-pa.googleapis.com/v1/projects/714392111679/clients/_:getWebAppConfig  
+ 
+[debug] [2019-03-02T16:01:04.101Z] <<< HTTP RESPONSE 200
+[info] i  hosting: Serving hosting files from: build
+[info] ✔  hosting: Local server: http://localhost:5000
