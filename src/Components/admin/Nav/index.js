@@ -6,7 +6,6 @@ import Tarjetas from "../Tarjetas";
 import "../Admin.css";
 import { withFirebase } from "../../../Firebase";
 import { useCollection } from "react-firebase-hooks/firestore";
-import { parse } from "json2csv";
 import { CSVLink } from "react-csv";
 
 const Nav = ({ firebase, match, history }) => {
