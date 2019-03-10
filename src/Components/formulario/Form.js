@@ -94,10 +94,18 @@ class Form extends Component {
       );
     this.setState({ errors }, () => {
       if (this.state.errors.length === 0) {
-        this.setState({ open: true });
+        //this.setState({ open: true });
+        this.handleOpenModal();
+      } else if (this.state.nombreApellido == "" || this.state.email == "") {
+        setTimeout(() => {
+          window.scrollTo({
+            top: 0,
+            left: 0,
+            behavior: "smooth"
+          });
+        }, 300);
       }
     });
-    this.handleOpenModal();
   };
 
   handleOpenModal = () => {
@@ -168,15 +176,14 @@ class Form extends Component {
             handleChanges={this.handleInputChange}
           />
         )}
-        {!this.state.conoceCodigo &&
-          this.state.conoceCodigo !== "" && (
-            <Plantilla
-              data={plantillas}
-              selectPlantilla={this.handleInputChange}
-              plantillaSeleccionada={plantillaSeleccionada}
-              loading={loadingPlantillas}
-            />
-          )}
+        {!this.state.conoceCodigo && this.state.conoceCodigo !== "" && (
+          <Plantilla
+            data={plantillas}
+            selectPlantilla={this.handleInputChange}
+            plantillaSeleccionada={plantillaSeleccionada}
+            loading={loadingPlantillas}
+          />
+        )}
 
         {this.state.plantillaSeleccionada !== "" &&
           !this.state.conoceCodigo && (

@@ -21,17 +21,17 @@ class PreguntaNumero extends PureComponent {
 
         <Grid>
           <Header as="h4">
-            ¿Conoce el numero del material que desea solicitar?{" "}
+            ¿Conoce el número del material que desea solicitar?{" "}
             <span className={"requerido"}>*</span>
             <Popup trigger={<Icon size="tiny" name="info circle" />} wide>
               Si encontró el material catalogado en SAP en otro centro,
-              selecciones "Si" e ingrese su número. Esto ayudará a reducir la
-              cantidad datos a ingresar y los tiempos de catalogación.
+              seleccione "Si" e ingreselo. Esto ayudará a reducir la cantidad
+              datos a ingresar y los tiempos de catalogación.
             </Popup>
             <Modal
               size={"fullscreen"}
               closeIcon
-              trigger={<a>¿Donde lo encuntro?</a>}
+              trigger={<a>¿Donde lo encuentro?</a>}
             >
               <Modal.Header>
                 Instrucciones para buscar código en SAP

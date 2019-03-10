@@ -126,7 +126,8 @@ class Camposcomunes extends PureComponent {
               <Input
                 label="USD$"
                 fluid={true}
-                placeholder="Monto"
+                type="number"
+                placeholder="Ej: 300"
                 error={this.props.errors.includes("valorUSD")}
                 onChange={(e, { value }) =>
                   handleInputChange("valorUSD", value)
@@ -180,8 +181,9 @@ class Camposcomunes extends PureComponent {
                 <Input
                   fluid={true}
                   control="input"
+                  type="number"
                   error={this.props.errors.includes("consumoAnual")}
-                  placeholder="Ej: 300 unidades"
+                  placeholder="Ej: 10"
                   onChange={(e, { value }) => {
                     handleInputChange("consumoAnual", value);
                   }}
