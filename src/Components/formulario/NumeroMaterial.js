@@ -25,7 +25,7 @@ class NumeroMaterial extends PureComponent {
       this.setState({ iconState: null, errorState: true, numeroMaterial: "" });
     } else {
       this.setState({ iconState: null, errorState: false });
-      if (numero.length >= 9) this.props.handleChanges("numeroMaterial", value);
+      if (numero.length >= 8) this.props.handleChanges("numeroMaterial", value);
     }
   };
 
@@ -38,7 +38,7 @@ class NumeroMaterial extends PureComponent {
     if (this.state.numMaterial.length === 0) {
       this.setState({ iconState: null, errorState: true });
       this.props.handleChanges("numeroMaterial", "");
-    } else if (isnum && numero.length >= 9 && numero.length <= 18) {
+    } else if (isnum && numero.length >= 8 && numero.length <= 18) {
       this.setState({ iconState: "check", errorState: false });
       this.props.handleChanges("numeroMaterial", this.state.numMaterial);
     } else {
@@ -56,7 +56,7 @@ class NumeroMaterial extends PureComponent {
               Número de material a solicitar
               <span className={"requerido"}>*</span>{" "}
               <Popup trigger={<Icon size="tiny" name="info circle" />} wide>
-                El numero de material es un numero compuesto por 9 a 18 digitos
+                El numero de material es un numero compuesto por 8 a 18 digitos
                 numericos el cual puede incluir la letras "INS" al principio.
               </Popup>
             </Header>

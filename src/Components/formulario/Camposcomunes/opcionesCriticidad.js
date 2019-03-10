@@ -2,49 +2,49 @@ export default {
   opcionesGradoDeCriticidad: [
     {
       key: "0",
-      value: "K  A1- No previsible- Oc Parada",
-      text: "K  A1- No previsible- Oc Parada"
+      value: "(K)  A1- No previsible- Oc Parada",
+      text: "(K)  A1- No previsible- Oc Parada"
     },
     {
       key: "1",
-      value: "L  A2- No previsible- Afecta Prod",
-      text: "L  A2- No previsible- Afecta Prod"
+      value: "(L)  A2- No previsible- Afecta Prod",
+      text: "(L)  A2- No previsible- Afecta Prod"
     },
     {
       key: "3",
-      value: "M  B1- Previsible- Oc Parada",
-      text: "M  B1- Previsible- Oc Parada"
+      value: "(M)  B1- Previsible- Oc Parada",
+      text: "(M)  B1- Previsible- Oc Parada"
     },
     {
       key: "4",
-      value: "N B2- Previsible- Afecta Prod",
-      text: "N B2- Previsible- Afecta Prod"
+      value: "(N) B2- Previsible- Afecta Prod",
+      text: "(N) B2- Previsible- Afecta Prod"
     },
     {
       key: "5",
-      value: "O B3- Previsible- No critico",
-      text: "O B3- Previsible- No critico"
+      value: "(O) B3- Previsible- No critico",
+      text: "(O) B3- Previsible- No critico"
     },
     {
       key: "6",
-      value: "P C1- Reparable- Oc Parada",
-      text: "P C1- Reparable- Oc Parada"
+      value: "(P) C1- Reparable- Oc Parada",
+      text: "(P) C1- Reparable- Oc Parada"
     },
     {
       key: "7",
-      value: "Q C2- Reparable- Afecta Prod",
-      text: "Q C2- Reparable- Afecta Prod"
+      value: "(Q) C2- Reparable- Afecta Prod",
+      text: "(Q) C2- Reparable- Afecta Prod"
     },
     {
       key: "8",
-      value: "R C3- Reparable- No critico",
-      text: "R C3- Reparable- No critico"
+      value: "(R) C3- Reparable- No critico",
+      text: "(R) C3- Reparable- No critico"
     },
 
     {
       key: "9",
-      value: "S D3- Eq Auxiliar- No critico",
-      text: "S D3- Eq Auxiliar- No critico"
+      value: "(S) D3- Eq Auxiliar- No critico",
+      text: "(S) D3- Eq Auxiliar- No critico"
     }
   ],
   opcionesSector: [

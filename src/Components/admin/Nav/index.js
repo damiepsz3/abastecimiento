@@ -5,7 +5,9 @@ import { Tab, Input, Button, Menu, Dropdown, Icon } from "semantic-ui-react";
 import Tarjetas from "../Tarjetas";
 import "../Admin.css";
 import { withFirebase } from "../../../Firebase";
-import { useCollection } from "react-firebase-hooks/firestore";
+//import { useCollection } from "react-firebase-hooks/firestore";
+import { useObjectVal } from "react-firebase-hooks/database";
+
 import { CSVLink } from "react-csv";
 
 const Nav = ({ firebase, match, history }) => {
@@ -14,9 +16,10 @@ const Nav = ({ firebase, match, history }) => {
   const [search, setSearch] = useState("");
   const [download, setDownload] = useState([]);
   const [filter, setFilter] = useState("createdDate");
-  const { error, loading, value } = useCollection(
-    firebase.db.collection("solicitudes")
+  const { error, loading, value } = useObjectVal(
+    firebase.db.ref("solicitudes")
   );
+  // const { error, loading, value } = useCollection(firebase.db.collection("solicitudes"));
 
   const sortBy = (a, b) => {
     if (a[filter] > b[filter]) return -1;
@@ -111,6 +114,12 @@ const Nav = ({ firebase, match, history }) => {
     { text: "Estado", value: "estado" }
   ];
 
+  //esta funcion saca el valor de la unidad de medida entre corchete. ej: para Kilogramo [KG] devuelve KG
+  function obtenerValorEntreCorchetes(texto) {
+    var valorEntreCorchetes = /\[([^)]+)\]/.exec(texto);
+    return valorEntreCorchetes[1];
+  }
+
   const descargar = () => {
     const json = solProc.map(s => {
       if (s.plantillaSeleccionada)
@@ -142,12 +151,12 @@ const Nav = ({ firebase, match, history }) => {
           Caract_6: s.plantillaSeleccionada["Característica 6"],
           Val_caract_6:
             s.camposDinamicos[s.plantillaSeleccionada["Característica 6"]],
-          Unid_med_suj: s.unidadMedida,
+          Unid_med_suj: obtenerValorEntreCorchetes(s.unidadMedida),
           Present: s.presentacion,
           Homologado: null,
           Planta_req: s.opcionPlanta,
           Sector_apr: s.opcionSector,
-          Criticidad: s.criticidad,
+          Criticidad: s.criticidad.charAt(1),
           Reparable: s.repara ? "Si" : "No",
           TAG_utiliza: s.valorTAG,
           Val_unit: s.valorUSD,
@@ -206,17 +215,19 @@ const Nav = ({ firebase, match, history }) => {
     () => {
       if (!loading)
         if (!error) {
-          const solicitudes = value.docs.map(doc => {
-            const { createdDate, ...rest } = doc.data();
-            return { id: doc.id, createdDate: createdDate.toDate(), ...rest };
-          });
+          let solicitudes = Object.keys(value).map(k => value[k]);
+
+          // const solicitudes = value.map(doc => {
+          //   const { createdDate, ...rest } = doc;
+          //   return { id: doc.id, createdDate: createdDate.toDate(), ...rest };
+          // });
           setSolPen(
             solicitudes.filter(sol => sol.estado === "pendiente").sort(sortBy)
           );
           setSolProc(
             solicitudes.filter(sol => sol.estado !== "pendiente").sort(sortBy)
           );
-          console.log(solicitudes);
+          //console.log(solicitudes);
         }
     },
     [value]

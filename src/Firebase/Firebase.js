@@ -36,12 +36,12 @@ class Firebase {
 
   // *** Solicitudes API ***
 
-  addSolicitudOLD = solicitud =>
-    this.db.collection(`solicitudes`).add({
-      createdDate: app.firestore.Timestamp.fromDate(new Date()),
-      razon: "",
-      ...solicitud
-    });
+  // addSolicitudOLD = solicitud =>
+  //   this.db.collection(`solicitudes`).add({
+  //     createdDate: app.firestore.Timestamp.fromDate(new Date()),
+  //     razon: "",
+  //     ...solicitud
+  //   });
 
   addSolicitud = solicitud =>
     this.db.ref(`solicitudes/`).push({
@@ -50,22 +50,36 @@ class Firebase {
       ...solicitud
     });
 
+  // getSolicitudesOLD = () =>
+  //   this.db
+  //     .collection("solicitudes")
+  //     .get()
+  //     .then(snapShot => {
+  //       const resp = [];
+  //       snapShot.forEach(snap => {
+  //         const { createdDate, ...rest } = snap.data();
+  //         resp.push({
+  //           id: snap.id,
+  //           createdDate: createdDate.toDate(),
+  //           ...rest
+  //         });
+  //       });
+  //       return resp;
+  //     });
+
   getSolicitudes = () =>
-    this.db
-      .collection("solicitudes")
-      .get()
-      .then(snapShot => {
-        const resp = [];
-        snapShot.forEach(snap => {
-          const { createdDate, ...rest } = snap.data();
-          resp.push({
-            id: snap.id,
-            createdDate: createdDate.toDate(),
-            ...rest
-          });
+    this.db.ref("solicitudes").then(snapShot => {
+      const resp = [];
+      snapShot.forEach(snap => {
+        const { createdDate, ...rest } = snap.data();
+        resp.push({
+          id: snap.id,
+          createdDate: createdDate.toDate(),
+          ...rest
         });
-        return resp;
       });
+      return resp;
+    });
 
   updateSolicitud = (id, estado, razon = null) =>
     this.db

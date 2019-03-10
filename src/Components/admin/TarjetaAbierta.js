@@ -136,12 +136,12 @@ class TarjetaAbierta extends Component {
               {" "}
               <span className="CriticidadIcono">
                 {" "}
-                {solicitud.criticidad.charAt(0)}{" "}
+                {solicitud.criticidad.charAt(1)}{" "}
               </span>
               <span>
                 {" "}
                 {solicitud.criticidad.slice(
-                  1,
+                  4,
                   solicitud.criticidad.length
                 )}{" "}
               </span>
