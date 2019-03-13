@@ -30,12 +30,13 @@ const Nav = ({ firebase, match, history }) => {
     {
       menuItem: (
         <Menu.Item key="1" as={Link} to="/admin/pendientes">
-          {loading ? "Pendientes(...)" : `Pendientes (${solPen.length})`}
+          {loading ? "Pendientes (...)" : `Pendientes (${solPen.length})`}
         </Menu.Item>
       ),
       render: () => (
         <Tab.Pane attached={false}>
           <Tarjetas
+            loading={loading}
             tarjetaSeleccionada={match.params.idSolicitud}
             solicitudes={
               search.length > 0
@@ -69,7 +70,7 @@ const Nav = ({ firebase, match, history }) => {
     {
       menuItem: (
         <Menu.Item key="2" as={Link} to="/admin/procesadas">
-          {loading ? "Procesadas(...)" : `Procesadas (${solProc.length})`}
+          {loading ? "Procesadas (...)" : `Procesadas (${solProc.length})`}
         </Menu.Item>
       ),
       render: () => (
@@ -210,13 +211,14 @@ const Nav = ({ firebase, match, history }) => {
     setDownload(json);
   };
 
-  useEffect(() => {
-    if (!loading)
-      if (!error && value) {
-        const solicitudes = Object.keys(value).map(k => {
-          const { createdDate, ...rest } = value[k];
-          return { id: k, createdDate: new Date(createdDate), ...rest };
-        });
+  useEffect(
+    () => {
+      if (!loading)
+        if (!error && value) {
+          const solicitudes = Object.keys(value).map(k => {
+            const { createdDate, ...rest } = value[k];
+            return { id: k, createdDate: new Date(createdDate), ...rest };
+          });
 
           // const solicitudes = value.map(doc => {
           //   const { createdDate, ...rest } = doc;

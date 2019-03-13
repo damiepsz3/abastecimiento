@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import {
-  Label,
   Divider,
   Image,
   Button,
@@ -82,7 +81,7 @@ class TarjetaAbierta extends Component {
           )}
           {solicitud.numeroMaterial !== "" && (
             <span>
-              <img className="logoSap" src={sapLogo} />{" "}
+              <img className="logoSap" alt="SAP" src={sapLogo} />{" "}
               {solicitud.numeroMaterial}{" "}
             </span>
           )}

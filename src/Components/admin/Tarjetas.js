@@ -4,6 +4,7 @@ import ExpansionPanelDetails from "@material-ui/core/ExpansionPanelDetails";
 import ExpansionPanelSummary from "@material-ui/core/ExpansionPanelSummary";
 import TarjetaCerrada from "./TarjetaCerrada";
 import TarjetaAbierta from "./TarjetaAbierta";
+import { Loader } from "semantic-ui-react";
 import { withFirebase } from "../../Firebase";
 class Tarjetas extends React.Component {
   constructor() {
@@ -18,9 +19,11 @@ class Tarjetas extends React.Component {
   };
 
   render() {
-    const { classes, solicitudes } = this.props;
+    const { solicitudes, loading } = this.props;
     const { expanded } = this.state;
-
+    if (loading) {
+      return <Loader active />;
+    }
     const ListaTarjetas = solicitudes.map(solicitud => {
       return (
         <ExpansionPanel
