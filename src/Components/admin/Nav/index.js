@@ -212,7 +212,7 @@ const Nav = ({ firebase, match, history }) => {
 
   useEffect(() => {
     if (!loading)
-      if (!error) {
+      if (!error && value) {
         const solicitudes = Object.keys(value).map(k => {
           const { createdDate, ...rest } = value[k];
           return { id: k, createdDate: new Date(createdDate), ...rest };

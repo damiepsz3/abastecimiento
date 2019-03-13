@@ -17,11 +17,10 @@ const Login = ({ firebase, history, location }) => {
   const [pass, setPass] = useState(null);
   const [error, setError] = useState(null);
   const { from } = location.state || {
-    from: { pathname: "/admin/procesadas" }
+    from: { pathname: "/admin/pendientes" }
   };
 
   const onSubmit = () => {
-    console.log(pass);
     setError(null);
     firebase
       .doSignInWithEmailAndPassword("damiepsz3@gmail.com", pass)
@@ -33,7 +32,7 @@ const Login = ({ firebase, history, location }) => {
 
   if (user) if (!user.isAnonymous) return <Redirect to={from} />;
   return (
-    <div className="login-form">
+    <div className='login-form'>
       {/*
         Heads up! The styles below are necessary for the correct render of this example.
         You can do same with CSS, the main idea is that all the elements up to the `Grid`
@@ -47,23 +46,23 @@ const Login = ({ firebase, history, location }) => {
   }
 `}</style>
       <Grid
-        textAlign="center"
+        textAlign='center'
         style={{ height: "100%" }}
-        verticalAlign="middle"
+        verticalAlign='middle'
       >
         <Grid.Column style={{ maxWidth: 450 }}>
-          <Header as="h2" textAlign="center">
+          <Header as='h2' textAlign='center'>
             Admin Abastecimiento
           </Header>
-          <Form size="large">
+          <Form size='large'>
             <Segment>
               <Form.Input
                 required
                 fluid
-                icon="lock"
-                iconPosition="left"
-                placeholder="Contraseña"
-                type="password"
+                icon='lock'
+                iconPosition='left'
+                placeholder='Contraseña'
+                type='password'
                 onChange={(e, { value }) => setPass(value)}
               />
 
@@ -73,7 +72,7 @@ const Login = ({ firebase, history, location }) => {
             </Segment>
           </Form>
           {error && (
-            <Message attached="bottom" negative>
+            <Message attached='bottom' negative>
               {error.message ===
               "The password is invalid or the user does not have a password."
                 ? "Contraseña Incorrecta"
