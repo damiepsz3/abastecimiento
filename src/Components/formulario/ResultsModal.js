@@ -74,7 +74,7 @@ const ResultsModal = ({
             <Table celled striped>
               <Table.Body>
                 <Table.Row>
-                  <Table.Cell collapsing>Nombre y Apellido</Table.Cell>
+                  <Table.Cell>Nombre y Apellido</Table.Cell>
                   <Table.Cell>{solicitud.nombreApellido}</Table.Cell>
                 </Table.Row>
                 <Table.Row>
