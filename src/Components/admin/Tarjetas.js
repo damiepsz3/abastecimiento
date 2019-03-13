@@ -21,23 +21,25 @@ class Tarjetas extends React.Component {
     const { classes, solicitudes } = this.props;
     const { expanded } = this.state;
 
-    const ListaTarjetas = solicitudes.map(solicitud => (
-      <ExpansionPanel
-        key={solicitud.id}
-        expanded={expanded === solicitud.id}
-        onChange={this.handleChange(solicitud.id)}
-      >
-        <ExpansionPanelSummary className={solicitud.estado}>
-          <TarjetaCerrada solicitud={solicitud} estado={solicitud.estado} />
-        </ExpansionPanelSummary>
-        <ExpansionPanelDetails>
-          <TarjetaAbierta
-            solicitud={solicitud}
-            cerrarPanel={this.handleChange(solicitud.id)}
-          />
-        </ExpansionPanelDetails>
-      </ExpansionPanel>
-    ));
+    const ListaTarjetas = solicitudes.map(solicitud => {
+      return (
+        <ExpansionPanel
+          key={solicitud.id}
+          expanded={expanded === solicitud.id}
+          onChange={this.handleChange(solicitud.id)}
+        >
+          <ExpansionPanelSummary className={solicitud.estado}>
+            <TarjetaCerrada solicitud={solicitud} estado={solicitud.estado} />
+          </ExpansionPanelSummary>
+          <ExpansionPanelDetails>
+            <TarjetaAbierta
+              solicitud={solicitud}
+              cerrarPanel={this.handleChange(solicitud.id)}
+            />
+          </ExpansionPanelDetails>
+        </ExpansionPanel>
+      );
+    });
 
     const NoHaySolicitudes = <h3> No hay solicitudes.. </h3>;
 

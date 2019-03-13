@@ -82,10 +82,12 @@ class Firebase {
     });
 
   updateSolicitud = (id, estado, razon = null) =>
-    this.db
-      .collection("solicitudes")
-      .doc(id)
-      .update({ estado, razon });
+    this.db.ref(`solicitudes/${id}`).update({ estado, razon });
+
+  // this.db
+  //   .collection("solicitudes")
+  //   .doc(id)
+  //   .update({ estado, razon });
 
   // *** Storage API ***
 }

@@ -19,7 +19,6 @@ const Nav = ({ firebase, match, history }) => {
   const { error, loading, value } = useObjectVal(
     firebase.db.ref("solicitudes")
   );
-  // const { error, loading, value } = useCollection(firebase.db.collection("solicitudes"));
 
   const sortBy = (a, b) => {
     if (a[filter] > b[filter]) return -1;
@@ -30,7 +29,7 @@ const Nav = ({ firebase, match, history }) => {
   const panes = [
     {
       menuItem: (
-        <Menu.Item key="1" as={Link} to="/admin/pendientes">
+        <Menu.Item key='1' as={Link} to='/admin/pendientes'>
           {`Pendientes (${solPen.length})`}
         </Menu.Item>
       ),
@@ -69,7 +68,7 @@ const Nav = ({ firebase, match, history }) => {
     },
     {
       menuItem: (
-        <Menu.Item key="2" as={Link} to="/admin/procesadas">
+        <Menu.Item key='2' as={Link} to='/admin/procesadas'>
           {`Procesadas (${solProc.length})`}
         </Menu.Item>
       ),
@@ -211,46 +210,45 @@ const Nav = ({ firebase, match, history }) => {
     setDownload(json);
   };
 
-  useEffect(
-    () => {
-      if (!loading)
-        if (!error) {
-          let solicitudes = Object.keys(value).map(k => value[k]);
+  useEffect(() => {
+    if (!loading)
+      if (!error) {
+        const solicitudes = Object.keys(value).map(k => {
+          const { createdDate, ...rest } = value[k];
+          return { id: k, createdDate: new Date(createdDate), ...rest };
+        });
 
-          // const solicitudes = value.map(doc => {
-          //   const { createdDate, ...rest } = doc;
-          //   return { id: doc.id, createdDate: createdDate.toDate(), ...rest };
-          // });
-          setSolPen(
-            solicitudes.filter(sol => sol.estado === "pendiente").sort(sortBy)
-          );
-          setSolProc(
-            solicitudes.filter(sol => sol.estado !== "pendiente").sort(sortBy)
-          );
-          //console.log(solicitudes);
-        }
-    },
-    [value]
-  );
+        // const solicitudes = value.map(doc => {
+        //   const { createdDate, ...rest } = doc;
+        //   return { id: doc.id, createdDate: createdDate.toDate(), ...rest };
+        // });
+        setSolPen(
+          solicitudes.filter(sol => sol.estado === "pendiente").sort(sortBy)
+        );
+        setSolProc(
+          solicitudes.filter(sol => sol.estado !== "pendiente").sort(sortBy)
+        );
+      }
+  }, [value]);
 
   return (
     <Fragment>
-      <div className="topNavBar">
+      <div className='topNavBar'>
         <Tab
           menu={{ secondary: true, pointing: true }}
           panes={panes}
           defaultActiveIndex={match.params.type === "procesadas" ? 1 : 0}
         />
         <Input
-          className="barraBusqueda"
+          className='barraBusqueda'
           icon={{ name: "search", link: true }}
-          placeholder="Search..."
+          placeholder='Search...'
           onChange={(e, { value }) => setSearch(value.toLowerCase())}
           value={search}
         />
         <Dropdown
-          className="filtrarPor"
-          placeholder="Ordenar por"
+          className='filtrarPor'
+          placeholder='Ordenar por'
           selection
           options={
             match.params.type === "procesadas"
@@ -260,20 +258,20 @@ const Nav = ({ firebase, match, history }) => {
           onChange={(e, { value }) => setFilter(value)}
         />
         {match.params.type === "procesadas" && (
-          <Button className="descargar">
+          <Button className='descargar'>
             <CSVLink
               data={download}
               onClick={() => descargar()}
               filename={"abastecimiento.csv"}
             >
-              <Icon name="download" />
+              <Icon name='download' />
             </CSVLink>
           </Button>
         )}
         <Button
-          className="cerrarSesion"
-          floated="right"
-          icon="sign out"
+          className='cerrarSesion'
+          floated='right'
+          icon='sign out'
           onClick={() => firebase.doSignOut()}
         />
       </div>
