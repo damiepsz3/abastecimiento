@@ -8,7 +8,6 @@ import {
   Loader
 } from "semantic-ui-react";
 import { withFirebase } from "../../Firebase";
-import { Link } from "react-router-dom";
 import ModalMessages from "./ModalMessages";
 
 const ResultsModal = ({
@@ -75,7 +74,7 @@ const ResultsModal = ({
             <Table celled striped>
               <Table.Body>
                 <Table.Row>
-                  <Table.Cell collapsing>Nombre y Apellido</Table.Cell>
+                  <Table.Cell>Nombre y Apellido</Table.Cell>
                   <Table.Cell>{solicitud.nombreApellido}</Table.Cell>
                 </Table.Row>
                 <Table.Row>

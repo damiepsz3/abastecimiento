@@ -8,7 +8,7 @@ const protectedRoute = ({ firebase, component: Component, ...rest }) => {
   const { initialising, user } = useAuthState(firebase.auth);
   if (initialising)
     return (
-      <div className='login-form'>
+      <div className="login-form">
         {/*
     Heads up! The styles below are necessary for the correct render of this example.
     You can do same with CSS, the main idea is that all the elements up to the `Grid`
@@ -22,12 +22,12 @@ height: 100%;
 }
 `}</style>
         <Grid
-          textAlign='center'
+          textAlign="center"
           style={{ height: "100%" }}
-          verticalAlign='middle'
+          verticalAlign="middle"
         >
           <Grid.Column style={{ maxWidth: 450 }}>
-            <Loader active size='big' />
+            <Loader active size="big" />
           </Grid.Column>
         </Grid>
       </div>
