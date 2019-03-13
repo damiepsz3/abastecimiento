@@ -45,6 +45,7 @@ const Nav = ({ firebase, match, history }) => {
                         return (
                           s.nombreApellido.toLowerCase().includes(search) ||
                           s.opcionPlanta.toLowerCase().includes(search) ||
+                          s.id.toLowerCase().includes(search) ||
                           s.plantillaSeleccionada["Nombre Plantilla"]
                             .toLowerCase()
                             .includes(search) ||
@@ -55,6 +56,7 @@ const Nav = ({ firebase, match, history }) => {
                       }
                       return (
                         s.nombreApellido.toLowerCase().includes(search) ||
+                        s.id.toLowerCase().includes(search) ||
                         s.opcionPlanta.toLowerCase().includes(search) ||
                         s.numeroMaterial.toLowerCase().includes(search)
                       );
@@ -84,6 +86,7 @@ const Nav = ({ firebase, match, history }) => {
                         return (
                           s.nombreApellido.toLowerCase().includes(search) ||
                           s.opcionPlanta.toLowerCase().includes(search) ||
+                          s.id.toLowerCase().includes(search) ||
                           s.plantillaSeleccionada["Nombre Plantilla"]
                             .toLowerCase()
                             .includes(search) ||
@@ -94,6 +97,7 @@ const Nav = ({ firebase, match, history }) => {
                       }
                       return (
                         s.nombreApellido.toLowerCase().includes(search) ||
+                        s.id.toLowerCase().includes(search) ||
                         s.opcionPlanta.toLowerCase().includes(search) ||
                         s.numeroMaterial.toLowerCase().includes(search)
                       );

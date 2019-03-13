@@ -2,7 +2,7 @@ import React from "react";
 import { withFirebase } from "../../Firebase";
 import { Route, Redirect } from "react-router-dom";
 import { useAuthState } from "react-firebase-hooks/auth";
-import { Loader, Grid, Container } from "semantic-ui-react";
+import { Loader, Grid } from "semantic-ui-react";
 
 const protectedRoute = ({ firebase, component: Component, ...rest }) => {
   const { initialising, user } = useAuthState(firebase.auth);
