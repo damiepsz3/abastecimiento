@@ -44,7 +44,7 @@ class TarjetaCerrada extends Component {
             solicitud.plantillaSeleccionada["Nombre Plantilla"]
           ) : (
             <span>
-              <img className="logoSap" src={sapLogo} />{" "}
+              <img className="logoSap" alt="SAP" src={sapLogo} />{" "}
               {solicitud.numeroMaterial}{" "}
             </span>
           )}

@@ -136,14 +136,10 @@ class Camposcomunes extends PureComponent {
             </Grid.Column>
 
             <Grid.Column>
-              <Header as="h4">
-                TAG de equipo que lo utiliza{" "}
-                <span className={"requerido"}>*</span>
-              </Header>
+              <Header as="h4">TAG de equipo que lo utiliza </Header>
               <Input
                 fluid={true}
                 control="input"
-                error={this.props.errors.includes("valorTAG")}
                 onChange={(e, { value }) =>
                   handleInputChange("valorTAG", value)
                 }

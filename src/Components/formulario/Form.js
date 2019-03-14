@@ -81,10 +81,12 @@ class Form extends Component {
               e !== "plantillaSeleccionada" &&
               e !== "unidadMedida" &&
               e !== "proveedor" &&
-              e !== "presentacion"
+              e !== "presentacion" &&
+              e !== "valorTAG"
           : e =>
               e !== "proveedor" &&
               e !== "presentacion" &&
+              e !== "valorTAG" &&
               e !== "numeroMaterial"
       )
       .concat(
@@ -96,7 +98,7 @@ class Form extends Component {
       if (this.state.errors.length === 0) {
         //this.setState({ open: true });
         this.handleOpenModal();
-      } else if (this.state.nombreApellido == "" || this.state.email == "") {
+      } else if (this.state.nombreApellido === "" || this.state.email === "") {
         setTimeout(() => {
           window.scrollTo({
             top: 0,

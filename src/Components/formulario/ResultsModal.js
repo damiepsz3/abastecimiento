@@ -8,7 +8,6 @@ import {
   Loader
 } from "semantic-ui-react";
 import { withFirebase } from "../../Firebase";
-import { Link } from "react-router-dom";
 import ModalMessages from "./ModalMessages";
 
 const ResultsModal = ({
@@ -36,7 +35,7 @@ const ResultsModal = ({
         setLoading(false);
         setResults({
           success: true,
-          idSeguimiento: response.id
+          idSeguimiento: response.key
         });
       })
       .catch(error => {
@@ -47,6 +46,7 @@ const ResultsModal = ({
         });
       });
   };
+  console.log(results);
   return (
     <Modal
       onOpen={handleOpenModal}
@@ -57,7 +57,7 @@ const ResultsModal = ({
       closeIcon
     >
       <Dimmer active={loading}>
-        <Loader size="large">Subiendo solicitud</Loader>
+        <Loader size='large'>Subiendo solicitud</Loader>
       </Dimmer>
       {results ? (
         <ModalMessages
@@ -154,7 +154,7 @@ const ResultsModal = ({
                 </Table.Row>
               </Table.Body>
             </Table>
-            <Container textAlign="center">
+            <Container textAlign='center'>
               <Button positive onClick={() => submitSolicitud()}>
                 Confirmar
               </Button>
