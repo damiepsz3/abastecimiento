@@ -73,8 +73,14 @@ class Form extends Component {
   };
 
   validarCampos = () => {
+    console.log(this.state.errors);
     const errors = Object.keys(this.state)
       .filter(prop => this.state[prop] === "")
+      .concat(
+        Object.keys(this.state.camposDinamicos).filter(
+          prop => this.state.camposDinamicos[prop] === ""
+        )
+      )
       .filter(
         this.state.conoceCodigo === true
           ? e =>
@@ -82,18 +88,20 @@ class Form extends Component {
               e !== "unidadMedida" &&
               e !== "proveedor" &&
               e !== "presentacion" &&
+              e !== this.state.plantillaSeleccionada["Característica 1"] &&
+              e !== this.state.plantillaSeleccionada["Característica 2"] &&
+              e !== this.state.plantillaSeleccionada["Característica 3"] &&
+              e !== this.state.plantillaSeleccionada["Característica 4"] &&
+              e !== this.state.plantillaSeleccionada["Característica 5"] &&
+              e !== this.state.plantillaSeleccionada["Característica 6"] &&
               e !== "valorTAG"
           : e =>
               e !== "proveedor" &&
               e !== "presentacion" &&
               e !== "valorTAG" &&
               e !== "numeroMaterial"
-      )
-      .concat(
-        Object.keys(this.state.camposDinamicos).filter(
-          prop => this.state.camposDinamicos[prop] === ""
-        )
       );
+
     this.setState({ errors }, () => {
       if (this.state.errors.length === 0) {
         //this.setState({ open: true });
