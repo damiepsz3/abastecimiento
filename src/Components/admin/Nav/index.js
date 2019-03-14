@@ -79,6 +79,7 @@ const Nav = ({ firebase, match, history }) => {
         <Tab.Pane attached={false}>
           <Tarjetas
             tarjetaSeleccionada={match.params.idSolicitud}
+            loading={loading}
             solicitudes={
               search.length > 0
                 ? solProc
