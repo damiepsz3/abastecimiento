@@ -22,7 +22,6 @@ class Firebase {
   doAnonymousSignIn = () =>
     this.auth.signInAnonymously().catch(function(error) {
       // Handle Errors here.
-      var errorCode = error.code;
       var errorMessage = error.message;
       console.log(errorMessage);
       // ...
@@ -84,12 +83,11 @@ class Firebase {
   updateSolicitud = (id, estado, razon = null) =>
     this.db.ref(`solicitudes/${id}`).update({ estado, razon });
 
-  // this.db
-  //   .collection("solicitudes")
-  //   .doc(id)
-  //   .update({ estado, razon });
-
-  // *** Storage API ***
+  deleteSolicitudes = ids => {
+    return Promise.all(
+      ids.map(id => this.db.ref(`solicitudes/${id}`).remove())
+    );
+  };
 }
 
 export default Firebase;
