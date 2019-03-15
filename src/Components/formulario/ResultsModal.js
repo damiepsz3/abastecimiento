@@ -46,7 +46,6 @@ const ResultsModal = ({
         });
       });
   };
-  console.log(results);
   return (
     <Modal
       onOpen={handleOpenModal}

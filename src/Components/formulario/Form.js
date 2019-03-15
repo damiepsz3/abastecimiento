@@ -73,7 +73,6 @@ class Form extends Component {
   };
 
   validarCampos = () => {
-    console.log(this.state.errors);
     const errors = Object.keys(this.state)
       .filter(prop => this.state[prop] === "")
       .concat(
@@ -165,7 +164,7 @@ class Form extends Component {
 
     return (
       <Container>
-        <Header as="h1" style={{ marginTop: 40 }}>
+        <Header as='h1' style={{ marginTop: 40 }}>
           Formulario de abastecimiento
         </Header>
 
@@ -213,12 +212,12 @@ class Form extends Component {
           />
         )}
 
-        <Grid textAlign="center" style={{ marginTop: 50 }}>
+        <Grid textAlign='center' style={{ marginTop: 50 }}>
           <Grid.Row>
-            <Container textAlign="center">
+            <Container textAlign='center'>
               <Button
                 primary
-                type="submit"
+                type='submit'
                 onClick={this.validarCampos}
                 disabled={
                   !(

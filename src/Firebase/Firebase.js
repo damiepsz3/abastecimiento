@@ -35,36 +35,12 @@ class Firebase {
 
   // *** Solicitudes API ***
 
-  // addSolicitudOLD = solicitud =>
-  //   this.db.collection(`solicitudes`).add({
-  //     createdDate: app.firestore.Timestamp.fromDate(new Date()),
-  //     razon: "",
-  //     ...solicitud
-  //   });
-
   addSolicitud = solicitud =>
     this.db.ref(`solicitudes/`).push({
       createdDate: app.database.ServerValue.TIMESTAMP,
       razon: "",
       ...solicitud
     });
-
-  // getSolicitudesOLD = () =>
-  //   this.db
-  //     .collection("solicitudes")
-  //     .get()
-  //     .then(snapShot => {
-  //       const resp = [];
-  //       snapShot.forEach(snap => {
-  //         const { createdDate, ...rest } = snap.data();
-  //         resp.push({
-  //           id: snap.id,
-  //           createdDate: createdDate.toDate(),
-  //           ...rest
-  //         });
-  //       });
-  //       return resp;
-  //     });
 
   getSolicitudes = () =>
     this.db.ref("solicitudes").then(snapShot => {
