@@ -122,7 +122,8 @@ const Nav = ({ firebase, match, history }) => {
   //esta funcion saca el valor de la unidad de medida entre corchete. ej: para Kilogramo [KG] devuelve KG
   function obtenerValorEntreCorchetes(texto) {
     var valorEntreCorchetes = /\[([^)]+)\]/.exec(texto);
-    return valorEntreCorchetes[1];
+    if (valorEntreCorchetes) return valorEntreCorchetes[1];
+    return texto;
   }
 
   const descargar = () => {
