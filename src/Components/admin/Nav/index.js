@@ -1,7 +1,7 @@
 import React, { Component, Fragment } from "react";
 import { withRouter, Link } from "react-router-dom";
 import { compose } from "recompose";
-import { Tab, Input, Button, Menu, Dropdown, Icon } from "semantic-ui-react";
+import { Tab, Input, Button, Menu, Dropdown } from "semantic-ui-react";
 import Tarjetas from "../Tarjetas";
 import Download from "./Download";
 import "../Admin.css";
@@ -17,9 +17,9 @@ class Nav extends Component {
   };
 
   componentDidMount() {
-    //llamada firebase
     this.props.firebase.db.ref("solicitudes").on("value", snapshot => {
       const value = snapshot.val();
+      console.log(value);
       if (value) {
         const solicitudes = Object.keys(value).map(k => {
           const { createdDate, ...rest } = value[k];
@@ -46,116 +46,6 @@ class Nav extends Component {
     return 0;
   };
 
-  panes = [
-    {
-      menuItem: (
-        <Menu.Item key='1' as={Link} to='/admin/pendientes'>
-          {this.state.loading
-            ? "Pendientes (...)"
-            : `Pendientes (${this.state.solPen.length})`}
-        </Menu.Item>
-      ),
-      render: () => (
-        <Tab.Pane attached={false}>
-          <Tarjetas
-            tarjetaSeleccionada={this.props.match.params.idSolicitud}
-            solicitudes={
-              this.state.search.length > 0
-                ? this.state.solPen
-                    .filter(s => {
-                      if (s.plantillaSeleccionada !== "") {
-                        return (
-                          s.nombreApellido
-                            .toLowerCase()
-                            .includes(this.state.search) ||
-                          s.opcionPlanta
-                            .toLowerCase()
-                            .includes(this.state.search) ||
-                          s.id.toLowerCase().includes(this.state.search) ||
-                          s.plantillaSeleccionada["Nombre Plantilla"]
-                            .toLowerCase()
-                            .includes(this.state.search) ||
-                          s.plantillaSeleccionada["Taxonomia BOLD:Descripción"]
-                            .toLowerCase()
-                            .includes(this.state.search)
-                        );
-                      }
-                      return (
-                        s.nombreApellido
-                          .toLowerCase()
-                          .includes(this.state.search) ||
-                        s.id.toLowerCase().includes(this.state.search) ||
-                        s.opcionPlanta
-                          .toLowerCase()
-                          .includes(this.state.search) ||
-                        s.numeroMaterial
-                          .toLowerCase()
-                          .includes(this.state.search)
-                      );
-                    })
-                    .sort(this.sortBy)
-                : this.state.solPen.sort(this.sortBy)
-            }
-          />
-        </Tab.Pane>
-      )
-    },
-    {
-      menuItem: (
-        <Menu.Item key='2' as={Link} to='/admin/procesadas'>
-          {this.state.loading
-            ? "Procesadas (...)"
-            : `Procesadas (${this.state.solProc.length})`}
-        </Menu.Item>
-      ),
-      render: () => (
-        <Tab.Pane attached={false}>
-          <Tarjetas
-            tarjetaSeleccionada={this.props.match.params.idSolicitud}
-            loading={this.state.loading}
-            solicitudes={
-              this.state.search.length > 0
-                ? this.state.solProc
-                    .filter(s => {
-                      if (s.plantillaSeleccionada !== "") {
-                        return (
-                          s.nombreApellido
-                            .toLowerCase()
-                            .includes(this.state.search) ||
-                          s.opcionPlanta
-                            .toLowerCase()
-                            .includes(this.state.search) ||
-                          s.id.toLowerCase().includes(this.state.search) ||
-                          s.plantillaSeleccionada["Nombre Plantilla"]
-                            .toLowerCase()
-                            .includes(this.state.search) ||
-                          s.plantillaSeleccionada["Taxonomia BOLD:Descripción"]
-                            .toLowerCase()
-                            .includes(this.state.search)
-                        );
-                      }
-                      return (
-                        s.nombreApellido
-                          .toLowerCase()
-                          .includes(this.state.search) ||
-                        s.id.toLowerCase().includes(this.state.search) ||
-                        s.opcionPlanta
-                          .toLowerCase()
-                          .includes(this.state.search) ||
-                        s.numeroMaterial
-                          .toLowerCase()
-                          .includes(this.state.search)
-                      );
-                    })
-                    .sort(this.sortBy)
-                : this.state.solProc.sort(this.sortBy)
-            }
-          />
-        </Tab.Pane>
-      )
-    }
-  ];
-
   filterOption = [
     { text: "Fecha", value: "createdDate" },
     { text: "Planta", value: "opcionPlanta" },
@@ -163,24 +53,136 @@ class Nav extends Component {
   ];
 
   render() {
+    const panes = [
+      {
+        menuItem: (
+          <Menu.Item key='1' as={Link} to='/admin/pendientes'>
+            {this.state.loading
+              ? "Pendientes (...)"
+              : `Pendientes (${this.state.solPen.length})`}
+          </Menu.Item>
+        ),
+        render: () => (
+          <Tab.Pane attached={false}>
+            <Tarjetas
+              tarjetaSeleccionada={this.props.match.params.idSolicitud}
+              solicitudes={
+                this.state.search.length > 0
+                  ? this.state.solPen
+                      .filter(s => {
+                        if (s.plantillaSeleccionada !== "") {
+                          return (
+                            s.nombreApellido
+                              .toLowerCase()
+                              .includes(this.state.search) ||
+                            s.opcionPlanta
+                              .toLowerCase()
+                              .includes(this.state.search) ||
+                            s.id.toLowerCase().includes(this.state.search) ||
+                            s.plantillaSeleccionada["Nombre Plantilla"]
+                              .toLowerCase()
+                              .includes(this.state.search) ||
+                            s.plantillaSeleccionada[
+                              "Taxonomia BOLD:Descripción"
+                            ]
+                              .toLowerCase()
+                              .includes(this.state.search)
+                          );
+                        }
+                        return (
+                          s.nombreApellido
+                            .toLowerCase()
+                            .includes(this.state.search) ||
+                          s.id.toLowerCase().includes(this.state.search) ||
+                          s.opcionPlanta
+                            .toLowerCase()
+                            .includes(this.state.search) ||
+                          s.numeroMaterial
+                            .toLowerCase()
+                            .includes(this.state.search)
+                        );
+                      })
+                      .sort(this.sortBy)
+                  : this.state.solPen.sort(this.sortBy)
+              }
+            />
+          </Tab.Pane>
+        )
+      },
+      {
+        menuItem: (
+          <Menu.Item key='2' as={Link} to='/admin/procesadas'>
+            {this.state.loading
+              ? "Procesadas (...)"
+              : `Procesadas (${this.state.solProc.length})`}
+          </Menu.Item>
+        ),
+        render: () => (
+          <Tab.Pane attached={false}>
+            <Tarjetas
+              tarjetaSeleccionada={this.props.match.params.idSolicitud}
+              loading={this.state.loading}
+              solicitudes={
+                this.state.search.length > 0
+                  ? this.state.solProc
+                      .filter(s => {
+                        if (s.plantillaSeleccionada !== "") {
+                          return (
+                            s.nombreApellido
+                              .toLowerCase()
+                              .includes(this.state.search) ||
+                            s.opcionPlanta
+                              .toLowerCase()
+                              .includes(this.state.search) ||
+                            s.id.toLowerCase().includes(this.state.search) ||
+                            s.plantillaSeleccionada["Nombre Plantilla"]
+                              .toLowerCase()
+                              .includes(this.state.search) ||
+                            s.plantillaSeleccionada[
+                              "Taxonomia BOLD:Descripción"
+                            ]
+                              .toLowerCase()
+                              .includes(this.state.search)
+                          );
+                        }
+                        return (
+                          s.nombreApellido
+                            .toLowerCase()
+                            .includes(this.state.search) ||
+                          s.id.toLowerCase().includes(this.state.search) ||
+                          s.opcionPlanta
+                            .toLowerCase()
+                            .includes(this.state.search) ||
+                          s.numeroMaterial
+                            .toLowerCase()
+                            .includes(this.state.search)
+                        );
+                      })
+                      .sort(this.sortBy)
+                  : this.state.solProc.sort(this.sortBy)
+              }
+            />
+          </Tab.Pane>
+        )
+      }
+    ];
+
     return (
       <Fragment>
         <div className='topNavBar'>
           <Tab
             menu={{ secondary: true, pointing: true }}
-            panes={this.panes}
+            panes={panes}
             defaultActiveIndex={
               this.props.match.params.type === "procesadas" ? 1 : 0
             }
           />
-          <Download
-            solicitudes={this.state.solProc}
-            deleteSol={() =>
-              this.props.firebase.deleteSolicitudes(
-                this.state.solProc.map(s => s.id)
-              )
-            }
-          />
+          {this.props.match.params.type === "procesadas" && (
+            <Download
+              solicitudes={this.state.solProc}
+              deleteSol={ids => this.props.firebase.deleteSolicitudes(ids)}
+            />
+          )}
           <Input
             className='barraBusqueda'
             icon={{ name: "search", link: true }}

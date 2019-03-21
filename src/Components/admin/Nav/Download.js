@@ -1,15 +1,11 @@
 import React from "react";
 import ReactExport from "react-data-export";
-import { Button, Icon } from "semantic-ui-react";
+import { Button } from "semantic-ui-react";
 const ExcelFile = ReactExport.ExcelFile;
 const ExcelSheet = ReactExport.ExcelFile.ExcelSheet;
 const ExcelColumn = ReactExport.ExcelFile.ExcelColumn;
 
 export default class Download extends React.Component {
-  constructor(props) {
-    super(props);
-  }
-
   render() {
     return (
       <ExcelFile
@@ -18,7 +14,9 @@ export default class Download extends React.Component {
             className='descargar'
             floated='right'
             icon='download'
-            onClick={() => this.props.deleteSol()}
+            onClick={() =>
+              this.props.deleteSol(this.props.solicitudes.map(s => s.id))
+            }
           />
         }
       >
