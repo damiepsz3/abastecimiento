@@ -35,7 +35,7 @@ class Nav extends Component {
           loading: false
         });
       } else {
-        this.setState({ loading: false });
+        this.setState({ loading: false, solProc: [] });
       }
     });
   }
@@ -56,7 +56,7 @@ class Nav extends Component {
     const panes = [
       {
         menuItem: (
-          <Menu.Item key='1' as={Link} to='/admin/pendientes'>
+          <Menu.Item key="1" as={Link} to="/admin/pendientes">
             {this.state.loading
               ? "Pendientes (...)"
               : `Pendientes (${this.state.solPen.length})`}
@@ -111,7 +111,7 @@ class Nav extends Component {
       },
       {
         menuItem: (
-          <Menu.Item key='2' as={Link} to='/admin/procesadas'>
+          <Menu.Item key="2" as={Link} to="/admin/procesadas">
             {this.state.loading
               ? "Procesadas (...)"
               : `Procesadas (${this.state.solProc.length})`}
@@ -169,7 +169,7 @@ class Nav extends Component {
 
     return (
       <Fragment>
-        <div className='topNavBar'>
+        <div className="topNavBar">
           <Tab
             menu={{ secondary: true, pointing: true }}
             panes={panes}
@@ -184,16 +184,16 @@ class Nav extends Component {
             />
           )}
           <Input
-            className='barraBusqueda'
+            className="barraBusqueda"
             icon={{ name: "search", link: true }}
-            placeholder='Search...'
+            placeholder="Search..."
             onChange={(e, { value }) =>
               this.setState({ search: value.toLowerCase() })
             }
           />
           <Dropdown
-            className='filtrarPor'
-            placeholder='Ordenar por'
+            className="filtrarPor"
+            placeholder="Ordenar por"
             selection
             options={
               this.props.match.params.type === "procesadas"
@@ -203,9 +203,9 @@ class Nav extends Component {
             onChange={(e, { value }) => this.setState({ filter: value })}
           />
           <Button
-            className='cerrarSesion'
-            floated='right'
-            icon='sign out'
+            className="cerrarSesion"
+            floated="right"
+            icon="sign out"
             onClick={() => this.props.firebase.doSignOut()}
           />
         </div>
