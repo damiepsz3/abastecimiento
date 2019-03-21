@@ -66,3 +66,9 @@
 #root a {
   cursor: pointer;
 }
+
+@media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) {
+  #root .ui.modal.transition.visible.active {
+    left: 20%;
+  }
+}

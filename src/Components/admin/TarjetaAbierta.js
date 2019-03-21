@@ -156,7 +156,6 @@ class TarjetaAbierta extends Component {
           <Form className='TextRechazo'>
             <TextArea
               rows='2'
-              autoFocus
               autoHeight
               value={this.state.razon}
               onChange={event => this.handleRazon(event)}
