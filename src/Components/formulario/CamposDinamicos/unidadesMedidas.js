@@ -10,7 +10,6 @@ export default [
     value: "Metro cúbico [M3]",
     text: "Metro cúbico [M3]"
   },
-
   {
     key: "3",
     value: "Metro cuadrado [M2]",
