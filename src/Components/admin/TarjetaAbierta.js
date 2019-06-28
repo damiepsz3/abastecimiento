@@ -53,8 +53,8 @@ class TarjetaAbierta extends Component {
     if (solicitud.camposDinamicos) {
       camposDinamicos = Object.keys(solicitud.camposDinamicos).map(
         caracteristica => (
-          <div className='grid-itemPlantilla' key={caracteristica}>
-            <div className='tituloPlantilla'>{caracteristica}</div>
+          <div className="grid-itemPlantilla" key={caracteristica}>
+            <div className="tituloPlantilla">{caracteristica}</div>
             {solicitud.camposDinamicos[caracteristica]}
           </div>
         )
@@ -62,65 +62,65 @@ class TarjetaAbierta extends Component {
     }
 
     return (
-      <div className='TarjetaAbierta'>
-        <div className='Plantilla'>
+      <div className="TarjetaAbierta">
+        <div className="Plantilla">
           {solicitud.plantillaSeleccionada["Nombre Plantilla"]}
         </div>
-        <div className='Categoria'>
+        <div className="Categoria">
           {solicitud.plantillaSeleccionada["Taxonomia BOLD:Descripción"]}
         </div>
-        <div className='GridContainerPlantilla'>
+        <div className="GridContainerPlantilla">
           {camposDinamicos}
           {solicitud.unidadMedida && (
-            <div className='grid-itemPlantilla'>
-              <div className='tituloPlantilla'>UNIDAD DE MEDIDA</div>
+            <div className="grid-itemPlantilla">
+              <div className="tituloPlantilla">UNIDAD DE MEDIDA</div>
               {solicitud.unidadMedida}
             </div>
           )}
           {solicitud.numeroMaterial !== "" && (
             <span>
-              <img className='logoSap' alt='SAP' src={sapLogo} />{" "}
+              <img className="logoSap" alt="SAP" src={sapLogo} />{" "}
               {solicitud.numeroMaterial}{" "}
             </span>
           )}
         </div>
 
         <Divider fitted />
-        <div className='GridContainerPlantilla'>
-          <div className='itemCampoComun'>
-            <Image src={DreyfusCentro} verticalAlign='middle' />
+        <div className="GridContainerPlantilla">
+          <div className="itemCampoComun">
+            <Image src={DreyfusCentro} verticalAlign="middle" />
             <span>{solicitud.opcionPlanta}</span>
           </div>
 
-          <div className='itemCampoComun'>
-            <Image src={DreyfusStock} verticalAlign='middle' />
+          <div className="itemCampoComun">
+            <Image src={DreyfusStock} verticalAlign="middle" />
             <span>
               {solicitud.requiereStock ? "REQUIERE STOCK" : "NO REQUIERE STOCK"}
             </span>
           </div>
-          <div className='itemCampoComun'>
-            <Image src={DreyfusSector} verticalAlign='middle' />
+          <div className="itemCampoComun">
+            <Image src={DreyfusSector} verticalAlign="middle" />
             <span>{solicitud.opcionSector} </span>
           </div>
-          <div className='itemCampoComun'>
-            <Image src={DreyfusDollar} verticalAlign='middle' />
+          <div className="itemCampoComun">
+            <Image src={DreyfusDollar} verticalAlign="middle" />
             <span>{solicitud.valorUSD} </span>
           </div>
           {solicitud.proveedor !== "" && (
-            <div className='itemCampoComun'>
-              <Image src={DreyfusVendedor} verticalAlign='middle' />
+            <div className="itemCampoComun">
+              <Image src={DreyfusVendedor} verticalAlign="middle" />
               <span>{solicitud.proveedor}</span>
             </div>
           )}
           {solicitud.consumoAnual !== "No Aplica" && (
-            <div className='itemCampoComun'>
-              <Image src={DreyfusTap} verticalAlign='middle' />
+            <div className="itemCampoComun">
+              <Image src={DreyfusTap} verticalAlign="middle" />
               <span>{solicitud.consumoAnual} </span>
             </div>
           )}
 
-          <div className='itemCampoComun'>
-            <Image src={DreyfusWrench} verticalAlign='middle' />
+          <div className="itemCampoComun">
+            <Image src={DreyfusWrench} verticalAlign="middle" />
             <span>
               {solicitud.repara
                 ? "PRODUCTO REPARABLE"
@@ -128,15 +128,15 @@ class TarjetaAbierta extends Component {
             </span>
           </div>
           {solicitud.valorTAG && (
-            <div className='itemCampoComun'>
-              <Image src={DreyfusBarcode} verticalAlign='middle' />
+            <div className="itemCampoComun">
+              <Image src={DreyfusBarcode} verticalAlign="middle" />
               <span>{solicitud.valorTAG} </span>
             </div>
           )}
-          <div className='itemCampoComun'>
+          <div className="itemCampoComun">
             <div>
               {" "}
-              <span className='CriticidadIcono'>
+              <span className="CriticidadIcono">
                 {" "}
                 {solicitud.criticidad.charAt(1)}{" "}
               </span>
@@ -153,16 +153,16 @@ class TarjetaAbierta extends Component {
         <Divider fitted />
 
         {(this.state.rechazando || solicitud.estado === "rechazada") && (
-          <Form className='TextRechazo'>
+          <Form className="TextRechazo">
             <TextArea
-              rows='2'
+              rows="2"
               autoHeight
               value={this.state.razon}
               onChange={event => this.handleRazon(event)}
-              placeholder='Razon de rechazo'
+              placeholder="Razon de rechazo"
             />
             <Button
-              floated='right'
+              floated="right"
               onClick={() => this.handleTerminarDeProcesar()}
             >
               Terminar de Processar
@@ -170,31 +170,31 @@ class TarjetaAbierta extends Component {
           </Form>
         )}
 
-        <div className='BotonesEstados'>
+        <div className="BotonesEstados">
           <Button.Group>
             <Button
-              className='Aceptar'
+              className="Aceptar"
               onClick={() => this.handleAceptar()}
               active={solicitud.estado === "aceptada" && !this.state.rechazando}
             >
-              <Icon name='check' /> Aceptar
+              <Icon name="check" /> Aceptar
             </Button>
             <Button
-              className='Pendiente'
+              className="Pendiente"
               onClick={() =>
                 this.props.firebase.updateSolicitud(solicitud.id, "pendiente")
               }
               active={solicitud.estado === "pendiente"}
             >
-              <Icon name='clock' /> Pendiente
+              <Icon name="clock" /> Pendiente
             </Button>
 
             <Button
-              className='Rechazar'
+              className="Rechazar"
               onClick={() => this.handleRechazar()}
               active={solicitud.estado === "rechazada" || this.state.rechazando}
             >
-              <Icon name='times' /> Rechazar
+              <Icon name="times" /> Rechazar
             </Button>
           </Button.Group>
         </div>
