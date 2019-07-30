@@ -52,6 +52,15 @@ class Nav extends Component {
     { text: "Estado", value: "estado" }
   ];
 
+  confirmarBorrado = () => {
+    var r = window.confirm(
+      "Esta operacion borrara todas las solicitudes procesadas y no se puede deshacer."
+    );
+    if (r == true) {
+      this.props.firebase.deleteSolicitudes(this.state.solProc.map(s => s.id));
+    }
+  };
+
   render() {
     const panes = [
       {
@@ -166,7 +175,7 @@ class Nav extends Component {
         )
       }
     ];
-
+    console.log(this.props);
     return (
       <Fragment>
         <div className="topNavBar">
@@ -178,10 +187,15 @@ class Nav extends Component {
             }
           />
           {this.props.match.params.type === "procesadas" && (
-            <Download
-              solicitudes={this.state.solProc}
-              deleteSol={ids => this.props.firebase.deleteSolicitudes(ids)}
-            />
+            <Fragment>
+              <Download solicitudes={this.state.solProc} />
+              <Button
+                className="Borrar"
+                floated="right"
+                icon="delete"
+                onClick={() => this.confirmarBorrado()}
+              />
+            </Fragment>
           )}
           <Input
             className="barraBusqueda"
@@ -202,6 +216,7 @@ class Nav extends Component {
             }
             onChange={(e, { value }) => this.setState({ filter: value })}
           />
+
           <Button
             className="cerrarSesion"
             floated="right"

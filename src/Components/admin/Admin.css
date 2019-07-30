@@ -19,6 +19,28 @@
   left: 3px;
 }
 
+.ui.button.borrar {
+  height: 36px;
+  width: 36px;
+  position: absolute;
+  top: 10px;
+  margin: 0;
+  right: 63px;
+}
+.ui.button.borrar a {
+  padding: 10px;
+  height: 40px;
+  top: 0;
+  color: #666868;
+  position: absolute;
+  left: 20px;
+}
+
+.ui.button.Borrar {
+  position: absolute !important;
+  top: 10px;
+  right: 110px;
+}
 .ui.input.barraBusqueda {
   position: absolute;
   top: 10px;
@@ -40,7 +62,7 @@
 .ui.selection.dropdown.filtrarPor {
   position: absolute !important;
   top: 10px;
-  right: 120px;
+  right: 160px;
 }
 
 #root .ui.secondary.pointing.menu .item {
