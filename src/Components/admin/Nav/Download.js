@@ -10,14 +10,7 @@ export default class Download extends React.Component {
     return (
       <ExcelFile
         element={
-          <Button
-            className="descargar"
-            floated="right"
-            icon="download"
-            onClick={() =>
-              this.props.deleteSol(this.props.solicitudes.map(s => s.id))
-            }
-          />
+          <Button className="descargar" floated="right" icon="download" />
         }
       >
         <ExcelSheet data={this.props.solicitudes} name="Solicitudes">
