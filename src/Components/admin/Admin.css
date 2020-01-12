@@ -181,21 +181,14 @@
   text-transform: uppercase;
 }
 
-.tituloPlantilla {
+.tituloPlantilla,
+.caract-comun {
   color: #979797;
   font-size: 13px;
 }
 
 .itemCampoComun span {
-  padding-left: 10px;
   vertical-align: sub;
-}
-
-span.CriticidadIcono {
-  font-weight: 900;
-  font-size: 24px;
-  opacity: 0.6;
-  padding-left: 5px;
 }
 
 .itemCampoComun img {

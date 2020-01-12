@@ -86,41 +86,47 @@ class TarjetaAbierta extends Component {
         </div>
 
         <Divider fitted />
+
         <div className="GridContainerPlantilla">
           <div className="itemCampoComun">
-            <Image src={DreyfusCentro} verticalAlign="middle" />
+            <div className="caract-comun">Planta</div>
             <span>{solicitud.opcionPlanta}</span>
           </div>
 
           <div className="itemCampoComun">
-            <Image src={DreyfusStock} verticalAlign="middle" />
+            <div className="caract-comun">Stock</div>
+
             <span>
               {solicitud.requiereStock ? "REQUIERE STOCK" : "NO REQUIERE STOCK"}
             </span>
           </div>
           <div className="itemCampoComun">
-            <Image src={DreyfusSector} verticalAlign="middle" />
+            <div className="caract-comun">Sector</div>
+
             <span>{solicitud.opcionSector} </span>
           </div>
           <div className="itemCampoComun">
-            <Image src={DreyfusDollar} verticalAlign="middle" />
+            <div className="caract-comun">Precio Moneda Local</div>
+
             <span>{solicitud.valorUSD} </span>
           </div>
           {solicitud.proveedor !== "" && (
             <div className="itemCampoComun">
-              <Image src={DreyfusVendedor} verticalAlign="middle" />
+              <div className="caract-comun">Proveedor</div>
+
               <span>{solicitud.proveedor}</span>
             </div>
           )}
           {solicitud.consumoAnual !== "No Aplica" && (
             <div className="itemCampoComun">
-              <Image src={DreyfusTap} verticalAlign="middle" />
+              <div className="caract-comun">Consumo Anual</div>
+
               <span>{solicitud.consumoAnual} </span>
             </div>
           )}
 
           <div className="itemCampoComun">
-            <Image src={DreyfusWrench} verticalAlign="middle" />
+            <div className="caract-comun">Planta</div>
             <span>
               {solicitud.repara
                 ? "PRODUCTO REPARABLE"
@@ -129,25 +135,13 @@ class TarjetaAbierta extends Component {
           </div>
           {solicitud.valorTAG && (
             <div className="itemCampoComun">
-              <Image src={DreyfusBarcode} verticalAlign="middle" />
+              <div className="caract-comun">TAG del Equipo que lo Utiliza</div>
               <span>{solicitud.valorTAG} </span>
             </div>
           )}
           <div className="itemCampoComun">
-            <div>
-              {" "}
-              <span className="CriticidadIcono">
-                {" "}
-                {solicitud.criticidad.charAt(1)}{" "}
-              </span>
-              <span>
-                {" "}
-                {solicitud.criticidad.slice(
-                  4,
-                  solicitud.criticidad.length
-                )}{" "}
-              </span>
-            </div>
+            <div className="caract-comun">Criticidad</div>
+            <span className="CriticidadIcono">{solicitud.criticidad}</span>
           </div>
         </div>
         <Divider fitted />
