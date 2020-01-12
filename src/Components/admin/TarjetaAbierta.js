@@ -1,20 +1,6 @@
 import React, { Component } from "react";
-import {
-  Divider,
-  Image,
-  Button,
-  Icon,
-  Form,
-  TextArea
-} from "semantic-ui-react";
-import DreyfusBarcode from "../../assets/DreyfusBarcode.svg";
-import DreyfusCentro from "../../assets/DreyfusCentro.svg";
-import DreyfusDollar from "../../assets/DreyfusDollar.svg";
-import DreyfusSector from "../../assets/DreyfusSector.svg";
-import DreyfusStock from "../../assets/DreyfusStock.svg";
-import DreyfusTap from "../../assets/DreyfusTap.svg";
-import DreyfusVendedor from "../../assets/DreyfusVendedor.svg";
-import DreyfusWrench from "../../assets/DreyfusWrench.svg";
+import { Divider, Button, Icon, Form, TextArea } from "semantic-ui-react";
+
 import sapLogo from "../../assets/sap.svg";
 import { withFirebase } from "../../Firebase";
 
