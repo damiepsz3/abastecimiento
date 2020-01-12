@@ -1,5 +1,12 @@
 import React, { PureComponent, Fragment } from "react";
-import { Header, Grid, Input, Dropdown, Divider } from "semantic-ui-react";
+import {
+  Header,
+  Grid,
+  Input,
+  Dropdown,
+  Divider,
+  Checkbox
+} from "semantic-ui-react";
 import opciones from "./opcionesCriticidad";
 import "../../../App.css";
 
@@ -7,7 +14,8 @@ class Camposcomunes extends PureComponent {
   constructor(props) {
     super(props);
     this.state = {
-      requiereStock: false
+      requiereStock: false,
+      tieneAdj: false
     };
   }
 
@@ -149,6 +157,28 @@ class Camposcomunes extends PureComponent {
 
           <Grid.Row>
             <Grid.Column>
+              <Header as="h4">¿Tiene archivo adjunto?</Header>
+              <div>
+                <Checkbox
+                  style={{ marginTop: 14 }}
+                  toggle
+                  onChange={() => {
+                    handleInputChange("tieneAdjunto", !this.state.tieneAdj);
+                    this.setState({ tieneAdj: !this.state.tieneAdj });
+                  }}
+                />
+                {this.state.tieneAdj && (
+                  <a
+                    style={{ marginLeft: 20, verticalAlign: "super" }}
+                    target="_blank"
+                    href="https://google.com"
+                  >
+                    Haz click aqui y sube tus archivos a esta carpeta
+                  </a>
+                )}
+              </div>
+            </Grid.Column>
+            <Grid.Column>
               <Header as="h4">
                 ¿Requiere Stock? <span className={"requerido"}>*</span>{" "}
               </Header>
@@ -168,7 +198,8 @@ class Camposcomunes extends PureComponent {
                 }}
               />
             </Grid.Column>
-
+          </Grid.Row>
+          <Grid.Row>
             {requiereStock && (
               <Grid.Column>
                 <Header as="h4">

@@ -56,7 +56,7 @@ const ResultsModal = ({
       closeIcon
     >
       <Dimmer active={loading}>
-        <Loader size='large'>Subiendo solicitud</Loader>
+        <Loader size="large">Subiendo solicitud</Loader>
       </Dimmer>
       {results ? (
         <ModalMessages
@@ -142,6 +142,12 @@ const ResultsModal = ({
                   <Table.Cell>{solicitud.valorTAG}</Table.Cell>
                 </Table.Row>
                 <Table.Row>
+                  <Table.Cell>¿Tiene adjunto? </Table.Cell>
+                  <Table.Cell>
+                    {solicitud.tieneAdjunto ? "Si" : "No"}
+                  </Table.Cell>
+                </Table.Row>
+                <Table.Row>
                   <Table.Cell>¿Requiere Stock? </Table.Cell>
                   <Table.Cell>
                     {solicitud.requiereStock ? "Si" : "No"}
@@ -153,7 +159,7 @@ const ResultsModal = ({
                 </Table.Row>
               </Table.Body>
             </Table>
-            <Container textAlign='center'>
+            <Container textAlign="center">
               <Button positive onClick={() => submitSolicitud()}>
                 Confirmar
               </Button>

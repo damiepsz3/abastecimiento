@@ -37,6 +37,7 @@ class Form extends Component {
       consumoAnual: "",
       proveedor: "",
       presentacion: "",
+      tieneAdjunto: false,
       errors: []
     };
   }
@@ -68,6 +69,7 @@ class Form extends Component {
       consumoAnual: "",
       proveedor: "",
       presentacion: "",
+      tieneAdjunto: false,
       errors: []
     });
   };
@@ -122,6 +124,7 @@ class Form extends Component {
   };
 
   componentDidUpdate(prevProps, prevState) {
+    console.log(this.state);
     //llenar las propiedades del campo dinamico solo cuando se selecciona plantilla
     if (
       prevState.plantillaSeleccionada === "" &&
@@ -164,7 +167,7 @@ class Form extends Component {
 
     return (
       <Container>
-        <Header as='h1' style={{ marginTop: 40 }}>
+        <Header as="h1" style={{ marginTop: 40 }}>
           Formulario de abastecimiento
         </Header>
 
@@ -212,12 +215,12 @@ class Form extends Component {
           />
         )}
 
-        <Grid textAlign='center' style={{ marginTop: 50 }}>
+        <Grid textAlign="center" style={{ marginTop: 50 }}>
           <Grid.Row>
-            <Container textAlign='center'>
+            <Container textAlign="center">
               <Button
                 primary
-                type='submit'
+                type="submit"
                 onClick={this.validarCampos}
                 disabled={
                   !(
