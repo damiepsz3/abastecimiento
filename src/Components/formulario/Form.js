@@ -43,7 +43,7 @@ class Form extends Component {
   }
 
   componentDidMount() {
-    GoogleApi.init().then(result =>
+    GoogleApi.init("Sheet1").then(result =>
       this.setState({ plantillas: result, loadingPlantillas: false })
     );
 

@@ -1,6 +1,6 @@
 import { configSheet } from "./config";
 
-const init = () => {
+const init = sheet => {
   return new Promise((res, rej) => {
     // window.gapi.load("client", initClient(res));
     window.gapi.load("client", () =>
@@ -16,7 +16,7 @@ const init = () => {
             window.gapi.client.sheets.spreadsheets.values
               .get({
                 spreadsheetId: configSheet.spreadsheetId,
-                range: "Sheet1"
+                range: sheet
               })
               .then(({ result }) => {
                 const { values } = result;

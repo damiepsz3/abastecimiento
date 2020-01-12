@@ -9,26 +9,42 @@ import {
 } from "semantic-ui-react";
 import opciones from "./opcionesCriticidad";
 import "../../../App.css";
+import GoogleApi from "../../../GoogleApi";
 
 class Camposcomunes extends PureComponent {
   constructor(props) {
     super(props);
     this.state = {
       requiereStock: false,
-      tieneAdj: false
+      tieneAdj: false,
+      opcionesGradoDeCriticidad: [],
+      opcionesPlanta: [],
+      opcionesSector: []
     };
   }
 
+  componentDidMount() {
+    GoogleApi.init("Criticidad").then(result =>
+      this.setState({ opcionesGradoDeCriticidad: result })
+    );
+    GoogleApi.init("Plantas").then(result =>
+      this.setState({ opcionesPlanta: result })
+    );
+    GoogleApi.init("Sector").then(result =>
+      this.setState({ opcionesSector: result })
+    );
+  }
+
   render() {
-    const {
-      opcionesPlanta,
-      opcionesSector,
-      opcionesSiNo,
-      opcionesGradoDeCriticidad
-    } = opciones;
+    const { opcionesSiNo } = opciones;
 
     const { handleInputChange } = this.props;
-    const { requiereStock } = this.state;
+    const {
+      requiereStock,
+      opcionesGradoDeCriticidad,
+      opcionesPlanta,
+      opcionesSector
+    } = this.state;
     return (
       <Fragment>
         <Divider />
@@ -170,6 +186,7 @@ class Camposcomunes extends PureComponent {
                 {this.state.tieneAdj && (
                   <a
                     style={{ marginLeft: 20, verticalAlign: "super" }}
+                    rel="noopener noreferrer"
                     target="_blank"
                     href="https://google.com"
                   >

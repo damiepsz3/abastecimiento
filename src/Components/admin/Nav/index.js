@@ -56,7 +56,7 @@ class Nav extends Component {
     var r = window.confirm(
       "Esta operacion borrara todas las solicitudes procesadas y no se puede deshacer."
     );
-    if (r == true) {
+    if (r) {
       this.props.firebase.deleteSolicitudes(this.state.solProc.map(s => s.id));
     }
   };
@@ -229,7 +229,4 @@ class Nav extends Component {
   }
 }
 
-export default compose(
-  withFirebase,
-  withRouter
-)(Nav);
+export default compose(withFirebase, withRouter)(Nav);
