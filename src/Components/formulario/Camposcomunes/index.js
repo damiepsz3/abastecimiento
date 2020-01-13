@@ -145,10 +145,10 @@ class Camposcomunes extends PureComponent {
           <Grid.Row>
             <Grid.Column>
               <Header as="h4">
-                Valor Unitario (U$D) <span className={"requerido"}>*</span>
+                Valor Unitario <span className={"requerido"}>*</span>
               </Header>
               <Input
-                label="USD$"
+                label="MONTO EN SU MONEDA LOCAL:"
                 fluid={true}
                 type="number"
                 placeholder="Ej: 300"

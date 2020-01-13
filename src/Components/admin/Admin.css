@@ -205,6 +205,11 @@
   margin: 20px auto;
 }
 
+.tarjeta-row .ui.button.btnEditar {
+  height: 36px;
+  margin-top: 20px;
+}
+
 #root .BotonesEstados .Rechazar:hover {
   background-color: #ffbbbe;
 }
@@ -233,6 +238,11 @@
 .logoSap {
   vertical-align: sub;
   padding-right: 2px;
+}
+
+.tarjeta-row {
+  display: flex;
+  justify-content: space-between;
 }
 
 @media screen and (max-width: 800px) {

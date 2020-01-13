@@ -1,5 +1,12 @@
 import React, { Component } from "react";
-import { Divider, Button, Icon, Form, TextArea } from "semantic-ui-react";
+import {
+  Divider,
+  Button,
+  Icon,
+  Form,
+  TextArea,
+  Input
+} from "semantic-ui-react";
 
 import sapLogo from "../../assets/sap.svg";
 import { withFirebase } from "../../Firebase";
@@ -7,7 +14,11 @@ import { withFirebase } from "../../Firebase";
 class TarjetaAbierta extends Component {
   constructor(props) {
     super(props);
-    this.state = { rechazando: false, razon: props.solicitud.razon };
+    this.state = {
+      rechazando: false,
+      razon: props.solicitud.razon,
+      editMode: false
+    };
   }
 
   handleAceptar() {
@@ -29,6 +40,18 @@ class TarjetaAbierta extends Component {
     );
   }
 
+  handleEditar() {
+    this.setState({ editMode: !this.state.editMode });
+  }
+
+  handleEditContent({ value, name }) {
+    this.props.firebase.updateCaracteristica(
+      this.props.solicitud.id,
+      name,
+      value
+    );
+  }
+
   handleRazon(event) {
     this.setState({ razon: event.target.value });
   }
@@ -37,24 +60,54 @@ class TarjetaAbierta extends Component {
     const { solicitud } = this.props;
     let camposDinamicos = [];
     if (solicitud.camposDinamicos) {
-      camposDinamicos = Object.keys(solicitud.camposDinamicos).map(
-        caracteristica => (
-          <div className="grid-itemPlantilla" key={caracteristica}>
-            <div className="tituloPlantilla">{caracteristica}</div>
-            {solicitud.camposDinamicos[caracteristica]}
-          </div>
-        )
-      );
+      if (!this.state.editMode) {
+        camposDinamicos = Object.keys(solicitud.camposDinamicos).map(
+          caracteristica => (
+            <div className="grid-itemPlantilla" key={caracteristica}>
+              <div className="tituloPlantilla">{caracteristica}</div>
+              {solicitud.camposDinamicos[caracteristica]}
+            </div>
+          )
+        );
+      } else {
+        camposDinamicos = Object.keys(solicitud.camposDinamicos).map(
+          caracteristica => (
+            <div className="grid-itemPlantilla" key={caracteristica}>
+              <div className="tituloPlantilla">{caracteristica}</div>
+              <Input
+                fluid={true}
+                value={solicitud.camposDinamicos[caracteristica]}
+                control="input"
+                name={caracteristica}
+                onChange={(e, values) => this.handleEditContent(values)}
+              />
+            </div>
+          )
+        );
+      }
     }
 
     return (
       <div className="TarjetaAbierta">
-        <div className="Plantilla">
-          {solicitud.plantillaSeleccionada["Nombre Plantilla"]}
-        </div>
-        <div className="Categoria">
-          {solicitud.plantillaSeleccionada["Taxonomia BOLD:Descripción"]}
-        </div>
+        {solicitud.camposDinamicos ? (
+          <div className="tarjeta-row">
+            <div>
+              <div className="Plantilla">
+                {solicitud.plantillaSeleccionada["Nombre Plantilla"]}
+              </div>
+              <div className="Categoria">
+                {solicitud.plantillaSeleccionada["Taxonomia BOLD:Descripción"]}
+              </div>
+            </div>
+            <Button
+              className="btnEditar"
+              onClick={() => this.handleEditar()}
+              active={this.state.editMode}
+            >
+              <Icon name="pencil" /> Editar
+            </Button>
+          </div>
+        ) : null}
         <div className="GridContainerPlantilla">
           {camposDinamicos}
           {solicitud.unidadMedida && (
@@ -92,7 +145,7 @@ class TarjetaAbierta extends Component {
             <span>{solicitud.opcionSector} </span>
           </div>
           <div className="itemCampoComun">
-            <div className="caract-comun">Precio Moneda Local</div>
+            <div className="caract-comun">Precio en Moneda Local</div>
 
             <span>{solicitud.valorUSD} </span>
           </div>
@@ -128,6 +181,18 @@ class TarjetaAbierta extends Component {
           <div className="itemCampoComun">
             <div className="caract-comun">Criticidad</div>
             <span className="CriticidadIcono">{solicitud.criticidad}</span>
+          </div>
+
+          <div className="itemCampoComun">
+            <div className="caract-comun">Criticidad</div>
+            <span className="CriticidadIcono">{solicitud.criticidad}</span>
+          </div>
+
+          <div className="itemCampoComun">
+            <div className="caract-comun">Adjunto</div>
+            <span className="CriticidadIcono">
+              {solicitud.tieneAdjunto ? "Contiene adjunto" : "Sin Adjunto"}
+            </span>
           </div>
         </div>
         <Divider fitted />
