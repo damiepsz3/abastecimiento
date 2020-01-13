@@ -59,6 +59,11 @@ class Firebase {
   updateSolicitud = (id, estado, razon = null) =>
     this.db.ref(`solicitudes/${id}`).update({ estado, razon });
 
+  updateCaracteristica = (id, caracteristica, valor) =>
+    this.db
+      .ref(`solicitudes/${id}/camposDinamicos/${caracteristica}`)
+      .update(valor);
+
   deleteSolicitudes = ids => {
     return Promise.all(
       ids.map(id => this.db.ref(`solicitudes/${id}`).remove())
