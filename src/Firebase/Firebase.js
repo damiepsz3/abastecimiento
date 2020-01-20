@@ -64,6 +64,17 @@ class Firebase {
     obj[caracteristica] = valor;
     this.db.ref(`solicitudes/${id}/camposDinamicos/`).update(obj);
   };
+  updateCaracteristica = (id, caracteristica, valor) => {
+    let obj = {};
+    obj[caracteristica] = valor;
+    this.db.ref(`solicitudes/${id}/camposDinamicos/`).update(obj);
+  };
+
+  updateField = (id, field, value) => {
+    let obj = {};
+    obj[field] = value;
+    this.deb.ref(`solicitudes/${id}`).update(obj);
+  };
   deleteSolicitudes = ids => {
     return Promise.all(
       ids.map(id => this.db.ref(`solicitudes/${id}`).remove())

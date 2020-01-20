@@ -102,7 +102,7 @@ class Form extends Component {
               e !== "valorTAG" &&
               e !== "numeroMaterial"
       );
-
+    console.log(errors);
     this.setState({ errors }, () => {
       if (this.state.errors.length === 0) {
         //this.setState({ open: true });

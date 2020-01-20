@@ -146,7 +146,11 @@ export default class Download extends React.Component {
           <ExcelColumn label="Cons_anual_est" value="consumoAnual" />
           <ExcelColumn label="Tiempo_aprovisionamiento" value="" />
           <ExcelColumn label="estado" value="estado" />
-          <ExcelColumn label="Texto breve de material" value="" />
+          <ExcelColumn label="Descripción" value={col => col.descripcion} />
+          <ExcelColumn
+            label="Descripción Completa"
+            value={col => col.descripcionCompleta}
+          />
           <ExcelColumn label="Texto Datos Básicos" value="" />
           <ExcelColumn label="Texto Ampliado" value="" />
         </ExcelSheet>
