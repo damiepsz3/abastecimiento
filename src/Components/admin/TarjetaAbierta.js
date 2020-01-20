@@ -4,6 +4,7 @@ import {
   Button,
   Icon,
   Form,
+  Checkbox,
   TextArea,
   Input
 } from "semantic-ui-react";
@@ -19,6 +20,7 @@ class TarjetaAbierta extends Component {
       razon: props.solicitud.razon,
       editMode: false
     };
+    this._handleDoubleClickItem = this._handleDoubleClickItem.bind(this);
   }
 
   handleAceptar() {
@@ -48,8 +50,20 @@ class TarjetaAbierta extends Component {
     this.props.firebase.updateCaracteristica(
       this.props.solicitud.id,
       name,
-      value
+      value.toUpperCase()
     );
+  }
+
+  handleEditField({ value, name }) {
+    this.props.firebase.updateField(
+      this.props.solicitud.id,
+      name,
+      value.toUpperCase()
+    );
+  }
+
+  _handleDoubleClickItem(event): void {
+    this.setState({ editMode: true });
   }
 
   handleRazon(event) {
@@ -60,22 +74,28 @@ class TarjetaAbierta extends Component {
     const { solicitud } = this.props;
     let camposDinamicos = [];
     if (solicitud.camposDinamicos) {
+      //muestra las caracteristicas en modo edicion
       if (!this.state.editMode) {
         camposDinamicos = Object.keys(solicitud.camposDinamicos).map(
           caracteristica => (
             <div className="grid-itemPlantilla" key={caracteristica}>
               <div className="tituloPlantilla">{caracteristica}</div>
-              {solicitud.camposDinamicos[caracteristica]}
+              <span onDoubleClick={this._handleDoubleClickItem}>
+                {solicitud.camposDinamicos[caracteristica]}
+              </span>
+              <div className="spacer"></div>
             </div>
           )
         );
       } else {
+        // muestra las caracteristicas sin edición
         camposDinamicos = Object.keys(solicitud.camposDinamicos).map(
           caracteristica => (
             <div className="grid-itemPlantilla" key={caracteristica}>
               <div className="tituloPlantilla">{caracteristica}</div>
               <Input
                 fluid={true}
+                className="input-caracteristica"
                 value={solicitud.camposDinamicos[caracteristica]}
                 control="input"
                 name={caracteristica}
@@ -99,23 +119,72 @@ class TarjetaAbierta extends Component {
                 {solicitud.plantillaSeleccionada["Taxonomia BOLD:Descripción"]}
               </div>
             </div>
-            <Button
-              className="btnEditar"
+
+            <div
               onClick={() => this.handleEditar()}
-              active={this.state.editMode}
+              className="edit-mode-toggle"
             >
-              <Icon name="pencil" /> Editar
-            </Button>
+              <label>Modo Edición</label>
+              <Checkbox
+                checked={this.state.editMode}
+                onClick={() => this.handleEditar()}
+                slider
+              />
+            </div>
           </div>
         ) : null}
         <div className="GridContainerPlantilla">
           {camposDinamicos}
-          {solicitud.unidadMedida && (
-            <div className="grid-itemPlantilla">
-              <div className="tituloPlantilla">UNIDAD DE MEDIDA</div>
-              {solicitud.unidadMedida}
-            </div>
-          )}
+          {/* cuando la socilitud tiene unidad de medida, es decir cuando la solicitud tiene una plantilla sel */}
+          {solicitud.unidadMedida &&
+            (this.state.editMode ? (
+              <React.Fragment>
+                <div className="grid-itemPlantilla">
+                  <div className="tituloPlantilla">UNIDAD DE MEDIDA</div>
+                  {solicitud.unidadMedida}
+                </div>
+
+                <div className="grid-itemPlantilla">
+                  <div className="tituloPlantilla">DESCRIPCIÓN</div>
+                  <Input
+                    fluid={true}
+                    className="input-caracteristica"
+                    value={solicitud.descripcion}
+                    control="input"
+                    name="descripcion"
+                    onChange={(e, values) => this.handleEditField(values)}
+                  />
+                </div>
+                <div className="grid-itemPlantilla">
+                  <div className="tituloPlantilla">DESCRIPCIÓN COMPLETA</div>
+                  <Form>
+                    <TextArea
+                      className="input-caracteristica"
+                      value={solicitud.descripcionCompleta}
+                      control="input"
+                      name="descripcionCompleta"
+                      onChange={(e, values) => this.handleEditField(values)}
+                    />
+                  </Form>
+                </div>
+              </React.Fragment>
+            ) : (
+              <React.Fragment>
+                <div className="grid-itemPlantilla">
+                  <div className="tituloPlantilla">UNIDAD DE MEDIDA</div>
+                  {solicitud.unidadMedida}
+                </div>
+                <div className="grid-itemPlantilla">
+                  <div className="tituloPlantilla">DESCRIPCIÓN</div>
+                  {solicitud.descripcion}
+                </div>
+                <div className="grid-itemPlantilla">
+                  <div className="tituloPlantilla">DESCRIPCIÓN COMPLETA</div>
+                  {solicitud.descripcionCompleta}
+                </div>
+              </React.Fragment>
+            ))}
+
           {solicitud.numeroMaterial !== "" && (
             <span>
               <img className="logoSap" alt="SAP" src={sapLogo} />{" "}
