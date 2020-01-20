@@ -73,7 +73,7 @@ class Firebase {
   updateField = (id, field, value) => {
     let obj = {};
     obj[field] = value;
-    this.deb.ref(`solicitudes/${id}`).update(obj);
+    this.db.ref(`solicitudes/${id}`).update(obj);
   };
   deleteSolicitudes = ids => {
     return Promise.all(
