@@ -5,11 +5,17 @@ import {
   Icon,
   Form,
   Checkbox,
+  Dropdown,
   TextArea,
   Input
 } from "semantic-ui-react";
-
+import {
+  getDescripcion,
+  getDescripcionCompleta
+} from "../../utils/excelFormulas";
 import sapLogo from "../../assets/sap.svg";
+import GoogleApi from "../../GoogleApi";
+
 import { withFirebase } from "../../Firebase";
 
 class TarjetaAbierta extends Component {
@@ -18,9 +24,16 @@ class TarjetaAbierta extends Component {
     this.state = {
       rechazando: false,
       razon: props.solicitud.razon,
-      editMode: false
+      editMode: false,
+      opcionesUnidadesDeMedida: []
     };
     this._handleDoubleClickItem = this._handleDoubleClickItem.bind(this);
+  }
+
+  componentDidMount() {
+    GoogleApi.init("UnidadMedida").then(result =>
+      this.setState({ opcionesUnidadesDeMedida: result })
+    );
   }
 
   handleAceptar() {
@@ -45,20 +58,31 @@ class TarjetaAbierta extends Component {
   handleEditar() {
     this.setState({ editMode: !this.state.editMode });
   }
-
+  //this function is called to update caracterisitcas
   handleEditContent({ value, name }) {
     this.props.firebase.updateCaracteristica(
       this.props.solicitud.id,
       name,
       value.toUpperCase()
     );
+    this.props.firebase.updateField(
+      this.props.solicitud.id,
+      "descripcion",
+      getDescripcion(this.props.solicitud)
+    );
+    this.props.firebase.updateField(
+      this.props.solicitud.id,
+      "descripcionCompleta",
+      getDescripcionCompleta(this.props.solicitud)
+    );
   }
 
   handleEditField({ value, name }) {
+    console.log("NAME:" + name);
     this.props.firebase.updateField(
       this.props.solicitud.id,
       name,
-      value.toUpperCase()
+      value //.toUpperCase()
     );
   }
 
@@ -141,9 +165,17 @@ class TarjetaAbierta extends Component {
               <React.Fragment>
                 <div className="grid-itemPlantilla">
                   <div className="tituloPlantilla">UNIDAD DE MEDIDA</div>
-                  {solicitud.unidadMedida}
+                  <Dropdown
+                    placeholder="Seleccione"
+                    fluid={true}
+                    search={true}
+                    value={solicitud.unidadMedida}
+                    selection={true}
+                    options={this.state.opcionesUnidadesDeMedida}
+                    name="unidadMedida"
+                    onChange={(e, { value }) => this.handleEditField(value)}
+                  />
                 </div>
-
                 <div className="grid-itemPlantilla">
                   <div className="tituloPlantilla">DESCRIPCIÓN</div>
                   <Input
@@ -172,15 +204,17 @@ class TarjetaAbierta extends Component {
               <React.Fragment>
                 <div className="grid-itemPlantilla">
                   <div className="tituloPlantilla">UNIDAD DE MEDIDA</div>
-                  {solicitud.unidadMedida}
+                  <span>{solicitud.unidadMedida}</span>
+                  <div className="spacer"></div>
                 </div>
                 <div className="grid-itemPlantilla">
                   <div className="tituloPlantilla">DESCRIPCIÓN</div>
-                  {solicitud.descripcion}
+                  <span>{solicitud.descripcion}</span>
                 </div>
                 <div className="grid-itemPlantilla">
                   <div className="tituloPlantilla">DESCRIPCIÓN COMPLETA</div>
-                  {solicitud.descripcionCompleta}
+                  <span>{solicitud.descripcionCompleta}</span>
+                  <div className="spacer"></div>
                 </div>
               </React.Fragment>
             ))}

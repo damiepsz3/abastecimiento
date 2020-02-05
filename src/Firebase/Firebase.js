@@ -59,11 +59,11 @@ class Firebase {
   updateSolicitud = (id, estado, razon = null) =>
     this.db.ref(`solicitudes/${id}`).update({ estado, razon });
 
-  updateCaracteristica = (id, caracteristica, valor) => {
-    let obj = {};
-    obj[caracteristica] = valor;
-    this.db.ref(`solicitudes/${id}/camposDinamicos/`).update(obj);
-  };
+  // updateCaracteristica = (id, caracteristica, valor) => {
+  //   let obj = {};
+  //   obj[caracteristica] = valor;
+  //   this.db.ref(`solicitudes/${id}/camposDinamicos/`).update(obj);
+  // };
   updateCaracteristica = (id, caracteristica, valor) => {
     let obj = {};
     obj[caracteristica] = valor;

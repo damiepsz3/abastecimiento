@@ -270,17 +270,13 @@
   }
 }
 
-.ui.input.input-caracteristica > input {
-  border-right: none;
-  border-top: none;
-  border-left: none;
-  border-radius: 0;
-  padding-left: 0px;
-  padding-bottom: 4px;
-  padding-top: 1px;
+.grid-itemPlantilla .ui.form textarea {
+  line-height: 19px !important;
 }
 
+.ui.input.input-caracteristica > input,
 .ui.form textarea.input-caracteristica {
+  padding-right: 0px;
   border-right: none;
   border-top: none;
   border-left: none;
@@ -288,6 +284,7 @@
   padding-left: 0px;
   padding-bottom: 4px;
   padding-top: 1px;
+  font-family: "Lato";
 }
 
 .grid-itemPlantilla span {
