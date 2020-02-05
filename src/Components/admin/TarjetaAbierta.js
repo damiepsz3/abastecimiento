@@ -168,12 +168,13 @@ class TarjetaAbierta extends Component {
                   <Dropdown
                     placeholder="Seleccione"
                     fluid={true}
+                    className="unidadMedida"
                     search={true}
                     value={solicitud.unidadMedida}
                     selection={true}
                     options={this.state.opcionesUnidadesDeMedida}
                     name="unidadMedida"
-                    onChange={(e, { value }) => this.handleEditField(value)}
+                    onChange={(e, value) => this.handleEditField(value)}
                   />
                 </div>
                 <div className="grid-itemPlantilla">
