@@ -36,6 +36,13 @@ const getCaracCompleta = (key, value, last = false) => {
   return "";
 };
 
+const getNormativa = value => {
+  if (value) {
+    return `, ${value}`;
+  }
+  return "";
+};
+
 const getDescripcionCompleta = sol => {
   const { plantillaSeleccionada, camposDinamicos } = sol;
   return `${plantillaSeleccionada["Nombre Plantilla"]}${getCaracCompleta(
@@ -56,7 +63,7 @@ const getDescripcionCompleta = sol => {
   )}${getCaracCompleta(
     plantillaSeleccionada["Característica 6"],
     camposDinamicos[plantillaSeleccionada["Característica 6"]]
-  )}, ${plantillaSeleccionada["Normativa"]}.-`;
+  )}${getNormativa(plantillaSeleccionada["Normativa"])}.-`;
 };
 
 export { getDescripcion, getDescripcionCompleta };

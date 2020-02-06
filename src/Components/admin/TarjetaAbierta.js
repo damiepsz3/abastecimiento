@@ -82,14 +82,14 @@ class TarjetaAbierta extends Component {
       this.props.firebase.updateField(
         this.props.solicitud.id,
         name,
-        value //.toUpperCase()
+        value.toUpperCase()
       );
     }
     if (name !== "descripcion") {
       this.props.firebase.updateField(
         this.props.solicitud.id,
         name,
-        value //.toUpperCase()
+        value.toUpperCase()
       );
     }
   }

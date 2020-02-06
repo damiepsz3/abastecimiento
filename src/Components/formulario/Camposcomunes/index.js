@@ -188,7 +188,7 @@ class Camposcomunes extends PureComponent {
                     style={{ marginLeft: 20, verticalAlign: "super" }}
                     rel="noopener noreferrer"
                     target="_blank"
-                    href="https://google.com"
+                    href=" https://ldcom365.sharepoint.com/:f:/r/sites/MejorasCatalogacion/Shared%20Documents/Adjuntos%20formularios%20altas?csf=1&e=nR93Ck"
                   >
                     Haz click aqui y sube tus archivos a esta carpeta
                   </a>
