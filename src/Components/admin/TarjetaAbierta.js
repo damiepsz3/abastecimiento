@@ -60,21 +60,20 @@ class TarjetaAbierta extends Component {
   }
   //this function is called to update caracterisitcas
   handleEditContent({ value, name }) {
-    this.props.firebase.updateCaracteristica(
-      this.props.solicitud.id,
-      name,
-      value.toUpperCase()
-    );
-    this.props.firebase.updateField(
-      this.props.solicitud.id,
-      "descripcion",
-      getDescripcion(this.props.solicitud)
-    );
-    this.props.firebase.updateField(
-      this.props.solicitud.id,
-      "descripcionCompleta",
-      getDescripcionCompleta(this.props.solicitud)
-    );
+    this.props.firebase
+      .updateCaracteristica(this.props.solicitud.id, name, value.toUpperCase())
+      .then(() => {
+        this.props.firebase.updateField(
+          this.props.solicitud.id,
+          "descripcion",
+          getDescripcion(this.props.solicitud)
+        );
+        this.props.firebase.updateField(
+          this.props.solicitud.id,
+          "descripcionCompleta",
+          getDescripcionCompleta(this.props.solicitud)
+        );
+      });
   }
 
   handleEditField({ value, name }) {
@@ -195,7 +194,7 @@ class TarjetaAbierta extends Component {
                     name="descripcion"
                     onChange={(e, values) => this.handleEditField(values)}
                   />
-                  <div class="contador-caracteres">
+                  <div className="contador-caracteres">
                     {40 - solicitud.descripcion.length}
                   </div>
                 </div>
