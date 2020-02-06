@@ -327,3 +327,15 @@
 .unidadMedida i.dropdown.icon {
   top: 2px !important;
 }
+
+.descripcion-field {
+  position: relative;
+}
+
+.contador-caracteres {
+  position: absolute;
+  right: 15px;
+  top: 25px;
+  color: #979797;
+  font-weight: 700;
+}

@@ -119,6 +119,12 @@ export default class Download extends React.Component {
             }
           />
           <ExcelColumn
+            label="Normativa"
+            value={col =>
+              !col.numeroMaterial ? col.plantillaSeleccionada["Normativa"] : ""
+            }
+          />
+          <ExcelColumn
             label="Unid_med_suj"
             value={col =>
               col.unidadMedida ? /\[([^)]+)\]/.exec(col.unidadMedida)[1] : ""
