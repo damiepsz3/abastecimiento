@@ -56,7 +56,7 @@ const getDescripcionCompleta = sol => {
   )}${getCaracCompleta(
     plantillaSeleccionada["Característica 6"],
     camposDinamicos[plantillaSeleccionada["Característica 6"]]
-  )}.-`;
+  )}, ${plantillaSeleccionada["Normativa"]}.-`;
 };
 
 export { getDescripcion, getDescripcionCompleta };

@@ -78,12 +78,20 @@ class TarjetaAbierta extends Component {
   }
 
   handleEditField({ value, name }) {
-    console.log("NAME:" + name);
-    this.props.firebase.updateField(
-      this.props.solicitud.id,
-      name,
-      value //.toUpperCase()
-    );
+    if (name === "descripcion" && value.length <= 40) {
+      this.props.firebase.updateField(
+        this.props.solicitud.id,
+        name,
+        value //.toUpperCase()
+      );
+    }
+    if (name !== "descripcion") {
+      this.props.firebase.updateField(
+        this.props.solicitud.id,
+        name,
+        value //.toUpperCase()
+      );
+    }
   }
 
   _handleDoubleClickItem(event) {
@@ -168,6 +176,7 @@ class TarjetaAbierta extends Component {
                   <Dropdown
                     placeholder="Seleccione"
                     fluid={true}
+                    className="unidadMedida"
                     search={true}
                     value={solicitud.unidadMedida}
                     selection={true}
@@ -176,8 +185,8 @@ class TarjetaAbierta extends Component {
                     onChange={(e, value) => this.handleEditField(value)}
                   />
                 </div>
-                <div className="grid-itemPlantilla">
-                  <div className="tituloPlantilla">DESCRIPCIÓN</div>
+                <div className="grid-itemPlantilla descripcion-field">
+                  <div className="tituloPlantilla ">DESCRIPCIÓN</div>
                   <Input
                     fluid={true}
                     className="input-caracteristica"
@@ -186,6 +195,9 @@ class TarjetaAbierta extends Component {
                     name="descripcion"
                     onChange={(e, values) => this.handleEditField(values)}
                   />
+                  <div class="contador-caracteres">
+                    {40 - solicitud.descripcion.length}
+                  </div>
                 </div>
                 <div className="grid-itemPlantilla">
                   <div className="tituloPlantilla">DESCRIPCIÓN COMPLETA</div>
@@ -268,7 +280,7 @@ class TarjetaAbierta extends Component {
           )}
 
           <div className="itemCampoComun">
-            <div className="caract-comun">Planta</div>
+            <div className="caract-comun">Reparacion</div>
             <span>
               {solicitud.repara
                 ? "PRODUCTO REPARABLE"
@@ -281,10 +293,6 @@ class TarjetaAbierta extends Component {
               <span>{solicitud.valorTAG} </span>
             </div>
           )}
-          <div className="itemCampoComun">
-            <div className="caract-comun">Criticidad</div>
-            <span className="CriticidadIcono">{solicitud.criticidad}</span>
-          </div>
 
           <div className="itemCampoComun">
             <div className="caract-comun">Criticidad</div>
