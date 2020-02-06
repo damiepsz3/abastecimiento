@@ -86,7 +86,7 @@ class TarjetaAbierta extends Component {
     );
   }
 
-  _handleDoubleClickItem(event): void {
+  _handleDoubleClickItem(event) {
     this.setState({ editMode: true });
   }
 
@@ -173,7 +173,7 @@ class TarjetaAbierta extends Component {
                     selection={true}
                     options={this.state.opcionesUnidadesDeMedida}
                     name="unidadMedida"
-                    onChange={(e, { value }) => this.handleEditField(value)}
+                    onChange={(e, value) => this.handleEditField(value)}
                   />
                 </div>
                 <div className="grid-itemPlantilla">
