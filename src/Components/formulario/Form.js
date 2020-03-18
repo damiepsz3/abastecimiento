@@ -75,7 +75,7 @@ class Form extends Component {
   };
 
   validarCampos = () => {
-    const errors = Object.keys(this.state)
+    const errorsVacios = Object.keys(this.state)
       .filter(prop => this.state[prop] === "")
       .concat(
         Object.keys(this.state.camposDinamicos).filter(
@@ -102,21 +102,43 @@ class Form extends Component {
               e !== "valorTAG" &&
               e !== "numeroMaterial"
       );
-    console.log(errors);
-    this.setState({ errors }, () => {
-      if (this.state.errors.length === 0) {
-        //this.setState({ open: true });
-        this.handleOpenModal();
-      } else if (this.state.nombreApellido === "" || this.state.email === "") {
-        setTimeout(() => {
-          window.scrollTo({
-            top: 0,
-            left: 0,
-            behavior: "smooth"
-          });
-        }, 300);
+
+    const numerosNegativos = () => {
+      const names = Object.keys(this.state).filter(
+        k => k === "valorUSD" || k === "consumoAnual"
+      );
+
+      return names
+        .map(name => {
+          if (this.state[name] < 0) {
+            return name;
+          }
+        })
+        .filter(noUndefined => noUndefined !== undefined);
+    };
+
+    this.setState(
+      {
+        errors: [...errorsVacios, ...numerosNegativos()]
+      },
+      () => {
+        if (this.state.errors.length === 0) {
+          //this.setState({ open: true });
+          this.handleOpenModal();
+        } else if (
+          this.state.nombreApellido === "" ||
+          this.state.email === ""
+        ) {
+          setTimeout(() => {
+            window.scrollTo({
+              top: 0,
+              left: 0,
+              behavior: "smooth"
+            });
+          }, 300);
+        }
       }
-    });
+    );
   };
 
   handleOpenModal = () => {

@@ -60,8 +60,16 @@ class TarjetaAbierta extends Component {
   }
   //this function is called to update caracterisitcas
   handleEditContent({ value, name }) {
+    const updatedObj = {};
+    Object.keys(this.props.solicitud.camposDinamicos).forEach(key => {
+      if (key === name) {
+        updatedObj[key] = value;
+      } else {
+        updatedObj[key] = this.props.solicitud.camposDinamicos[key];
+      }
+    });
     this.props.firebase
-      .updateCaracteristica(this.props.solicitud.id, name, value.toUpperCase())
+      .updateCaracteristica(this.props.solicitud.id, updatedObj)
       .then(() => {
         this.props.firebase.updateField(
           this.props.solicitud.id,
@@ -184,31 +192,14 @@ class TarjetaAbierta extends Component {
                     onChange={(e, value) => this.handleEditField(value)}
                   />
                 </div>
-                <div className="grid-itemPlantilla descripcion-field">
-                  <div className="tituloPlantilla ">DESCRIPCIÓN</div>
-                  <Input
-                    fluid={true}
-                    className="input-caracteristica"
-                    value={solicitud.descripcion}
-                    control="input"
-                    name="descripcion"
-                    onChange={(e, values) => this.handleEditField(values)}
-                  />
-                  <div className="contador-caracteres">
-                    {40 - solicitud.descripcion.length}
-                  </div>
+                <div className="grid-itemPlantilla">
+                  <div className="tituloPlantilla">DESCRIPCIÓN</div>
+                  <span>{solicitud.descripcion}</span>
                 </div>
                 <div className="grid-itemPlantilla">
                   <div className="tituloPlantilla">DESCRIPCIÓN COMPLETA</div>
-                  <Form>
-                    <TextArea
-                      className="input-caracteristica"
-                      value={solicitud.descripcionCompleta}
-                      control="input"
-                      name="descripcionCompleta"
-                      onChange={(e, values) => this.handleEditField(values)}
-                    />
-                  </Form>
+                  <span>{solicitud.descripcionCompleta}</span>
+                  <div className="spacer"></div>
                 </div>
               </React.Fragment>
             ) : (

@@ -64,14 +64,14 @@ class Firebase {
   //   obj[caracteristica] = valor;
   //   this.db.ref(`solicitudes/${id}/camposDinamicos/`).update(obj);
   // };
-  updateCaracteristica = (id, caracteristica, valor) => {
-    let obj = {};
-    obj[caracteristica] = valor;
+  updateCaracteristica = (id, updatedObj) => {
     return new Promise((res, rej) => {
-      this.db.ref(`solicitudes/${id}/camposDinamicos/`).set(obj, error => {
-        if (error) rej(error);
-        res("successfull");
-      });
+      this.db
+        .ref(`solicitudes/${id}/camposDinamicos/`)
+        .set(updatedObj, error => {
+          if (error) rej(error);
+          res("successfull");
+        });
     });
   };
 
