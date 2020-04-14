@@ -37,12 +37,13 @@ class Form extends Component {
       consumoAnual: "",
       proveedor: "",
       presentacion: "",
+      tieneAdjunto: false,
       errors: []
     };
   }
 
   componentDidMount() {
-    GoogleApi.init().then(result =>
+    GoogleApi.init("Sheet1").then(result =>
       this.setState({ plantillas: result, loadingPlantillas: false })
     );
 
@@ -68,12 +69,13 @@ class Form extends Component {
       consumoAnual: "",
       proveedor: "",
       presentacion: "",
+      tieneAdjunto: false,
       errors: []
     });
   };
 
   validarCampos = () => {
-    const errors = Object.keys(this.state)
+    const errorsVacios = Object.keys(this.state)
       .filter(prop => this.state[prop] === "")
       .concat(
         Object.keys(this.state.camposDinamicos).filter(
@@ -101,20 +103,42 @@ class Form extends Component {
               e !== "numeroMaterial"
       );
 
-    this.setState({ errors }, () => {
-      if (this.state.errors.length === 0) {
-        //this.setState({ open: true });
-        this.handleOpenModal();
-      } else if (this.state.nombreApellido === "" || this.state.email === "") {
-        setTimeout(() => {
-          window.scrollTo({
-            top: 0,
-            left: 0,
-            behavior: "smooth"
-          });
-        }, 300);
+    const numerosNegativos = () => {
+      const names = Object.keys(this.state).filter(
+        k => k === "valorUSD" || k === "consumoAnual"
+      );
+
+      return names
+        .map(name => {
+          if (this.state[name] < 0) {
+            return name;
+          }
+        })
+        .filter(noUndefined => noUndefined !== undefined);
+    };
+
+    this.setState(
+      {
+        errors: [...errorsVacios, ...numerosNegativos()]
+      },
+      () => {
+        if (this.state.errors.length === 0) {
+          //this.setState({ open: true });
+          this.handleOpenModal();
+        } else if (
+          this.state.nombreApellido === "" ||
+          this.state.email === ""
+        ) {
+          setTimeout(() => {
+            window.scrollTo({
+              top: 0,
+              left: 0,
+              behavior: "smooth"
+            });
+          }, 300);
+        }
       }
-    });
+    );
   };
 
   handleOpenModal = () => {
@@ -122,6 +146,7 @@ class Form extends Component {
   };
 
   componentDidUpdate(prevProps, prevState) {
+    console.log(this.state);
     //llenar las propiedades del campo dinamico solo cuando se selecciona plantilla
     if (
       prevState.plantillaSeleccionada === "" &&
@@ -164,7 +189,7 @@ class Form extends Component {
 
     return (
       <Container>
-        <Header as='h1' style={{ marginTop: 40 }}>
+        <Header as="h1" style={{ marginTop: 40 }}>
           Formulario de abastecimiento
         </Header>
 
@@ -212,12 +237,12 @@ class Form extends Component {
           />
         )}
 
-        <Grid textAlign='center' style={{ marginTop: 50 }}>
+        <Grid textAlign="center" style={{ marginTop: 50 }}>
           <Grid.Row>
-            <Container textAlign='center'>
+            <Container textAlign="center">
               <Button
                 primary
-                type='submit'
+                type="submit"
                 onClick={this.validarCampos}
                 disabled={
                   !(

@@ -181,21 +181,15 @@
   text-transform: uppercase;
 }
 
-.tituloPlantilla {
+.tituloPlantilla,
+.caract-comun {
   color: #979797;
   font-size: 13px;
+  padding-bottom: 3px;
 }
 
 .itemCampoComun span {
-  padding-left: 10px;
   vertical-align: sub;
-}
-
-span.CriticidadIcono {
-  font-weight: 900;
-  font-size: 24px;
-  opacity: 0.6;
-  padding-left: 5px;
 }
 
 .itemCampoComun img {
@@ -210,6 +204,19 @@ span.CriticidadIcono {
   display: flex;
   justify-content: center;
   margin: 20px auto;
+}
+
+.edit-mode-toggle label {
+  padding-right: 10px;
+  vertical-align: super;
+}
+.edit-mode-toggle label:hover {
+  cursor: pointer;
+}
+
+.tarjeta-row .edit-mode-toggle {
+  height: 36px;
+  margin-top: 20px;
 }
 
 #root .BotonesEstados .Rechazar:hover {
@@ -242,6 +249,11 @@ span.CriticidadIcono {
   padding-right: 2px;
 }
 
+.tarjeta-row {
+  display: flex;
+  justify-content: space-between;
+}
+
 @media screen and (max-width: 800px) {
   .ui.pointing.secondary.menu {
     margin-bottom: 70px;
@@ -256,4 +268,74 @@ span.CriticidadIcono {
     top: 70px;
     right: 10px;
   }
+}
+
+.grid-itemPlantilla .ui.form textarea {
+  line-height: 19px !important;
+}
+
+.ui.input.input-caracteristica > input,
+.ui.form textarea.input-caracteristica {
+  padding-right: 0px;
+  border-right: none;
+  border-top: none;
+  border-left: none;
+  border-radius: 0;
+  padding-left: 0px;
+  padding-bottom: 4px;
+  padding-top: 1px;
+  font-family: "Lato";
+}
+
+.grid-itemPlantilla span {
+  padding-bottom: 6px;
+}
+
+.spacer {
+  height: 4px;
+}
+
+.ui.fluid.search.selection.dropdown.unidadMedida {
+  border-left: 0;
+  border-right: 0;
+  border-top: 0;
+  padding-left: 0;
+  padding-top: 3px;
+  min-height: 22px;
+  margin-left: -1px;
+  padding-bottom: 0;
+  border-radius: 0;
+}
+
+.ui.active.visible.fluid.search.selection.dropdown.unidadMedida {
+  padding-left: initial;
+  border-left: 1px solid #96c8da;
+  border-top: 1px solid #96c8da;
+  padding-left: 15px;
+  padding-top: 12px;
+  padding-bottom: 11px;
+  border-radius: 5px;
+  border-right: 1px solid #96c8da;
+}
+
+.unidadMedida input.search {
+  padding-left: 15px;
+  padding-top: 0;
+  padding-bottom: 0;
+}
+
+.unidadMedida i.dropdown.icon {
+  top: 2px !important;
+}
+
+.descripcion-field {
+  position: relative;
+}
+
+.contador-caracteres {
+  position: absolute;
+  right: 1px;
+  top: 25px;
+  color: #979797;
+  font-weight: 700;
 }

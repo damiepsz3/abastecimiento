@@ -1,9 +1,21 @@
 import React, { PureComponent, Fragment } from "react";
 import { Header, Grid, Input, Dropdown, Divider } from "semantic-ui-react";
 import opcionesUnidadesDeMedida from "./unidadesMedidas";
+import GoogleApi from "../../../GoogleApi";
 
 class CamposDinamicos extends PureComponent {
-  componentDidMount() {}
+  constructor(props) {
+    super(props);
+    this.state = {
+      opcionesUnidadesDeMedida: []
+    };
+  }
+
+  componentDidMount() {
+    GoogleApi.init("UnidadMedida").then(result =>
+      this.setState({ opcionesUnidadesDeMedida: result })
+    );
+  }
 
   handleInput = (prop, value) => {
     this.props.handleInputChange("camposDinamicos", {

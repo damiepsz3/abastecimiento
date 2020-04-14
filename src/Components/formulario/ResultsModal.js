@@ -9,6 +9,10 @@ import {
 } from "semantic-ui-react";
 import { withFirebase } from "../../Firebase";
 import ModalMessages from "./ModalMessages";
+import {
+  getDescripcion,
+  getDescripcionCompleta
+} from "../../utils/excelFormulas";
 
 const ResultsModal = ({
   firebase,
@@ -29,22 +33,47 @@ const ResultsModal = ({
       ...rest
     } = solicitud;
     setLoading(true);
-    firebase
-      .addSolicitud({ estado: "pendiente", ...rest })
-      .then(response => {
-        setLoading(false);
-        setResults({
-          success: true,
-          idSeguimiento: response.key
+    console.log(conoceCodigo);
+    if (conoceCodigo) {
+      firebase
+        .addSolicitud({ estado: "pendiente", ...rest })
+        .then(response => {
+          setLoading(false);
+          setResults({
+            success: true,
+            idSeguimiento: response.key
+          });
+        })
+        .catch(error => {
+          setLoading(false);
+          setResults({
+            success: false,
+            idSeguimiento: null
+          });
         });
-      })
-      .catch(error => {
-        setLoading(false);
-        setResults({
-          success: false,
-          idSeguimiento: null
+    } else {
+      firebase
+        .addSolicitud({
+          descripcion: getDescripcion(rest),
+          descripcionCompleta: getDescripcionCompleta(rest),
+          estado: "pendiente",
+          ...rest
+        })
+        .then(response => {
+          setLoading(false);
+          setResults({
+            success: true,
+            idSeguimiento: response.key
+          });
+        })
+        .catch(error => {
+          setLoading(false);
+          setResults({
+            success: false,
+            idSeguimiento: null
+          });
         });
-      });
+    }
   };
   return (
     <Modal
@@ -56,7 +85,7 @@ const ResultsModal = ({
       closeIcon
     >
       <Dimmer active={loading}>
-        <Loader size='large'>Subiendo solicitud</Loader>
+        <Loader size="large">Subiendo solicitud</Loader>
       </Dimmer>
       {results ? (
         <ModalMessages
@@ -142,6 +171,12 @@ const ResultsModal = ({
                   <Table.Cell>{solicitud.valorTAG}</Table.Cell>
                 </Table.Row>
                 <Table.Row>
+                  <Table.Cell>¿Tiene adjunto? </Table.Cell>
+                  <Table.Cell>
+                    {solicitud.tieneAdjunto ? "Si" : "No"}
+                  </Table.Cell>
+                </Table.Row>
+                <Table.Row>
                   <Table.Cell>¿Requiere Stock? </Table.Cell>
                   <Table.Cell>
                     {solicitud.requiereStock ? "Si" : "No"}
@@ -153,7 +188,7 @@ const ResultsModal = ({
                 </Table.Row>
               </Table.Body>
             </Table>
-            <Container textAlign='center'>
+            <Container textAlign="center">
               <Button positive onClick={() => submitSolicitud()}>
                 Confirmar
               </Button>

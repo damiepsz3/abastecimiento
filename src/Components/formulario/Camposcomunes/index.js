@@ -1,26 +1,50 @@
 import React, { PureComponent, Fragment } from "react";
-import { Header, Grid, Input, Dropdown, Divider } from "semantic-ui-react";
+import {
+  Header,
+  Grid,
+  Input,
+  Dropdown,
+  Divider,
+  Checkbox
+} from "semantic-ui-react";
 import opciones from "./opcionesCriticidad";
 import "../../../App.css";
+import GoogleApi from "../../../GoogleApi";
 
 class Camposcomunes extends PureComponent {
   constructor(props) {
     super(props);
     this.state = {
-      requiereStock: false
+      requiereStock: false,
+      tieneAdj: false,
+      opcionesGradoDeCriticidad: [],
+      opcionesPlanta: [],
+      opcionesSector: []
     };
   }
 
+  componentDidMount() {
+    GoogleApi.init("Criticidad").then(result =>
+      this.setState({ opcionesGradoDeCriticidad: result })
+    );
+    GoogleApi.init("Plantas").then(result =>
+      this.setState({ opcionesPlanta: result })
+    );
+    GoogleApi.init("Sector").then(result =>
+      this.setState({ opcionesSector: result })
+    );
+  }
+
   render() {
-    const {
-      opcionesPlanta,
-      opcionesSector,
-      opcionesSiNo,
-      opcionesGradoDeCriticidad
-    } = opciones;
+    const { opcionesSiNo } = opciones;
 
     const { handleInputChange } = this.props;
-    const { requiereStock } = this.state;
+    const {
+      requiereStock,
+      opcionesGradoDeCriticidad,
+      opcionesPlanta,
+      opcionesSector
+    } = this.state;
     return (
       <Fragment>
         <Divider />
@@ -121,10 +145,10 @@ class Camposcomunes extends PureComponent {
           <Grid.Row>
             <Grid.Column>
               <Header as="h4">
-                Valor Unitario (U$D) <span className={"requerido"}>*</span>
+                Valor Unitario <span className={"requerido"}>*</span>
               </Header>
               <Input
-                label="USD$"
+                label="MONTO EN SU MONEDA LOCAL:"
                 fluid={true}
                 type="number"
                 placeholder="Ej: 300"
@@ -149,6 +173,29 @@ class Camposcomunes extends PureComponent {
 
           <Grid.Row>
             <Grid.Column>
+              <Header as="h4">¿Tiene archivo adjunto?</Header>
+              <div>
+                <Checkbox
+                  style={{ marginTop: 14 }}
+                  toggle
+                  onChange={() => {
+                    handleInputChange("tieneAdjunto", !this.state.tieneAdj);
+                    this.setState({ tieneAdj: !this.state.tieneAdj });
+                  }}
+                />
+                {this.state.tieneAdj && (
+                  <a
+                    style={{ marginLeft: 20, verticalAlign: "super" }}
+                    rel="noopener noreferrer"
+                    target="_blank"
+                    href=" https://ldcom365.sharepoint.com/:f:/r/sites/MejorasCatalogacion/Shared%20Documents/Adjuntos%20formularios%20altas?csf=1&e=nR93Ck"
+                  >
+                    Haz click aqui y sube tus archivos a esta carpeta
+                  </a>
+                )}
+              </div>
+            </Grid.Column>
+            <Grid.Column>
               <Header as="h4">
                 ¿Requiere Stock? <span className={"requerido"}>*</span>{" "}
               </Header>
@@ -168,7 +215,8 @@ class Camposcomunes extends PureComponent {
                 }}
               />
             </Grid.Column>
-
+          </Grid.Row>
+          <Grid.Row>
             {requiereStock && (
               <Grid.Column>
                 <Header as="h4">

@@ -119,6 +119,12 @@ export default class Download extends React.Component {
             }
           />
           <ExcelColumn
+            label="Normativa"
+            value={col =>
+              !col.numeroMaterial ? col.plantillaSeleccionada["Normativa"] : ""
+            }
+          />
+          <ExcelColumn
             label="Unid_med_suj"
             value={col =>
               col.unidadMedida ? /\[([^)]+)\]/.exec(col.unidadMedida)[1] : ""
@@ -146,7 +152,11 @@ export default class Download extends React.Component {
           <ExcelColumn label="Cons_anual_est" value="consumoAnual" />
           <ExcelColumn label="Tiempo_aprovisionamiento" value="" />
           <ExcelColumn label="estado" value="estado" />
-          <ExcelColumn label="Texto breve de material" value="" />
+          <ExcelColumn label="Descripción" value={col => col.descripcion} />
+          <ExcelColumn
+            label="Descripción Completa"
+            value={col => col.descripcionCompleta}
+          />
           <ExcelColumn label="Texto Datos Básicos" value="" />
           <ExcelColumn label="Texto Ampliado" value="" />
         </ExcelSheet>
