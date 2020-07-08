@@ -16,14 +16,18 @@ class TarjetaCerrada extends Component {
   }
 
   seleccionarBandera() {
-    const caracterInicial = this.props.solicitud.opcionPlanta.charAt(0);
-    if (caracterInicial === "A") return "argentina";
-    if (caracterInicial === "4") return "peru";
-    if (caracterInicial === "6") return "mexico";
-    if (caracterInicial === "8") return "colombia";
-    if (caracterInicial === "9") return "honduras";
-    if (caracterInicial === "P") return "paraguay";
-    if (caracterInicial === "U") return "uruguay";
+    if (this.props.solicitud.opcionPlanta != undefined) {
+      const caracterInicial = this.props.solicitud.opcionPlanta.charAt(0);
+      if (caracterInicial === "A") return "argentina";
+      if (caracterInicial === "4") return "peru";
+      if (caracterInicial === "6") return "mexico";
+      if (caracterInicial === "8") return "colombia";
+      if (caracterInicial === "9") return "honduras";
+      if (caracterInicial === "P") return "paraguay";
+      if (caracterInicial === "U") return "uruguay";
+    } else {
+      return "eu";
+    }
   }
 
   render() {
@@ -54,13 +58,16 @@ class TarjetaCerrada extends Component {
             " " +
             solicitud.createdDate.toLocaleDateString("es-AR", {
               year: "numeric",
-              month: "short"
+              month: "short",
             })}
         </div>
         <div className="Centro">
           <Label image>
             <Flag name={this.seleccionarBandera()} />
-            {solicitud.opcionPlanta.substring(0, 4)}
+
+            {solicitud.opcionPlanta != undefined
+              ? solicitud.opcionPlanta.substring(0, 4)
+              : ""}
           </Label>
         </div>
       </div>

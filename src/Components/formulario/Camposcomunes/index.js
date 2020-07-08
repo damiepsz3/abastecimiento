@@ -151,6 +151,7 @@ class Camposcomunes extends PureComponent {
                 label="MONTO EN SU MONEDA LOCAL:"
                 fluid={true}
                 type="number"
+                min="1"
                 placeholder="Ej: 300"
                 error={this.props.errors.includes("valorUSD")}
                 onChange={(e, { value }) =>
