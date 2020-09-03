@@ -24,7 +24,7 @@
     "recompose": "^0.30.0",
     "semantic-ui-css": "^2.3.3",
     "semantic-ui-react": "^0.82.2",
-    "serve": "^10.1.1",
+    "serve": "^10.1.2",
     "xlsx": "^0.14.1"
   },
   "scripts": {
